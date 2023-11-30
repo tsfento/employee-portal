@@ -1,27 +1,23 @@
 <div class="sidebar sticky-top">
-  <!-- sidebar -->
   <nav class="nav flex-column sidebar-div">
-    <div class="logo-text mt-4 mb-2 text-center">
-      <!-- <span class="material-symbols-outlined logo-icon">
-      copyright
-      </span>&nbsp;Coterie -->
-      <img class="logo-img" src="./assets/images/c_logo.png" alt=""><span>&nbsp;Coterie</span>
+    <div class="mt-4 mb-2 text-center">
+      <img class="logo-img" src="./assets/images/c_logo.png" alt=""><span class="logo-text">&nbsp;Coterie</span>
     </div>
     <hr class="ms-3 me-3">
     <ul class="mb-auto">
-      <li class="ms-4">
+      <li>
         <a href="#" class="btn-sidebar">
           <span class="material-symbols-outlined btn-icon">groups</span>
           <span class="btn-text">&nbsp;&nbsp;Personnel</span>
         </a>
       </li>
-      <li class="ms-4 mt-3">
+      <li class="mt-3">
         <a href="#" class="btn-sidebar">
           <span class="material-symbols-outlined btn-icon">paid</span>
           <span class="btn-text">&nbsp;&nbsp;Payroll</span>
         </a>
       </li>
-      <li class="ms-4 mt-3">
+      <li class="mt-3">
         <a href="#" class="btn-sidebar">
           <span class="material-symbols-outlined btn-icon">settings</span>
           <span class="btn-text">&nbsp;&nbsp;Admin</span>
@@ -30,15 +26,15 @@
     </ul>
     <div class="container p-2 user-info-box">
       <hr class="ms-2 me-2">
-      <div class="row">
-        <div class="col-2">
+      <div class="row mb-2">
+        <div class="col-xl-2 col-md-12 ms-2 mt-1 user-info-img">
           <img src="{{ user[2] }}" style="max-height: 30px; border-radius: 50%;">
         </div>
-        <div class="col-6">
+        <div class="col-xl-6">
           <div class="name">{{ user[0] }}</div>
           <div class="email">{{ user[1] }}</div>
         </div>
-        <div class="col-3 ms-2 mt-2">
+        <div class="col-xl-3 ms-2 mt-2">
           <a class="click" (click)="logout()">
             <span class="bi material-symbols-outlined ms-sm-2 ms-xl-4 logout">
               logout
@@ -48,5 +44,4 @@
       </div>
     </div>
   </nav>
-  <!-- end sidebar -->
 </div>
