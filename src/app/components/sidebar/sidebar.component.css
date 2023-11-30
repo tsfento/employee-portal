@@ -1,0 +1,88 @@
+.logo-css {
+  width: 100px;
+  height: 100px;
+  background: white;
+  border-radius: 50%
+}
+
+hr {
+  color: white;
+}
+
+.sidebar {
+  /* grid-area: sidebar; */
+  height: 100vh;
+}
+
+.sidebar-div {
+  width: 280px;
+  height: 100%;
+  background-color: #3A405A;
+}
+
+/* logo */
+.logo-text {
+  font-size: 35px;
+  font-weight: bolder;
+  color: #FCF7F8;
+}
+
+.logo-img {
+  height: 50px;
+  vertical-align: bottom;
+  margin-bottom: 2px;
+}
+
+.logo-icon {
+  font-size: 40px;
+  vertical-align: bottom;
+}
+/* end logo */
+
+/* sidebar nav */
+li {
+  list-style: none;
+}
+
+.btn-sidebar {
+  text-decoration: none;
+  color: white;
+}
+
+.btn-sidebar:hover {
+  color: #F9DEC9;
+}
+
+.btn-icon {
+  font-size: 30px;
+  vertical-align: bottom;
+}
+
+.btn-text {
+  font-size: 20px;
+}
+/* end sidebar nav */
+
+/* info box */
+.name {
+  font-weight: bold;
+  font-size: 12px;
+  color: white;
+}
+
+.email {
+  font-size: 12px;
+  color: white;
+}
+
+.logout {
+  cursor: pointer;
+  text-decoration: none;
+  color: white;
+  font-size: 18px;
+}
+
+.logout:hover {
+  color: #F9DEC9;
+}
+/* end info box */
