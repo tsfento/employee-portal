@@ -1,0 +1,58 @@
+<!-- Landing Page Container -->
+<div class="landing-container">
+
+  <!-- Main Heading -->
+  <h1>Welcome to Coterie </h1>
+
+  <!-- Introduction Text -->
+  <p class="intro-text">
+      Coterie, your comprehensive solution for efficient employee management, personal information access, and specialized training and development programs. Designed to streamline HR processes and enhance employee engagement.
+  </p>
+
+  <!-- Feature Sections -->
+  <div class="features">
+
+      <!-- Employee Management -->
+      <div class="feature-item">
+          <h2>Employee Management</h2>
+          <p>
+              Simplify and automate your employee management tasks. From attendance tracking to performance reviews, Coterie makes it easy to manage your team effectively.
+          </p>
+          <p>
+            Stay informed and engaged with your work progress. Coterie provides you with easy access to your attendance records, performance reviews, and schedule, helping you to stay aligned with your career goals and team objectives.
+        </p>
+      </div>
+
+      <!-- Personal Information Access -->
+      <div class="feature-item">
+          <h2>Personal Information Access</h2>
+          <p>
+              Secure and easy access to personal employee information. Update personal details, view payslips, and manage your benefits with ease, all in one place.
+          </p>
+          <p>
+            Easily view your personal and professional information securely in one place. From payslips to benefit details, Coterie keeps you informed and updated, ensuring you have all the essential details you need about your employment.
+        </p>
+      </div>
+
+      <!-- Training and Development -->
+      <div class="feature-item">
+          <h2>Training and Development</h2>
+          <p>
+              Empower your workforce with our extensive training and development modules. Boost skills, foster career growth, and enhance job satisfaction through targeted learning opportunities.
+          </p>
+          <p>
+            Take advantage of Coterie’s comprehensive training resources to grow your skills and advance your career. Our platform offers a range of development opportunities to help you expand your knowledge and enhance your professional capabilities.
+        </p>
+      </div>
+
+  </div>
+
+  <!-- Original Button Container -->
+  <div class="button-container">
+      <!-- Buttons -->
+      <button [routerLink]="['/auth']" [state]="{ action: 'sign-up' }" class="signup-button">Sign Up</button>
+<button [routerLink]="['/auth']" [state]="{ action: 'sign-in' }" class="login-button">Log In</button>
+
+  </div>
+
+</div>
