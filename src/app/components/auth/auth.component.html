@@ -5,8 +5,12 @@
         <div class="auth-form">
            <!-- Conditional Title and Text -->
            <h2>{{ isSignInMode ? 'Welcome Back to Coterie!' : 'Join Our Coterie Community' }}</h2>
-           <p *ngIf="isSignInMode">Log in to continue your journey with Coterie HR Portal, where your professional growth is our priority.</p>
-           <p *ngIf="!isSignInMode">Empower Your Career with Coterie HR Portal. Sign up today and start exploring a world of efficient employee management, personalized professional growth, and comprehensive HR resources designed to elevate your work experience.</p>
+            <p *ngIf="isSignInMode">
+            Log in to manage and streamline your HR processes with Coterie HR Portal. Prioritize efficiency and strategic HR management to drive organizational success.
+        </p>
+        <p *ngIf="!isSignInMode">
+            Sign up today and start exploring a world of efficient employee management, personalized professional growth, and comprehensive HR resources designed to elevate your work experience.
+        </p>
           <form #authForm="ngForm" (ngSubmit)="onAuthSubmit(authForm)">
             <!-- First Name, Last Name, Email, Password Fields -->
             <div *ngIf="!isSignInMode">
@@ -48,4 +52,3 @@
       </div>
     </div>
   </div>
-  
