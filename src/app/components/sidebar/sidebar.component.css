@@ -27,6 +27,12 @@ hr {
 }
 /* end logo */
 
+.company-name {
+  color: white;
+  font-size: 30px;
+  font-weight: 600;
+}
+
 /* sidebar nav */
 li {
   list-style: none;
