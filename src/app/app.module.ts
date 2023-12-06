@@ -8,6 +8,7 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { ContainerComponent } from './components/container/container.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { PersonnelPageComponent } from './components/personnel-page/personnel-page.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { HttpClientModule } from '@angular/common/http';
     LandingPageComponent,
     AuthComponent,
     SidebarComponent,
-    ContainerComponent
+    ContainerComponent,
+    PersonnelPageComponent
   ],
   imports: [
     BrowserModule,

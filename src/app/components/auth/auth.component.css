@@ -2,7 +2,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh; 
+  height: 100vh;
   background-color: #3A405A;
 }
 
@@ -13,6 +13,7 @@
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
   border-radius: 10px;
   color: #3A405A;
+  min-width: 500px;
 }
 
 .auth-form h2 {
