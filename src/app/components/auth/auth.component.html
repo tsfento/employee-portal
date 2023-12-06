@@ -1,0 +1,54 @@
+<div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-md-6 offset-md-3">
+        <!-- Auth Form -->
+        <div class="auth-form">
+           <!-- Conditional Title and Text -->
+           <h2>{{ isSignInMode ? 'Welcome Back to Coterie!' : 'Join Our Coterie Community' }}</h2>
+            <p *ngIf="isSignInMode">
+            Log in to manage and streamline your HR processes with Coterie HR Portal. Prioritize efficiency and strategic HR management to drive organizational success.
+        </p>
+        <p *ngIf="!isSignInMode">
+            Sign up today and start exploring a world of efficient employee management, personalized professional growth, and comprehensive HR resources designed to elevate your work experience.
+        </p>
+          <form #authForm="ngForm" (ngSubmit)="onAuthSubmit(authForm)">
+            <!-- First Name, Last Name, Email, Password Fields -->
+            <div *ngIf="!isSignInMode">
+              <div class="form-group">
+                <label for="firstName">First Name</label>
+                <input type="text" id="firstName" name="firstName" class="form-control" required ngModel />
+              </div>
+              <div class="form-group">
+                <label for="lastName">Last Name</label>
+                <input type="text" id="lastName" name="lastName" class="form-control" required ngModel />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" class="form-control" required ngModel />
+            </div>
+            <div class="form-group">
+              <label for="password">Password</label>
+              <input type="password" id="password" name="password" class="form-control" minlength="6" required ngModel />
+            </div>
+            <!-- Sign Up and Log In Buttons -->
+            <div class="form-row">
+              <div class="col button-container">
+                <span *ngIf="!isSignInMode" class="auth-switch-text">Have an account?</span>
+                <span *ngIf="isSignInMode" class="auth-switch-text">Don't have an account?</span>
+                <!--Toggle Button-->
+                <button class="btn btn-secondary" type="button" (click)="toggleAuthMode()">
+                  {{ isSignInMode ? "Sign Up" : "Log In" }}
+                </button>
+                <button class="btn btn-success" type="submit" [disabled]="!authForm.valid">
+                  {{ isSignInMode ? "Log In" : "Sign Up" }}
+                </button>
+              </div>
+            </div>
+          </form>
+          <p class="alert alert-danger mt-3" *ngIf="errorMsg">{{ errorMsg }}</p>
+          <p class="alert alert-success mt-3" *ngIf="successMessage">{{ successMessage }}</p>
+        </div>
+      </div>
+    </div>
+  </div>

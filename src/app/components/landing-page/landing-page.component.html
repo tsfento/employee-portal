@@ -1,0 +1,54 @@
+<!-- Landing Page Container -->
+<div class="landing-container">
+
+  <!-- Main Heading -->
+  <h1>Welcome to Coterie </h1>
+
+  <!-- Introduction Text -->
+  <p class="intro-text">
+      Coterie, your comprehensive solution for efficient employee management, personal information access, and specialized training and development programs. Designed to streamline HR processes.
+  </p>
+
+  <!-- Feature Sections -->
+  <div class="features">
+
+      <!-- Employee Management -->
+      <div class="feature-item">
+        <img src="https://static.thenounproject.com/png/2019477-200.png" alt="Employee Management Icon" class="feature-icon">
+          <h2>Employee Management</h2>
+          <p>
+              Simplify and automate your employee management tasks. From attendance tracking to performance reviews, Coterie makes it easy to manage your team effectively.
+          </p>
+
+      </div>
+
+      <!-- Personal Information Access -->
+      <div class="feature-item">
+        <img src="https://www.svgrepo.com/show/13133/personal-information-interface-symbol.svg" alt="Personal Information Icon" class="feature-icon">
+          <h2>Personal Information Access</h2>
+          <p>
+              Secure and easy access to personal employee information. Update personal details, view payslips, and manage your benefits with ease, all in one place.
+          </p>
+      </div>
+
+      <!-- Training and Development -->
+      <div class="feature-item">
+        <img src="https://cdn.iconscout.com/icon/premium/png-512-thumb/training-2233275-1913766.png?f=webp&w=512" alt="Training and Development Icon" class="feature-icon">
+          <h2>Training and Development</h2>
+          <p>
+              Empower your workforce with our extensive training and development modules. Boost skills, foster career growth, and enhance job satisfaction through targeted learning opportunities.
+          </p>
+      
+      </div>
+
+  </div>
+
+  <!-- Original Button Container -->
+  <div class="button-container">
+      <!-- Buttons -->
+      <button [routerLink]="['/auth']" [state]="{ action: 'sign-up' }" class="signup-button">Sign Up</button>
+<button [routerLink]="['/auth']" [state]="{ action: 'sign-in' }" class="login-button">Log In</button>
+
+  </div>
+
+</div>
