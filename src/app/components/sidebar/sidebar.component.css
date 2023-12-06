@@ -104,5 +104,9 @@ li {
     width: 75px;
     margin-left: -6px;
   }
+
+  .company-name {
+    display: none;
+  }
 }
 /* end media query */
