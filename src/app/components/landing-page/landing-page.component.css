@@ -1,9 +1,7 @@
-body {
-  background-color: #3A405A;
-}
 
 .landing-container {
-  width: 85%;
+  width: 100dvw;
+  height: 100dvh;
   margin: auto;
   padding: 40px;
   background-color: #3A405A;
