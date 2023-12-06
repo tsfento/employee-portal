@@ -6,8 +6,9 @@ import { LandingPageComponent } from './components/landing-page/landing-page.com
 import { AuthComponent } from './components/auth/auth.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { ContainerComponent } from './components/container/container.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { AdminComponent } from './components/admin/admin.component';
 
 @NgModule({
   declarations: [
@@ -15,12 +16,14 @@ import { HttpClientModule } from '@angular/common/http';
     LandingPageComponent,
     AuthComponent,
     SidebarComponent,
-    ContainerComponent
+    ContainerComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule
 
   ],
