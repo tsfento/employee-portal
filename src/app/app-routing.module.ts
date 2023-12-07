@@ -12,7 +12,7 @@ const routes: Routes = [
   { path: '', component: LandingPageComponent },
   { path: 'landing', component: LandingPageComponent },
   { path: 'auth', component: AuthComponent },
-  { path: 'personnel', component: PersonnelPageComponent }
+  { path: 'personnel', component: PersonnelPageComponent },
   { path: 'user', component: ContainerComponent, children: [
     { path: 'admin', component: AdminComponent }
   ] },
