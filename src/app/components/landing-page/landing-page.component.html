@@ -38,17 +38,15 @@
           <p>
               Empower your workforce with our extensive training and development modules. Boost skills, foster career growth, and enhance job satisfaction through targeted learning opportunities.
           </p>
-      
+
       </div>
 
   </div>
 
   <!-- Original Button Container -->
   <div class="button-container">
-      <!-- Buttons -->
-      <button [routerLink]="['/auth']" [state]="{ action: 'sign-up' }" class="signup-button">Sign Up</button>
-<button [routerLink]="['/auth']" [state]="{ action: 'sign-in' }" class="login-button">Log In</button>
-
-  </div>
-
+    <!-- Buttons -->
+    <button [routerLink]="['/auth']" [queryParams]="{ action: 'sign-up' }" class="signup-button">Sign Up</button>
+    <button [routerLink]="['/auth']" [queryParams]="{ action: 'sign-in' }" class="login-button">Log In</button>
+</div>
 </div>
