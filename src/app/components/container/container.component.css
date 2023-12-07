@@ -1,0 +1,15 @@
+.layout {
+  display: grid;
+  grid:
+      "sidebar body" 1fr / auto 1fr;
+}
+
+.sidebar {
+  grid-area: sidebar;
+  height: 100vh;
+}
+
+.body {
+  grid-area: body;
+  background-color: #F9DEC9;
+}
