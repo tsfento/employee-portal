@@ -28,14 +28,13 @@ export class AuthComponent implements OnInit {
   onAuthSubmit(form: NgForm) {
     if (form.valid) {
       const { email, password, firstName, lastName } = form.value;
-  
+
       if (this.isSignInMode) {
         // Sign in
         this.authService.signIn(email, password).subscribe(
           () => {
-            // Handle successful sign-in. Redirect or perform other actions as needed.
-            // For example, you might navigate to a dashboard or home page
-            this.router.navigate(['/some-other-route']);
+
+            this.router.navigate(['/personnel']);
           },
           (error) => {
             this.errorMsg = error.message;
@@ -48,9 +47,8 @@ export class AuthComponent implements OnInit {
             this.successMessage = 'Sign-up successful!';
             // Clear the form
             form.reset();
-            // Perform actions after successful sign-up. Redirect or other logic as needed.
-            // Example: Redirect to a welcome page or sign-in page
-            this.router.navigate(['/welcome-or-signin-route']);
+            // Toggle to sign-in mode after successful signup
+            this.toggleAuthMode();
           },
           (error) => {
             this.errorMsg = 'Something went wrong';
@@ -60,7 +58,6 @@ export class AuthComponent implements OnInit {
     }
   }
 
-  
   // Function to toggle between sign-in and sign-up
   toggleAuthMode() {
     this.isSignInMode = !this.isSignInMode;

@@ -8,7 +8,9 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { ContainerComponent } from './components/container/container.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { PersonnelPageComponent } from './components/personnel-page/personnel-page.component';
 import { AdminComponent } from './components/admin/admin.component';
+
 
 @NgModule({
   declarations: [
@@ -17,7 +19,9 @@ import { AdminComponent } from './components/admin/admin.component';
     AuthComponent,
     SidebarComponent,
     ContainerComponent,
+    PersonnelPageComponent,
     AdminComponent
+
   ],
   imports: [
     BrowserModule,
