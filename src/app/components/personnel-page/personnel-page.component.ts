@@ -12,8 +12,6 @@ export class PersonnelPageComponent {
 
   // Reference to the off-canvas element in the HTML
   @ViewChild('offcanvas') offcanvas!: ElementRef;
-
-  private clickListener: () => void;
   private isOpen = false;
 
   constructor(private renderer: Renderer2) {}
@@ -27,44 +25,39 @@ export class PersonnelPageComponent {
       imageUrl: 'path-to-image.jpg'
     });
   }
-
-  // Function to open the off-canvas panel. 
-  openOffcanvas(employee: any) {
+  // Function to open the off-canvas panel when an employee box is clicked
+  openOffcanvas(event: Event, employee: any) {
     const offcanvasElement = this.offcanvas.nativeElement;
-    this.renderer.addClass(offcanvasElement, 'show');
-    this.isOpen = true;
 
-    // Add a delay to registering the click event listener
-    setTimeout(() => {
-      this.clickListener = this.renderer.listen('document', 'click', (event: Event) => {
-        if (this.isOpen && !offcanvasElement.contains(event.target)) {
-          this.closeOffcanvas();
-        }
+    if (!this.isOpen) {
+      this.renderer.addClass(offcanvasElement, 'show');
+      this.isOpen = true;
+
+      // Global click event listener to close the off-canvas when clicking outside
+      setTimeout(() => {
+        window.addEventListener('click', this.closeOffcanvasHandler);
       });
-    });
-
-    // Show the off-canvas container
-    const offcanvasContainer = document.querySelector('.offcanvas-container');
-    if (offcanvasContainer) {
-      this.renderer.addClass(offcanvasContainer, 'show');
     }
   }
 
-  // Function to close the off-canvas panel
+    // Event handler for closing the off-canvas panel
+  closeOffcanvasHandler = (event: Event) => {
+    const offcanvasElement = this.offcanvas.nativeElement;
+
+    if (this.isOpen && !offcanvasElement.contains(event.target as Node)) {
+      this.closeOffcanvas();
+      window.removeEventListener('click', this.closeOffcanvasHandler);
+    }
+  };
+  // Function to close the off-canvas panel.
   closeOffcanvas() {
     const offcanvasElement = this.offcanvas.nativeElement;
     this.renderer.removeClass(offcanvasElement, 'show');
     this.isOpen = false;
 
-    // Remove the click event listener
-    if (this.clickListener) {
-      this.clickListener();
-    }
-
-    // Hide the off-canvas container
-    const offcanvasContainer = document.querySelector('.offcanvas-container');
-    if (offcanvasContainer) {
-      this.renderer.removeClass(offcanvasContainer, 'show');
-    }
+    // Delay removal of the event listener to allow for smooth transitions
+    setTimeout(() => {
+      window.removeEventListener('click', this.closeOffcanvasHandler);
+    }, 300);
   }
 }
