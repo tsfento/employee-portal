@@ -15,7 +15,7 @@ export class StorageService {
 
   dbTest() {
     this.http.put<Employee[]>(
-      'https://employee-portal-f13b1-default-rtdb.firebaseio.com/employees.json',
+      `https://employee-portal-f13b1-default-rtdb.firebaseio.com/employees.json`,
       this.employees
     ).subscribe();
   }
