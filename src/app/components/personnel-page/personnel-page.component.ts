@@ -1,4 +1,5 @@
 import { Component, ElementRef, Renderer2, ViewChild } from '@angular/core';
+import { Employee } from 'src/app/models/employee.model';
 
 @Component({
   selector: 'app-personnel-page',
@@ -6,8 +7,8 @@ import { Component, ElementRef, Renderer2, ViewChild } from '@angular/core';
   styleUrls: ['personnel-page.component.css']
 })
 export class PersonnelPageComponent {
-  employees = [
-    { name: 'Darlton Carlyle', title: 'Marketing Coordinator', email: 'dcarlyle@conglomo.com', imageUrl: './assets/images/Delton-Sewell-Image-1.jpg' }
+  employees: Employee[] = [
+    new Employee('Darlton Carlyle', 'Marketing Coordinator', 'dcarlyle@conglomo.com', './assets/images/Delton-Sewell-Image-1.jpg')
   ];
 
   // Reference to the off-canvas element in the HTML
@@ -28,7 +29,7 @@ export class PersonnelPageComponent {
     });
   }
 
-  // Function to open the off-canvas panel. 
+  // Function to open the off-canvas panel.
   openOffcanvas(employee: any) {
     const offcanvasElement = this.offcanvas.nativeElement;
     this.renderer.addClass(offcanvasElement, 'show');
