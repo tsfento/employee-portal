@@ -38,10 +38,13 @@
 </button>
 
 <!-- Offcanvas  -->
-<div #offcanvas class="offcanvas offcanvas-end details" id="offcanvasExample" tabindex="-1" aria-labelledby="offcanvasExampleLabel">
+<div #offcanvas class="offcanvas offcanvas-end details" id="offcanvasExample" tabindex="-1" aria-labelledby="offcanvasExampleLabel"(click)="closeOffcanvas()">
 <div class="offcanvas-header" data-bs-theme="dark">
   <h5 class="offcanvas-title" id="offcanvasExampleLabel">Employee Details</h5>
-  <button type="button" class="btn-close text-reset" (click)="closeOffcanvas()" aria-label="Close"></button>
+  <button type="button" class="btn btn-offcanvas-close" (click)="closeOffcanvas()">
+    <span class="material-symbols-outlined box-button-icon">close</span>
+  </button>
+
 </div>
 <div class="offcanvas-body">
   <!-- Offcanvas content -->
@@ -151,6 +154,9 @@
         <li class="document-item">Employee Benefit Details - <a href="path/to/document">Download</a></li>
         <li class="document-item">Company Financial Reports - <a href="path/to/document">View</a></li>
   </ul>
+  <button class="btn btn-offcanvas-box">
+    <span class="material-symbols-outlined box-button-icon">add</span>
+  </button>
     </div>
       </div>
       </div>

@@ -59,6 +59,15 @@
   scrollbar-color: darkgrey lightgrey;
   scrollbar-width: thin;
 }
+.offcanvas-end.details {
+  transform: translateX(100%);
+  transition: transform 0.3s ease-in-out;
+}
+
+.offcanvas-end.details.show {
+  transform: translateX(0);
+  transition: transform 0.3s ease-in-out;
+}
 
 .btn-offcanvas-box {
   position: absolute;

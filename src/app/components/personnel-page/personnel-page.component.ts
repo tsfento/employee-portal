@@ -27,7 +27,8 @@ export class PersonnelPageComponent {
       imageUrl: 'path-to-image.jpg'
     });
   }
- // Function to open the off-canvas panel when an employee box is clicked
+
+  // Function to open the off-canvas panel. 
   openOffcanvas(employee: any) {
     const offcanvasElement = this.offcanvas.nativeElement;
     this.renderer.addClass(offcanvasElement, 'show');
@@ -48,6 +49,7 @@ export class PersonnelPageComponent {
       this.renderer.addClass(offcanvasContainer, 'show');
     }
   }
+
   // Function to close the off-canvas panel
   closeOffcanvas() {
     const offcanvasElement = this.offcanvas.nativeElement;
