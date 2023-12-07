@@ -80,6 +80,30 @@ li {
 .logout:hover {
   color: #F9DEC9;
 }
+
+.user-menu-link {
+  pointer-events: none;
+  cursor: default;
+}
+
+.logout-menu {
+  min-width: 40px;
+}
+
+.logout-item {
+  width: 20px;
+  height: 25px;
+}
+
+.logout-dropdown {
+  left: 8px;
+  bottom: 8px;
+}
+
+.dropdown-item:hover {
+  background-image: none;
+  background-color: transparent;
+}
 /* end info box */
 
 /* media query */
@@ -103,6 +127,23 @@ li {
   .row{
     width: 75px;
     margin-left: -6px;
+  }
+
+  .company-name {
+    display: none;
+  }
+
+  .user-menu-link {
+    pointer-events: all;
+    cursor: pointer;
+  }
+
+  .logout-menu {
+    position: relative;
+  }
+
+  .logout-dropdown {
+    position: absolute;
   }
 }
 /* end media query */
