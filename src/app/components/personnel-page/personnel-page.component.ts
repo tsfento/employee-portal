@@ -1,17 +1,19 @@
 // personnel-page.component.ts
-import { Component, ElementRef, Renderer2, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { Employee } from 'src/app/models/employee.model';
-import { AddEmployeeComponent } from '../add-employee/add-employee.component';
+import { StorageService } from 'src/app/services/storage.service';
 
 @Component({
   selector: 'app-personnel-page',
   templateUrl: 'personnel-page.component.html',
   styleUrls: ['personnel-page.component.css']
 })
-export class PersonnelPageComponent {
+export class PersonnelPageComponent implements OnInit, OnDestroy {
   employees: Employee[] = [
-    { name: 'Darlton Carlyle', title: 'Marketing Coordinator', email: 'dcarlyle@conglomo.com', imageUrl: './assets/images/Delton-Sewell-Image-1.jpg' }
+    // { name: 'Darlton Carlyle', title: 'Marketing Coordinator', email: 'dcarlyle@conglomo.com', imageUrl: './assets/images/Delton-Sewell-Image-1.jpg' }
   ];
+  employeesFetchedSub: Subscription;
 
   @ViewChild('offcanvas') offcanvas!: ElementRef;
   private isOpen = false;
@@ -19,7 +21,21 @@ export class PersonnelPageComponent {
   // Correct property name
   isAddEmployeeFormOpen = false;
 
-  constructor(private renderer: Renderer2) {}
+  constructor(private renderer: Renderer2, private storageService: StorageService) {}
+
+  ngOnInit() {
+    this.employees = this.storageService.fetchEmployees();
+
+    this.employeesFetchedSub = this.storageService.employeesFetched.subscribe(
+      fetchedEmployees => {
+        this.employees = fetchedEmployees;
+      }
+    );
+  }
+
+  ngOnDestroy() {
+    this.employeesFetchedSub.unsubscribe();
+  }
 
   openOffcanvas(employee: Employee) {
     const offcanvasElement = this.offcanvas.nativeElement;
@@ -63,7 +79,7 @@ export class PersonnelPageComponent {
   }
 
   onEmployeeAdded(newEmployee: Employee) {
-    this.employees.push(newEmployee);
+    this.storageService.addEmployee(newEmployee);
     this.closeAddEmployeeForm();
   }
 }
