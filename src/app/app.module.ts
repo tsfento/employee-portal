@@ -7,9 +7,10 @@ import { AuthComponent } from './components/auth/auth.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { ContainerComponent } from './components/container/container.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { PersonnelPageComponent } from './components/personnel-page/personnel-page.component';
 import { AdminComponent } from './components/admin/admin.component';
+import { AuthInterceptorService } from './components/auth/auth-interceptor.service';
 
 
 @NgModule({
@@ -31,7 +32,13 @@ import { AdminComponent } from './components/admin/admin.component';
     HttpClientModule
 
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptorService,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

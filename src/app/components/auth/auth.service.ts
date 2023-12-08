@@ -1,8 +1,19 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Observable, of, throwError } from 'rxjs';
+import { BehaviorSubject, Observable, of, throwError } from 'rxjs';
 import { catchError, tap, map } from 'rxjs/operators';
 import { environment } from 'src/app/environments/environment.production';
+import { User } from 'src/app/models/user.model';
+import { Router } from '@angular/router';
+
+export interface IAuthData {
+  firstName: string;
+  lastName: string;
+  userId: string;
+  email: string;
+  token: string;
+  expiresIn: number;
+}
 
 @Injectable({
   providedIn: 'root',
@@ -11,8 +22,9 @@ export class AuthService {
   private baseUrl = 'https://identitytoolkit.googleapis.com/v1/accounts:';
   private apiKey = environment.firebaseAPIKey;
   private idToken: string | null = null;
+  currentUser = new BehaviorSubject<User | null>(null);
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   // Function to handle user sign-up
   signUp(email: string, password: string, firstName?: string, lastName?: string): Observable<any> {
@@ -44,6 +56,16 @@ export class AuthService {
           if (response && response.idToken) {
             this.idToken = response.idToken;
           }
+          const authData: IAuthData = {
+            firstName: '',
+            lastName: '',
+            userId: response.localId,
+            email: signInData.email,
+            token: response.idToken,
+            expiresIn: +response.expiresIn
+          }
+
+          this.handleAuthentication(authData);
         }),
 
         // Error handling for sign-in requests
@@ -51,6 +73,12 @@ export class AuthService {
           return throwError(() => new Error('Something went wrong!'));
         })
       );
+  }
+
+  logout() {
+    this.currentUser.next(null);
+    this.router.navigate(['/']);
+    localStorage.removeItem('userData');
   }
 
   // Function to see if user is authenticated
@@ -79,5 +107,21 @@ export class AuthService {
         }
       })
     );
+  }
+
+  private handleAuthentication(authData: IAuthData) {
+    const expirationDate = new Date(new Date().getTime() + authData.expiresIn * 1000);
+
+    const loggedInUser = new User(
+      '',
+      '',
+      authData.userId,
+      authData.email,
+      authData.token,
+      expirationDate
+    );
+
+    this.currentUser.next(loggedInUser);
+    localStorage.setItem('userData', JSON.stringify(loggedInUser));
   }
 }

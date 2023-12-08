@@ -7,9 +7,7 @@ import { Employee } from "../models/employee.model";
 })
 
 export class StorageService {
-  employees: Employee[] = [
-    new Employee('Darlton Carlyle', 'Marketing Coordinator', 'dcarlyle@conglomo.com', './assets/images/Delton-Sewell-Image-1.jpg'),
-  ];
+  employees: Employee[] = [];
 
   constructor(private http: HttpClient) {}
 
@@ -18,5 +16,29 @@ export class StorageService {
       `https://employee-portal-f13b1-default-rtdb.firebaseio.com/employees.json`,
       this.employees
     ).subscribe();
+  }
+
+  storeEmployees(employees: Employee[]) {
+    this.http.put<Employee[]>(
+      `https://employee-portal-f13b1-default-rtdb.firebaseio.com/employees.json`,
+      employees
+    ).subscribe();
+  }
+
+  fetchEmployees() {
+    this.http.get<Employee[]>(
+      `https://employee-portal-f13b1-default-rtdb.firebaseio.com/employees.json`,
+    ).subscribe(response => {
+      if (response !== null) {
+        this.employees = response;
+      }
+    });
+
+    return this.employees.slice();
+  }
+
+  addEmployee(sentEmployee: Employee) {
+    this.employees.push(sentEmployee);
+    this.storeEmployees(this.employees.slice());
   }
 }
