@@ -1,0 +1,50 @@
+<!-- Overlay -->
+<div class="overlay" *ngIf="isAddEmployeeFormOpen">
+<!-- Form Container -->
+<div class="add-employee-form">
+<!-- Form Header -->
+<div class="modal-header">
+  <h4 class="modal-title">Add Employee</h4>
+  <!-- Close Button -->
+  <button type="button" class="close" aria-label="Close" (click)="cancelForm()" style="font-size: 24px; color: #333; background: none; border: none; padding: 0;">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<!-- Form Body -->
+<form (ngSubmit)="submitForm()" #employeeForm="ngForm">
+  <div class="modal-body">
+    <!-- Form Inputs for Left Section-->
+    <div class="left-inputs">
+      <!-- Name Input -->
+      <div class="form-group">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" [(ngModel)]="newEmployee.name" class="form-control" required>
+      </div>
+      <!-- Title Input -->
+      <div class="form-group">
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title" [(ngModel)]="newEmployee.title" class="form-control" required>
+      </div>
+    </div>
+<!-- Form Inputs for Right Section-->
+    <div class="right-inputs">
+      <!-- Email Input -->
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" [(ngModel)]="newEmployee.email" class="form-control" required>
+      </div>
+      <!-- Image URL Input -->
+      <div class="form-group">
+        <label for="imageUrl">Image URL:</label>
+        <input type="text" id="imageUrl" name="imageUrl" [(ngModel)]="newEmployee.imageUrl" class="form-control" required>
+      </div>
+    </div>
+  </div>
+  <!-- Form Footer with Buttons -->
+  <div class="modal-footer">
+    <button type="submit" class="btn btn-primary">Add Employee</button>
+    <button type="button" class="btn btn-secondary" (click)="cancelForm()">Cancel</button>
+  </div>
+</form>
+</div>
+</div>

@@ -10,6 +10,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { PersonnelPageComponent } from './components/personnel-page/personnel-page.component';
 import { AdminComponent } from './components/admin/admin.component';
+import { AddEmployeeComponent } from './components/add-employee/add-employee.component';
 
 
 
@@ -23,8 +24,7 @@ import { AdminComponent } from './components/admin/admin.component';
     ContainerComponent,
     PersonnelPageComponent,
     AdminComponent,
-
-
+    AddEmployeeComponent
 
   ],
   imports: [

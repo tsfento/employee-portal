@@ -19,7 +19,7 @@
       <button class="btn btn-search me-2" type="button">Search</button>
     </form>
   </ul>
-
+  <app-add-employee *ngIf="isAddEmployeeFormOpen" (employeeAdded)="onEmployeeAdded($event)" (closeForm)="closeAddEmployeeForm()"></app-add-employee>
 <!-- Employee Boxes -->
 <div class="employee-parent ms-3 mt-3 me-3 mb-3">
 <div class="employee-box text-center" *ngFor="let employee of employees" (click)="openOffcanvas(employee)">
@@ -33,9 +33,10 @@
 </div>
 
 <!-- Add Employee Button -->
-<button class="btn btn-employee-list" (click)="addEmployee()">
-<span class="material-symbols-outlined employee-list-button-icon">add</span>
+<button class="btn btn-employee-list" (click)="openAddEmployeeForm()">
+  <span class="material-symbols-outlined employee-list-button-icon">add</span>
 </button>
+
 
 <!-- Offcanvas  -->
 <div #offcanvas class="offcanvas offcanvas-end details" id="offcanvasExample" tabindex="-1" aria-labelledby="offcanvasExampleLabel"(click)="closeOffcanvas()">
@@ -44,6 +45,8 @@
   <button type="button" class="btn btn-offcanvas-close" (click)="closeOffcanvas()">
     <span class="material-symbols-outlined box-button-icon">close</span>
   </button>
+  <!-- Add Employee Form Modal -->
+  <app-add-employee *ngIf="isAddEmployeeFormOpen" (employeeAdded)="onEmployeeAdded($event)" (closeForm)="closeAddEmployeeForm()"></app-add-employee>
 
 </div>
 <div class="offcanvas-body">
@@ -155,8 +158,8 @@
         <li class="document-item">Company Financial Reports - <a href="path/to/document">View</a></li>
   </ul>
   <button class="btn btn-offcanvas-box">
-    <span class="material-symbols-outlined box-button-icon">add</span>
-  </button>
+          <span class="material-symbols-outlined box-button-icon">add</span>
+        </button>
     </div>
       </div>
       </div>
