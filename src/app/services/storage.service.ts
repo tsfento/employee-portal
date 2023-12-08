@@ -13,18 +13,14 @@ export class StorageService {
 
   constructor(private http: HttpClient) {}
 
-  // dbTest() {
-  //   this.http.put<Employee[]>(
-  //     `https://employee-portal-f13b1-default-rtdb.firebaseio.com/employees.json`,
-  //     this.employees
-  //   ).subscribe();
-  // }
-
   storeEmployees(employees: Employee[]) {
     this.http.put<Employee[]>(
       `https://employee-portal-f13b1-default-rtdb.firebaseio.com/employees.json`,
       employees
-    ).subscribe();
+    ).subscribe((response: Employee[]) => {
+      this.employees = response;
+      this.employeesFetched.next(this.employees.slice());
+    });
   }
 
   fetchEmployees() {
@@ -41,6 +37,7 @@ export class StorageService {
   }
 
   addEmployee(sentEmployee: Employee) {
+    this.fetchEmployees();
     this.employees.push(sentEmployee);
     this.storeEmployees(this.employees.slice());
   }

@@ -27,7 +27,7 @@ export class PersonnelPageComponent implements OnInit, OnDestroy {
     this.employees = this.storageService.fetchEmployees();
 
     this.employeesFetchedSub = this.storageService.employeesFetched.subscribe(
-      fetchedEmployees => {
+      (fetchedEmployees: Employee[]) => {
         this.employees = fetchedEmployees;
       }
     );
