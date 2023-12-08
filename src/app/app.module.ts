@@ -11,7 +11,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { PersonnelPageComponent } from './components/personnel-page/personnel-page.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { AuthInterceptorService } from './components/auth/auth-interceptor.service';
-
+import { AddEmployeeComponent } from './components/add-employee/add-employee.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +21,8 @@ import { AuthInterceptorService } from './components/auth/auth-interceptor.servi
     SidebarComponent,
     ContainerComponent,
     PersonnelPageComponent,
-    AdminComponent
+    AdminComponent,
+    AddEmployeeComponent
 
   ],
   imports: [

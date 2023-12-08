@@ -1,5 +1,7 @@
+// personnel-page.component.ts
 import { Component, ElementRef, Renderer2, ViewChild } from '@angular/core';
 import { Employee } from 'src/app/models/employee.model';
+import { AddEmployeeComponent } from '../add-employee/add-employee.component';
 
 @Component({
   selector: 'app-personnel-page',
@@ -8,64 +10,60 @@ import { Employee } from 'src/app/models/employee.model';
 })
 export class PersonnelPageComponent {
   employees: Employee[] = [
-    new Employee('Darlton Carlyle', 'Marketing Coordinator', 'dcarlyle@conglomo.com', './assets/images/Delton-Sewell-Image-1.jpg')
+    { name: 'Darlton Carlyle', title: 'Marketing Coordinator', email: 'dcarlyle@conglomo.com', imageUrl: './assets/images/Delton-Sewell-Image-1.jpg' }
   ];
 
-  // Reference to the off-canvas element in the HTML
   @ViewChild('offcanvas') offcanvas!: ElementRef;
-
-  private clickListener: () => void;
   private isOpen = false;
+
+  // Correct property name
+  isAddEmployeeFormOpen = false;
 
   constructor(private renderer: Renderer2) {}
 
-  // Function to add a new employee to the employees array
-  addEmployee() {
-    this.employees.push({
-      name: 'New Employee',
-      title: 'New Position',
-      email: 'newemail@conglomo.com',
-      imageUrl: 'path-to-image.jpg'
-    });
-  }
-
-  // Function to open the off-canvas panel.
-  openOffcanvas(employee: any) {
+  openOffcanvas(employee: Employee) {
     const offcanvasElement = this.offcanvas.nativeElement;
-    this.renderer.addClass(offcanvasElement, 'show');
-    this.isOpen = true;
 
-    // Add a delay to registering the click event listener
-    setTimeout(() => {
-      this.clickListener = this.renderer.listen('document', 'click', (event: Event) => {
-        if (this.isOpen && !offcanvasElement.contains(event.target)) {
-          this.closeOffcanvas();
-        }
+    if (!this.isOpen) {
+      this.renderer.addClass(offcanvasElement, 'show');
+      this.isOpen = true;
+
+      setTimeout(() => {
+        window.addEventListener('click', this.closeOffcanvasHandler);
       });
-    });
-
-    // Show the off-canvas container
-    const offcanvasContainer = document.querySelector('.offcanvas-container');
-    if (offcanvasContainer) {
-      this.renderer.addClass(offcanvasContainer, 'show');
     }
   }
 
-  // Function to close the off-canvas panel
+  closeOffcanvasHandler = (event: Event) => {
+    const offcanvasElement = this.offcanvas.nativeElement;
+
+    if (this.isOpen && !offcanvasElement.contains(event.target as Node)) {
+      this.closeOffcanvas();
+      window.removeEventListener('click', this.closeOffcanvasHandler);
+    }
+  };
+
   closeOffcanvas() {
     const offcanvasElement = this.offcanvas.nativeElement;
     this.renderer.removeClass(offcanvasElement, 'show');
     this.isOpen = false;
 
-    // Remove the click event listener
-    if (this.clickListener) {
-      this.clickListener();
-    }
+    setTimeout(() => {
+      window.removeEventListener('click', this.closeOffcanvasHandler);
+    }, 300);
+  }
 
-    // Hide the off-canvas container
-    const offcanvasContainer = document.querySelector('.offcanvas-container');
-    if (offcanvasContainer) {
-      this.renderer.removeClass(offcanvasContainer, 'show');
-    }
+  openAddEmployeeForm() {
+    console.log('Opening Add Employee Form');
+    this.isAddEmployeeFormOpen = true;
+  }
+
+  closeAddEmployeeForm() {
+    this.isAddEmployeeFormOpen = false;
+  }
+
+  onEmployeeAdded(newEmployee: Employee) {
+    this.employees.push(newEmployee);
+    this.closeAddEmployeeForm();
   }
 }
