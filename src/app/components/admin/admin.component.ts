@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Organization } from '../models/organization.model';
+import { Organization } from 'src/app/models/organization.model';
+
 
 @Component({
   selector: 'app-admin',

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthService } from '../auth/auth.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -12,6 +13,9 @@ export class SidebarComponent {
     imgUrl: 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png'
   };
 
+  constructor(private authService: AuthService) {}
+
   logout() {
+    this.authService.logout();
   }
 }
