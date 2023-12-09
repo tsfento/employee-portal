@@ -148,6 +148,7 @@
           </button>
         </div>
 
+
         <!-- Company Documents Box -->
         <div class="offcanvas-box">
           <div class="ms-3 mt-3 offcanvas-box-header">
@@ -171,6 +172,37 @@
     <button class="btn btn-offcanvas-box">
             <span class="material-symbols-outlined box-button-icon">add</span>
           </button>
+
+      <!-- Company Documents Box -->
+      <div class="offcanvas-box">
+        <div class="ms-3 mt-3 offcanvas-box-header">
+          <span class="material-symbols-outlined box-header-icon">folder</span>
+          &nbsp;Company Documents
+        </div>
+    <div class="mt-3 offcanvas-box-body">
+      <ul class="document-list">
+        <!-- List of Ducuments Items -->
+        <li class="document-item">Employee Handbook - <a href="path/to/document">Download</a></li>
+        <li class="document-item">HR Policies and Procedures - <a href="path/to/document">Download</a></li>
+        <li class="document-item">Annual Business Plan - <a href="path/to/document">View</a></li>
+        <li class="document-item">Safety and Compliance Guidelines - <a href="path/to/document">View</a></li>
+        <li class="document-item">Code of Conduct - <a href="path/to/document">Download</a></li>
+        <li class="document-item">Emergency Response Plan - <a href="path/to/document">Download</a></li>
+        <li class="document-item">Remote Work Policy - <a href="path/to/document">View</a></li>
+        <li class="document-item">Diversity and Inclusion Report - <a href="path/to/document">View</a></li>
+        <li class="document-item">Employee Benefit Details - <a href="path/to/document">Download</a></li>
+        <li class="document-item">Company Financial Reports - <a href="path/to/document">View</a></li>
+  </ul>
+  <app-delete-employee
+      *ngIf="showDeleteModal"
+      (cancel)="closeDeleteModal()"
+      (deleteEmployee)="performDeleteAction()"
+    ></app-delete-employee>
+  <button class="btn btn-offcanvas-box">
+          <span class="material-symbols-outlined box-button-icon">add</span>
+        </button>
+    </div>
+
       </div>
         </div>
         </div>

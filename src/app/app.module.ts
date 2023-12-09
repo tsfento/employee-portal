@@ -13,6 +13,7 @@ import { AdminComponent } from './components/admin/admin.component';
 import { AuthInterceptorService } from './components/auth/auth-interceptor.service';
 import { AddEmployeeComponent } from './components/add-employee/add-employee.component';
 import { EditEmployeeComponent } from './components/edit-employee/edit-employee.component';
+import { DeleteEmployeeComponent } from './components/delete-employee/delete-employee.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { EditEmployeeComponent } from './components/edit-employee/edit-employee.
     PersonnelPageComponent,
     AdminComponent,
     AddEmployeeComponent,
-    EditEmployeeComponent
+    EditEmployeeComponent,
+    DeleteEmployeeComponent
 
   ],
   imports: [

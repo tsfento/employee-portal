@@ -2,6 +2,8 @@ import { Component, ElementRef, Renderer2, ViewChild } from '@angular/core';
 import { Employee } from '../models/employee.model';
 import { EmployeeService } from '../../employee.service';
 import { take } from 'rxjs/operators';
+import { AddEmployeeComponent } from '../add-employee/add-employee.component';
+
 
 @Component({
   selector: 'app-personnel-page',
@@ -84,5 +86,29 @@ closeOffcanvas() {
   }
   preventOffCanvas(event: Event): void {
     event.stopPropagation();
+
+// Method to close the Add Employee form
+closeAddEmployeeForm() {
+  this.employeeService.closeAddEmployeeForm();
+}
+
+// Method to handle icon click for editing
+openEditForm(employee: Employee) {
+  this.employeeService.openEditForm(employee);
+}
+showDeleteModal = false;
+
+  openDeleteModal() {
+    this.showDeleteModal = true;
+  }
+
+  closeDeleteModal() {
+    this.showDeleteModal = false;
+  }
+
+  performDeleteAction() {
+  
+    console.log('Employee deleted!');
+    this.showDeleteModal = false;
   }
 }
