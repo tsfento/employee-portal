@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Output } from '@angular/core';
+import { EmployeeService } from 'src/app/employee.service';
 
 @Component({
 selector: 'app-add-employee',
@@ -16,17 +17,16 @@ newEmployee = {
 @Output() employeeAdded = new EventEmitter<any>();
 @Output() closeForm = new EventEmitter<void>();
 
-// Flag to control the visibility of the form
+// Flag to see if the form is open
 isAddEmployeeFormOpen = true;
 onCancelForm: any;
 
-// Function to handle form submission
+// Method to submit the form
 submitForm() {
-
-  // Emit the new employee data to the parent component
+  // Emit the new employee
   this.employeeAdded.emit(this.newEmployee);
 
-  // Reset the form or perform any other necessary actions
+  // Reset the form
   this.newEmployee = {
     name: '',
     title: '',
@@ -35,10 +35,10 @@ submitForm() {
   };
 
   // Close the form
-  this.onCancelForm();
+  this.closeForm.emit();
 }
 
-// Function to close the form without adding a new employee
+// Method to close the form without adding a new employee
 cancelForm() {
   this.isAddEmployeeFormOpen = false;
   this.closeForm.emit();

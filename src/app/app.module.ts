@@ -11,6 +11,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { PersonnelPageComponent } from './components/personnel-page/personnel-page.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { AddEmployeeComponent } from './components/add-employee/add-employee.component';
+import { EditEmployeeComponent } from './components/edit-employee/edit-employee.component';
 
 
 
@@ -24,7 +25,8 @@ import { AddEmployeeComponent } from './components/add-employee/add-employee.com
     ContainerComponent,
     PersonnelPageComponent,
     AdminComponent,
-    AddEmployeeComponent
+    AddEmployeeComponent,
+    EditEmployeeComponent
 
   ],
   imports: [
