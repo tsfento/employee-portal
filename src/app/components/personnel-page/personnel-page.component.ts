@@ -2,53 +2,42 @@ import { Component, ElementRef, Renderer2, ViewChild } from '@angular/core';
 import { Employee } from '../models/employee.model';
 import { EmployeeService } from '../../employee.service';
 import { take } from 'rxjs/operators';
-import { Employee } from 'src/app/models/employee.model';
-import { AddEmployeeComponent } from '../add-employee/add-employee.component';
 
 @Component({
-selector: 'app-personnel-page',
-templateUrl: 'personnel-page.component.html',
-styleUrls: ['personnel-page.component.css']
+  selector: 'app-personnel-page',
+  templateUrl: 'personnel-page.component.html',
+  styleUrls: ['personnel-page.component.css']
 })
 export class PersonnelPageComponent {
-// Array of employees
-employees: Employee[] = [
-  { name: 'Darlton Carlyle', title: 'Marketing Coordinator', email: 'dcarlyle@conglomo.com', imageUrl: './assets/images/Delton-Sewell-Image-1.jpg' }
-];
-
+  // Array of employees
+  employees: Employee[] = [
+    { name: 'Darlton Carlyle', title: 'Marketing Coordinator', email: 'dcarlyle@conglomo.com', imageUrl: './assets/images/Delton-Sewell-Image-1.jpg' }
+  ];
 // Add the ViewChild decorator
-@ViewChild('offcanvas') offcanvas!: ElementRef;
-private isOpen = false;
+  @ViewChild('offcanvas') offcanvas!: ElementRef;
+  // Property to see if the Add Employee form is open
+  private isOpen = false;
+  isAddEmployeeFormOpen = false;
 
-// Property to see if the Add Employee form is open
-isAddEmployeeFormOpen = false;
+  // Inject the Renderer2 and EmployeeService
+  constructor(private renderer: Renderer2, private employeeService: EmployeeService) {
+    // Subscribe to the isAddEmployeeFormOpen$ observable
+    this.employeeService.isAddEmployeeFormOpen$.subscribe((isOpen) => {
+      this.isAddEmployeeFormOpen = isOpen;
+    });
+  }
 
-// Inject the Renderer2 and EmployeeService
-constructor(private renderer: Renderer2, private employeeService: EmployeeService) {
 
-  // Subscribe to the isAddEmployeeFormOpen$ observable
-  this.employeeService.isAddEmployeeFormOpen$.subscribe((isOpen) => {
-    this.isAddEmployeeFormOpen = isOpen;
-  });
-}
 // Method to open the offcanvas element
 openOffcanvas(employee: Employee) {
-  // Subscribe to the isEditEmployeeFormOpen$ observable
-  this.employeeService.isEditEmployeeFormOpen$.pipe(take(1)).subscribe((isEditEmployeeFormOpen) => {
-    // Only open the offcanvas if the edit form is not open
-    if (!isEditEmployeeFormOpen && !this.isAddEmployeeFormOpen) {
-      const offcanvasElement = this.offcanvas.nativeElement;
-      // Make sure the offcanvas element is not already open
-      if (!this.isOpen) {
-        this.renderer.addClass(offcanvasElement, 'show');
-        this.isOpen = true;
-        // Set up a click event listener to close the offcanvas
-        setTimeout(() => {
-          window.addEventListener('click', this.closeOffcanvasHandler);
-        });
-      }
-    }
-  });
+  const offcanvasElement = this.offcanvas.nativeElement;
+  if (!this.isOpen) {
+    this.renderer.addClass(offcanvasElement, 'show');
+    this.isOpen = true;
+    setTimeout(() => {
+      window.addEventListener('click', this.closeOffcanvasHandler);
+    });
+  }
 }
 // Method to close the offcanvas element
 closeOffcanvasHandler = (event: Event) => {
@@ -68,25 +57,32 @@ closeOffcanvas() {
     window.removeEventListener('click', this.closeOffcanvasHandler);
   }, 300);
 }
+  openAddEmployeeForm() {
+    console.log('Opening Add Employee Form');
+    this.employeeService.openAddEmployeeForm();
+  }
 
-// Method to open the Add Employee form
-openAddEmployeeForm() {
-  console.log('Opening Add Employee Form');
-  this.employeeService.openAddEmployeeForm();
-}
-// Method for when an employee is added
-onEmployeeAdded(newEmployee: Employee) {
-  this.employees.push(newEmployee);
-  this.closeAddEmployeeForm();
-}
+  onEmployeeAdded(newEmployee: Employee) {
+    this.employees.push(newEmployee);
+    this.closeAddEmployeeForm();
+  }
 
-// Method to close the Add Employee form
-closeAddEmployeeForm() {
-  this.employeeService.closeAddEmployeeForm(); 
-}
+  closeAddEmployeeForm() {
+    this.employeeService.closeAddEmployeeForm();
+  }
 
-// Method to handle icon click for editing
-openEditForm(employee: Employee) {
-  this.employeeService.openEditForm(employee);
-}
+  openEditForm(event: Event, employee: Employee) {
+    console.log('Opening Edit Form');
+    // Stop the event propagation to prevent it from reaching the container
+    event.stopPropagation();
+    this.employeeService.openEditForm(employee);
+  }
+
+  onEmployeeBoxClick(event: Event, employee: Employee) {
+    console.log('Employee box clicked');
+    this.openOffcanvas(employee);
+  }
+  preventOffCanvas(event: Event): void {
+    event.stopPropagation();
+  }
 }
