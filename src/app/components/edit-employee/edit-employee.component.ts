@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, Output, OnChanges, SimpleChanges, OnInit } from '@angular/core';
 import { Employee } from '../models/employee.model';
 import { EmployeeService } from '../../employee.service';
 
@@ -30,14 +30,20 @@ export class EditEmployeeComponent implements OnInit {
       }
     });
   }
+  // Method to prevent the off-canvas from closing when clicking inside the form
+  preventOffCanvas(event: Event): void {
+    console.log('Preventing off-canvas');
+    event.stopPropagation();
+  }
   // Method to submit the form
   submitForm() {
+    console.log('Submit and Cancel');
     this.employeeUpdated.emit(this.employee);
     this.closeForm.emit();
   }
-
-  // Method to close the form
+  // Method to cancel the form
   cancelForm() {
+    console.log('Submit and Cancel');
     this.closeForm.emit();
   }
 }
