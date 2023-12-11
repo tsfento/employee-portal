@@ -1,12 +1,12 @@
 <!-- Overlay -->
-<div class="overlay">
+<div class="overlay" *ngIf="isEditEmployeeFormOpen">
   <!-- Form Container -->
   <div class="edit-employee-form">
     <!-- Form Header -->
     <div class="modal-header">
       <h4 class="modal-title">Edit Employee</h4>
       <!-- Close Button -->
-      <button type="button" class="close" aria-label="Close" (click)="cancelForm(); preventOffCanvas($event)">
+      <button type="button" class="close" aria-label="Close" (click)="cancelForm()">
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
@@ -19,12 +19,11 @@
           <div class="form-group">
             <label for="name">Name:</label>
             <input type="text" id="name" name="name" [(ngModel)]="selectedEmployee.name" class="form-control" required>
-
           </div>
           <!-- Title Input -->
           <div class="form-group">
             <label for="title">Title:</label>
-  <input type="text" id="title" name="title" [(ngModel)]="selectedEmployee.title" class="form-control" required>
+            <input type="text" id="title" name="title" [(ngModel)]="selectedEmployee.title" class="form-control" required>
           </div>
         </div>
         <!-- Form Inputs for Right Section -->
@@ -32,22 +31,20 @@
           <!-- Email Input -->
           <div class="form-group">
             <label for="email">Email:</label>
-  <input type="text" id="email" name="email" [(ngModel)]="selectedEmployee.email" class="form-control" required>
+            <input type="email" id="email" name="email" [(ngModel)]="selectedEmployee.email" class="form-control" required>
           </div>
           <!-- Image URL Input -->
           <div class="form-group">
             <label for="imageUrl">Image URL:</label>
-            <input type="text" id="imageUrl" name="ImageUrl" [(ngModel)]="selectedEmployee.imageUrl" class="form-control" required>
+            <input type="text" id="imageUrl" name="imageUrl" [(ngModel)]="selectedEmployee.imageUrl" class="form-control" required>
           </div>
         </div>
       </div>
-      <!-- Footer with Buttons -->
+      <!-- Form Footer with Buttons -->
       <div class="modal-footer">
-
-<button type="submit" class="btn btn-primary">Save Changes</button>
-<button type="button" class="btn btn-secondary" (click)="cancelForm(); preventOffCanvas($event)">Cancel</button>
-
+        <button type="submit" class="btn btn-primary">Save Changes</button>
+        <button type="button" class="btn btn-secondary" (click)="cancelForm()">Cancel</button>
       </div>
     </form>
   </div>
-  </div>
+</div>
