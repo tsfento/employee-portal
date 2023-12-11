@@ -12,6 +12,9 @@ import { PersonnelPageComponent } from './components/personnel-page/personnel-pa
 import { AdminComponent } from './components/admin/admin.component';
 import { AuthInterceptorService } from './components/auth/auth-interceptor.service';
 import { AddEmployeeComponent } from './components/add-employee/add-employee.component';
+import { EditEmployeeComponent } from './components/edit-employee/edit-employee.component';
+import { DeleteEmployeeComponent } from './components/delete-employee/delete-employee.component';
+
 
 @NgModule({
   declarations: [
@@ -22,7 +25,10 @@ import { AddEmployeeComponent } from './components/add-employee/add-employee.com
     ContainerComponent,
     PersonnelPageComponent,
     AdminComponent,
-    AddEmployeeComponent
+    AddEmployeeComponent,
+    EditEmployeeComponent,
+    DeleteEmployeeComponent
+
 
   ],
   imports: [
@@ -30,7 +36,8 @@ import { AddEmployeeComponent } from './components/add-employee/add-employee.com
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+
 
   ],
   providers: [

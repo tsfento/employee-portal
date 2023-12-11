@@ -1,142 +1,176 @@
 <section class="layout">
-<!-- Sidebar -->
-<div class="sidebar sticky-top">
-  <app-sidebar></app-sidebar>
-</div>
-<!-- Body content -->
-<div class="body">
-  <!-- Navigation Bar -->
-  <ul class="nav nav-tabs sticky-top pt-2 top-nav">
-    <li class="nav-item">
-      <a href="#" class="nav-link">All</a>
-    </li>
-    <li class="nav-item me-2">
-      <a href="#" class="nav-link active">Advertising</a>
-    </li>
-    <!-- Search form -->
-    <form class="d-flex flex-fill" role="search" style="height: 33px;">
-      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-search me-2" type="button">Search</button>
-    </form>
-  </ul>
-  <app-add-employee *ngIf="isAddEmployeeFormOpen" (employeeAdded)="onEmployeeAdded($event)" (closeForm)="closeAddEmployeeForm()"></app-add-employee>
-<!-- Employee Boxes -->
-<div class="employee-parent ms-3 mt-3 me-3 mb-3">
-<div class="employee-box text-center" *ngFor="let employee of employees" (click)="openOffcanvas(employee)">
-  <div class="mt-4">
-    <img class="employee-img" src="{{ employee.imageUrl }}" alt="Employee Image">
-    <p class="employee-name mt-2">{{ employee.name }}</p>
-    <p class="employee-title">{{ employee.title }}</p>
+  <!-- Sidebar -->
+  <div class="sidebar sticky-top">
+    <app-sidebar></app-sidebar>
   </div>
-  <a href="#" class="employee-email">{{ employee.email }}</a>
-</div>
-</div>
+  <!-- Body content -->
+  <div class="body">
+    <!-- Navigation Bar -->
+    <ul class="nav nav-tabs sticky-top pt-2 top-nav">
+      <li class="nav-item">
+        <a href="#" class="nav-link">All</a>
+      </li>
+      <li class="nav-item me-2">
+        <a href="#" class="nav-link active">Advertising</a>
+      </li>
+      <!-- Search form -->
+      <form class="d-flex flex-fill" role="search" style="height: 33px;">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-search me-2" type="button">Search</button>
+      </form>
+    </ul>
+    <app-add-employee *ngIf="isAddEmployeeFormOpen" (employeeAdded)="onEmployeeAdded($event)" (closeForm)="closeAddEmployeeForm()"></app-add-employee>
+  <!-- Employee Boxes -->
+  <div class="employee-parent ms-3 mt-3 me-3 mb-3">
+    <div class="employee-box text-center" *ngFor="let employee of employees" (click)="onEmployeeBoxClick($event, employee)">
+      <div class="mt-4">
+        <img class="employee-img" src="{{ employee.imageUrl }}" alt="Employee Image">
+        <p class="employee-name mt-2">{{ employee.name }}</p>
+        <p class="employee-title">{{ employee.title }}</p>
+        <div class="icons-container">
+          <!-- Edit Icon -->
+<i class="material-icons edit-icon" (click)="openEditForm($event, employee)" title="Edit Employee">edit_note</i>
+          <!-- Delete Icon -->
+          <i class="material-icons delete-icon" (click)="confirmDeleteEmployeeModal(employee)" title="Delete Employee">delete</i>
 
-<!-- Add Employee Button -->
-<button class="btn btn-employee-list" (click)="openAddEmployeeForm()">
-  <span class="material-symbols-outlined employee-list-button-icon">add</span>
-</button>
-
-
-<!-- Offcanvas  -->
-<div #offcanvas class="offcanvas offcanvas-end details" id="offcanvasExample" tabindex="-1" aria-labelledby="offcanvasExampleLabel"(click)="closeOffcanvas()">
-<div class="offcanvas-header" data-bs-theme="dark">
-  <h5 class="offcanvas-title" id="offcanvasExampleLabel">Employee Details</h5>
-  <button type="button" class="btn btn-offcanvas-close" (click)="closeOffcanvas()">
-    <span class="material-symbols-outlined box-button-icon">close</span>
+        </div>
+        <a href="#" class="employee-email">{{ employee.email }}</a>
+      </div>
+  <!-- Edit Employee Form Modal -->
+  <app-edit-employee *ngIf="employeeService.isEditEmployeeFormOpen$ | async"
+  (closeForm)="employeeService.closeEditForm()" (click)="preventOffCanvas($event)">
+</app-edit-employee>
+<!-- Delete Employee Confirmation Modal -->
+<app-delete-employee
+  [employeeToDelete]="employeeToDelete"
+  (confirmDelete)="confirmDeleteEmployee($event)"
+  (cancelDelete)="cancelDeleteEmployeeModal()">
+</app-delete-employee>
+  </div>
+  <!-- Add Employee Button -->
+  <button class="btn btn-employee-list" (click)="openAddEmployeeForm()">
+    <span class="material-symbols-outlined employee-list-button-icon">add</span>
   </button>
-  <!-- Add Employee Form Modal -->
-  <app-add-employee *ngIf="isAddEmployeeFormOpen" (employeeAdded)="onEmployeeAdded($event)" (closeForm)="closeAddEmployeeForm()"></app-add-employee>
-
-</div>
-<div class="offcanvas-body">
-  <!-- Offcanvas content -->
-  <div class="offcanvas-parent">
-    <!-- Offcanvas Boxes -->
-    <!-- TODO Box -->
-    <div class="offcanvas-box">
-      <div class="ms-3 mt-3 offcanvas-box-header">
-        <span class="material-symbols-outlined box-header-icon">fact_check</span>
-        &nbsp;TODO
+  <!-- Offcanvas  -->
+  <div #offcanvas class="offcanvas offcanvas-end details" id="offcanvasExample" tabindex="-1" aria-labelledby="offcanvasExampleLabel"(click)="closeOffcanvas()">
+  <div class="offcanvas-header" data-bs-theme="dark">
+    <h5 class="offcanvas-title" id="offcanvasExampleLabel">Employee Details</h5>
+    <button type="button" class="btn btn-offcanvas-close" (click)="closeOffcanvas()">
+      <span class="material-symbols-outlined box-button-icon">close</span>
+    </button>
+    <!-- Add Employee Form Modal -->
+    <app-add-employee *ngIf="isAddEmployeeFormOpen" (employeeAdded)="onEmployeeAdded($event)" (closeForm)="closeAddEmployeeForm()"></app-add-employee>
+  </div>
+  <div class="offcanvas-body">
+    <!-- Offcanvas content -->
+    <div class="offcanvas-parent">
+      <!-- Offcanvas Boxes -->
+      <!-- TODO Box -->
+      <div class="offcanvas-box">
+        <div class="ms-3 mt-3 offcanvas-box-header">
+          <span class="material-symbols-outlined box-header-icon">fact_check</span>
+          &nbsp;TODO
+        </div>
+        <div class="mt-3 offcanvas-box-body">
+          <ul class="todo-list">
+            <!--List of TODO items -->
+        <li class="to-do-item">Schedule monthly team meeting and prepare the agenda</li>
+      <li class="to-do-item">Update employee records with recent changes in contact details</li>
+      <li class="to-do-item">Coordinate with IT for new hire onboarding setups</li>
+      <li class="to-do-item">Complete documentation for upcoming audit</li>
+      <li class="to-do-item">Update the job descriptions for open positions on the careers page</li>
+      <li class="to-do-item">Prepare a report on employee turnover for the past year</li>
+          </ul>
+        </div>
+        <button class="btn btn-offcanvas-box">
+          <span class="material-symbols-outlined box-button-icon">add</span>
+        </button>
       </div>
+      <!-- Event Box -->
+        <div class="offcanvas-box">
+          <div class="ms-3 mt-3 offcanvas-box-header">
+            <span class="material-symbols-outlined box-header-icon">event</span>
+            &nbsp;Upcoming Events
+          </div>
+          <div class="mt-3 offcanvas-box-body">
+            <ul class="event-list">
+              <!-- List of Event Items -->
+              <li class="event list-text">
+                <li class="event-item">Remote Work Policy Webinar - July 22nd</li>
+      <li class="event-item">Labor Law Update Seminar - August 15th</li>
+      <li class="event-item">Team Building Retreat - September 10th</li>
+      <li class="event-item">End-of-Year Benefits Enrollment Period - October 1st to 31st</li>
+            </ul>
+          </div>
+          <button class="btn btn-offcanvas-box">
+            <span class="material-symbols-outlined box-button-icon">add</span>
+          </button>
+        </div>
+        <!-- Tasks to Review Box -->
+        <div class="offcanvas-box">
+          <div class="ms-3 mt-3 offcanvas-box-header">
+            <span class="material-symbols-outlined box-header-icon">task</span>
+            &nbsp;Tasks to Review
+          </div>
+          <div class="mt-3 offcanvas-box-body">
+            <ul class="task-list">
+              <!-- List of Task List Items -->
+              <li class="task-item">Review and update employee handbooks</li>
+              <li class="task-item">Evaluate recent job applications for the Marketing Manager position</li>
+              <li class="task-item">Complete quarterly compliance training updates</li>
+              <li class="task-item">Prepare performance review materials for upcoming evaluations</li>
+              <li class="task-item">Verify and update employee emergency contact information</li>
+              <li class="task-item">Finalize details for the remote work policy update</li>
+              <li class="task-item">Review and approve time-off requests</li>
+              <li class="task-item">Review and update employee handbooks</li>
+            </ul>
+          </div>
+          <button class="btn btn-offcanvas-box">
+            <span class="material-symbols-outlined box-button-icon">add</span>
+          </button>
+        </div>
+        <!-- Company News Box -->
+        <div class="offcanvas-box">
+          <div class="ms-3 mt-3 offcanvas-box-header">
+            <span class="material-symbols-outlined box-header-icon">newspaper</span>
+            &nbsp;Company News
+          </div>
+          <div class="mt-3 offcanvas-box-body">
+            <ul class="news-list">
+              <!-- List of Company News Items -->
+              <li class="news-item">CEO's Quarterly Address Highlights Company Growth - Read More</li>
+              <li class="news-item">Innovation Award: Our Team's Latest Tech Advancement - Discover</li>
+              <li class="news-item">Community Outreach: Successful Charity Event Last Weekend - Highlights</li>
+              <li class="news-item">Employee Spotlight: Interview with Our Employee of the Month - Profile</li>
+            </ul>
+          </div>
+          <button class="btn btn-offcanvas-box">
+            <span class="material-symbols-outlined box-button-icon">add</span>
+          </button>
+        </div>
+        <!-- Company Documents Box -->
+        <div class="offcanvas-box">
+          <div class="ms-3 mt-3 offcanvas-box-header">
+            <span class="material-symbols-outlined box-header-icon">folder</span>
+            &nbsp;Company Documents
+          </div>
       <div class="mt-3 offcanvas-box-body">
-        <ul class="todo-list">
-          <!--List of TODO items -->
-      <li class="to-do-item">Schedule monthly team meeting and prepare the agenda</li>
-    <li class="to-do-item">Update employee records with recent changes in contact details</li>
-    <li class="to-do-item">Coordinate with IT for new hire onboarding setups</li>
-    <li class="to-do-item">Complete documentation for upcoming audit</li>
-    <li class="to-do-item">Update the job descriptions for open positions on the careers page</li>
-    <li class="to-do-item">Prepare a report on employee turnover for the past year</li>
-        </ul>
-      </div>
-      <button class="btn btn-offcanvas-box">
-        <span class="material-symbols-outlined box-button-icon">add</span>
-      </button>
-    </div>
-    <!-- Event Box -->
-      <div class="offcanvas-box">
-        <div class="ms-3 mt-3 offcanvas-box-header">
-          <span class="material-symbols-outlined box-header-icon">event</span>
-          &nbsp;Upcoming Events
-        </div>
-        <div class="mt-3 offcanvas-box-body">
-          <ul class="event-list">
-            <!-- List of Event Items -->
-            <li class="event list-text">
-              <li class="event-item">Remote Work Policy Webinar - July 22nd</li>
-    <li class="event-item">Labor Law Update Seminar - August 15th</li>
-    <li class="event-item">Team Building Retreat - September 10th</li>
-    <li class="event-item">End-of-Year Benefits Enrollment Period - October 1st to 31st</li>
-          </ul>
-        </div>
-        <button class="btn btn-offcanvas-box">
-          <span class="material-symbols-outlined box-button-icon">add</span>
-        </button>
-      </div>
-      <!-- Tasks to Review Box -->
-      <div class="offcanvas-box">
-        <div class="ms-3 mt-3 offcanvas-box-header">
-          <span class="material-symbols-outlined box-header-icon">task</span>
-          &nbsp;Tasks to Review
-        </div>
-        <div class="mt-3 offcanvas-box-body">
-          <ul class="task-list">
-            <!-- List of Task List Items -->
-            <li class="task-item">Review and update employee handbooks</li>
-            <li class="task-item">Evaluate recent job applications for the Marketing Manager position</li>
-            <li class="task-item">Complete quarterly compliance training updates</li>
-            <li class="task-item">Prepare performance review materials for upcoming evaluations</li>
-            <li class="task-item">Verify and update employee emergency contact information</li>
-            <li class="task-item">Finalize details for the remote work policy update</li>
-            <li class="task-item">Review and approve time-off requests</li>
-            <li class="task-item">Review and update employee handbooks</li>
-          </ul>
-        </div>
-        <button class="btn btn-offcanvas-box">
-          <span class="material-symbols-outlined box-button-icon">add</span>
-        </button>
-      </div>
-      <!-- Company News Box -->
-      <div class="offcanvas-box">
-        <div class="ms-3 mt-3 offcanvas-box-header">
-          <span class="material-symbols-outlined box-header-icon">newspaper</span>
-          &nbsp;Company News
-        </div>
-        <div class="mt-3 offcanvas-box-body">
-          <ul class="news-list">
-            <!-- List of Company News Items -->
-            <li class="news-item">CEO's Quarterly Address Highlights Company Growth - Read More</li>
-            <li class="news-item">Innovation Award: Our Team's Latest Tech Advancement - Discover</li>
-            <li class="news-item">Community Outreach: Successful Charity Event Last Weekend - Highlights</li>
-            <li class="news-item">Employee Spotlight: Interview with Our Employee of the Month - Profile</li>
-          </ul>
-        </div>
-        <button class="btn btn-offcanvas-box">
-          <span class="material-symbols-outlined box-button-icon">add</span>
-        </button>
-      </div>
-
+        <ul class="document-list">
+          <!-- List of Ducuments Items -->
+          <li class="document-item">Employee Handbook - <a href="path/to/document">Download</a></li>
+          <li class="document-item">HR Policies and Procedures - <a href="path/to/document">Download</a></li>
+          <li class="document-item">Annual Business Plan - <a href="path/to/document">View</a></li>
+          <li class="document-item">Safety and Compliance Guidelines - <a href="path/to/document">View</a></li>
+          <li class="document-item">Code of Conduct - <a href="path/to/document">Download</a></li>
+          <li class="document-item">Emergency Response Plan - <a href="path/to/document">Download</a></li>
+          <li class="document-item">Remote Work Policy - <a href="path/to/document">View</a></li>
+          <li class="document-item">Diversity and Inclusion Report - <a href="path/to/document">View</a></li>
+          <li class="document-item">Employee Benefit Details - <a href="path/to/document">Download</a></li>
+          <li class="document-item">Company Financial Reports - <a href="path/to/document">View</a></li>
+    </ul>
+    <button class="btn btn-offcanvas-box">
+            <span class="material-symbols-outlined box-button-icon">add</span>
+          </button>
       <!-- Company Documents Box -->
       <div class="offcanvas-box">
         <div class="ms-3 mt-3 offcanvas-box-header">
@@ -157,14 +191,14 @@
         <li class="document-item">Employee Benefit Details - <a href="path/to/document">Download</a></li>
         <li class="document-item">Company Financial Reports - <a href="path/to/document">View</a></li>
   </ul>
+  <!-- Add Employee Button -->
   <button class="btn btn-offcanvas-box">
           <span class="material-symbols-outlined box-button-icon">add</span>
         </button>
     </div>
       </div>
+        </div>
+        </div>
       </div>
     </div>
   </div>
-</div>
-
-
