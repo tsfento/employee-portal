@@ -2,8 +2,6 @@ import { Component, ElementRef, Renderer2, ViewChild } from '@angular/core';
 import { Employee } from '../models/employee.model';
 import { EmployeeService } from '../../employee.service';
 import { take } from 'rxjs/operators';
-import { AddEmployeeComponent } from '../add-employee/add-employee.component';
-
 
 @Component({
   selector: 'app-personnel-page',
@@ -28,7 +26,8 @@ export class PersonnelPageComponent {
       this.isAddEmployeeFormOpen = isOpen;
     });
   }
-
+ // Property to store the employee to be deleted
+ private employeeToDelete: Employee | null = null;
 
 // Method to open the offcanvas element
 openOffcanvas(employee: Employee) {
@@ -59,27 +58,32 @@ closeOffcanvas() {
     window.removeEventListener('click', this.closeOffcanvasHandler);
   }, 300);
 }
+  // Method to open the Add Employee form
   openAddEmployeeForm() {
     console.log('Opening Add Employee Form');
     this.employeeService.openAddEmployeeForm();
   }
 
+  // Method to handle the employeeAdded event
   onEmployeeAdded(newEmployee: Employee) {
     this.employees.push(newEmployee);
     this.closeAddEmployeeForm();
   }
 
+  // Method to close the Add Employee form
   closeAddEmployeeForm() {
     this.employeeService.closeAddEmployeeForm();
   }
 
+  // Method to open the Edit Form
   openEditForm(event: Event, employee: Employee) {
     console.log('Opening Edit Form');
-    // Stop the event propagation to prevent it from reaching the container
+    // Stop the offCanvas from opening
     event.stopPropagation();
     this.employeeService.openEditForm(employee);
   }
 
+  // Method to handle clicking on an employee box
   onEmployeeBoxClick(event: Event, employee: Employee) {
     console.log('Employee box clicked');
     this.openOffcanvas(employee);
@@ -87,28 +91,30 @@ closeOffcanvas() {
   preventOffCanvas(event: Event): void {
     event.stopPropagation();
 
-// Method to close the Add Employee form
-closeAddEmployeeForm() {
-  this.employeeService.closeAddEmployeeForm();
-}
-
-// Method to handle icon click for editing
-openEditForm(employee: Employee) {
-  this.employeeService.openEditForm(employee);
-}
-showDeleteModal = false;
-
-  openDeleteModal() {
-    this.showDeleteModal = true;
+  }
+  // Method to confirm the deletion
+  confirmDeleteEmployee() {
+    if (this.employeeToDelete) {
+      const index = this.employees.indexOf(this.employeeToDelete);
+      if (index !== -1) {
+        this.employees.splice(index, 1);
+      }
+      // Close the delete confirmation modal
+      this.employeeService.openDeleteModal(null);
+    }
   }
 
-  closeDeleteModal() {
-    this.showDeleteModal = false;
+  // Method to show the delete confirmation modal
+  confirmDeleteEmployeeModal(employee: Employee) {
+    event.stopPropagation();
+    this.employeeToDelete = employee;
   }
 
-  performDeleteAction() {
-  
-    console.log('Employee deleted!');
-    this.showDeleteModal = false;
+  // Method to cancel the deletion
+  cancelDeleteEmployeeModal() {
+    event.stopPropagation();
+    this.employeeService.openDeleteModal(null);
+    this.employeeToDelete = null;
+
   }
 }

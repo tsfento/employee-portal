@@ -15,6 +15,7 @@ import { AddEmployeeComponent } from './components/add-employee/add-employee.com
 import { EditEmployeeComponent } from './components/edit-employee/edit-employee.component';
 import { DeleteEmployeeComponent } from './components/delete-employee/delete-employee.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,13 +29,15 @@ import { DeleteEmployeeComponent } from './components/delete-employee/delete-emp
     EditEmployeeComponent,
     DeleteEmployeeComponent
 
+
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+
 
   ],
   providers: [
