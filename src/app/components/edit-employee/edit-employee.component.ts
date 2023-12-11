@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output, OnChanges, SimpleChanges, OnInit } from '@angular/core';
 import { Employee } from '../models/employee.model';
 import { EmployeeService } from '../../services/employee.service';
+import { StorageService } from 'src/app/services/storage.service';
 
 @Component({
   selector: 'app-edit-employee',
@@ -16,7 +17,7 @@ export class EditEmployeeComponent implements OnInit {
   employee: Employee;
   isEditEmployeeFormOpen: boolean = false;
 
-  constructor(private employeeService: EmployeeService) {}
+  constructor(private employeeService: EmployeeService, private storageService: StorageService) {}
 
   ngOnInit() {
     // Subscribe to the selectedEmployee$ observable
@@ -39,6 +40,7 @@ export class EditEmployeeComponent implements OnInit {
   submitForm() {
     console.log('Submit and Cancel');
     this.employeeUpdated.emit(this.employee);
+    this.storageService.editEmployee(this.employee, 1);
     this.closeForm.emit();
   }
   // Method to cancel the form
