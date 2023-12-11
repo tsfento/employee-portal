@@ -16,9 +16,8 @@ export class PersonnelPageComponent implements OnInit, OnDestroy {
   employeesFetchedSub: Subscription;
 
   @ViewChild('offcanvas') offcanvas!: ElementRef;
+  // Property to see if the Add Employee form is open
   private isOpen = false;
-
-  // Correct property name
   isAddEmployeeFormOpen = false;
 
   constructor(private renderer: Renderer2, private storageService: StorageService) {}
@@ -71,15 +70,60 @@ export class PersonnelPageComponent implements OnInit, OnDestroy {
 
   openAddEmployeeForm() {
     console.log('Opening Add Employee Form');
-    this.isAddEmployeeFormOpen = true;
+    this.employeeService.openAddEmployeeForm();
   }
 
-  closeAddEmployeeForm() {
-    this.isAddEmployeeFormOpen = false;
-  }
-
+  // Method to handle the employeeAdded event
   onEmployeeAdded(newEmployee: Employee) {
     this.storageService.addEmployee(newEmployee);
     this.closeAddEmployeeForm();
+  }
+
+  // Method to close the Add Employee form
+  closeAddEmployeeForm() {
+    this.employeeService.closeAddEmployeeForm();
+  }
+
+  // Method to open the Edit Form
+  openEditForm(event: Event, employee: Employee) {
+    console.log('Opening Edit Form');
+    // Stop the offCanvas from opening
+    event.stopPropagation();
+    this.employeeService.openEditForm(employee);
+  }
+
+  // Method to handle clicking on an employee box
+  onEmployeeBoxClick(event: Event, employee: Employee) {
+    console.log('Employee box clicked');
+    this.openOffcanvas(employee);
+  }
+  preventOffCanvas(event: Event): void {
+    event.stopPropagation();
+
+  }
+  // Method to confirm the deletion
+  confirmDeleteEmployee() {
+    if (this.employeeToDelete) {
+      const index = this.employees.indexOf(this.employeeToDelete);
+      if (index !== -1) {
+        this.employees.splice(index, 1);
+      }
+      // Close the delete confirmation modal
+      this.employeeService.openDeleteModal(null);
+    }
+  }
+
+  // Method to show the delete confirmation modal
+  confirmDeleteEmployeeModal(employee: Employee) {
+    event.stopPropagation();
+    this.employeeToDelete = employee;
+  }
+
+  // Method to cancel the deletion
+  cancelDeleteEmployeeModal() {
+    event.stopPropagation();
+    this.employeeService.openDeleteModal(null);
+    this.employeeToDelete = null;
+
   }
 }
