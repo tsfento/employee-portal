@@ -9,14 +9,14 @@
     <app-add-employee *ngIf="isAddEmployeeFormOpen" (employeeAdded)="onEmployeeAdded($event)" (closeForm)="closeAddEmployeeForm()"></app-add-employee>
   <!-- Employee Boxes -->
   <div class="employee-parent ms-3 mt-3 me-3 mb-3">
-    <div class="employee-box text-center" *ngFor="let employee of employees" (click)="onEmployeeBoxClick($event, employee)">
+    <div class="employee-box text-center" *ngFor="let employee of employees; let i = index" (click)="onEmployeeBoxClick($event, employee)">
       <div class="mt-4">
         <img class="employee-img" src="{{ employee.imageUrl }}" alt="Employee Image">
         <p class="employee-name mt-2">{{ employee.name }}</p>
         <p class="employee-title">{{ employee.title }}</p>
         <div class="icons-container">
           <!-- Edit Icon -->
-<i class="material-icons edit-icon" (click)="openEditForm($event, employee)" title="Edit Employee">edit_note</i>
+<i class="material-icons edit-icon" (click)="openEditForm($event, employee, i)" title="Edit Employee">edit_note</i>
           <!-- Delete Icon -->
           <i class="material-icons delete-icon" (click)="confirmDeleteEmployeeModal(employee)" title="Delete Employee">delete</i>
 

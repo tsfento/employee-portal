@@ -5,6 +5,7 @@ import { catchError, tap, map } from 'rxjs/operators';
 import { environment } from 'src/app/environments/environment.production';
 import { User } from 'src/app/models/user.model';
 import { Router } from '@angular/router';
+import { StorageService } from 'src/app/services/storage.service';
 
 export interface IAuthData {
   firstName: string;
@@ -24,7 +25,7 @@ export class AuthService {
   private idToken: string | null = null;
   currentUser = new BehaviorSubject<User | null>(null);
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private router: Router, private storageService: StorageService) {}
 
   // Function to handle user sign-up
   signUp(email: string, password: string, firstName?: string, lastName?: string): Observable<any> {
@@ -38,7 +39,18 @@ export class AuthService {
     return this.http.post(
       `${this.baseUrl}signUp?key=${this.apiKey}`,
       signUpData
-    );
+    ).pipe(tap(response => {
+      const authData: IAuthData = {
+        firstName: firstName,
+        lastName: lastName,
+        userId: response.localId,
+        email: email,
+        token: response.idToken,
+        expiresIn: +response.expiresIn
+      }
+
+      this.handleAuthentication(authData, false);
+    }));
   }
   // Function to handle user sign-in
   signIn(email: string, password: string): Observable<any> {
@@ -65,7 +77,7 @@ export class AuthService {
             expiresIn: +response.expiresIn
           }
 
-          this.handleAuthentication(authData);
+          this.handleAuthentication(authData, true);
         }),
 
         // Error handling for sign-in requests
@@ -109,7 +121,7 @@ export class AuthService {
     );
   }
 
-  private handleAuthentication(authData: IAuthData) {
+  private handleAuthentication(authData: IAuthData, loggingIn: boolean) {
     const expirationDate = new Date(new Date().getTime() + authData.expiresIn * 1000);
 
     const loggedInUser = new User(
@@ -123,5 +135,11 @@ export class AuthService {
 
     this.currentUser.next(loggedInUser);
     localStorage.setItem('userData', JSON.stringify(loggedInUser));
+
+    if (loggingIn) {
+      this.storageService.fetchUserDetails(authData);
+    } else {
+      this.storageService.storeUserDetails(authData);
+    }
   }
 }

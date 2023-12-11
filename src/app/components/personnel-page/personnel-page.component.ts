@@ -1,33 +1,48 @@
-import { Component, ElementRef, Renderer2, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { Employee } from '../models/employee.model';
 import { EmployeeService } from '../../services/employee.service';
 import { take } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
+import { StorageService } from 'src/app/services/storage.service';
 
 @Component({
   selector: 'app-personnel-page',
   templateUrl: 'personnel-page.component.html',
   styleUrls: ['personnel-page.component.css']
 })
-export class PersonnelPageComponent {
+export class PersonnelPageComponent implements OnInit, OnDestroy {
   // Array of employees
-  employees: Employee[] = [
-    { name: 'Darlton Carlyle', title: 'Marketing Coordinator', email: 'dcarlyle@conglomo.com', imageUrl: './assets/images/Delton-Sewell-Image-1.jpg' }
-  ];
+  employees: Employee[] = [];
+  employeesFetchedSub: Subscription;
 // Add the ViewChild decorator
   @ViewChild('offcanvas') offcanvas!: ElementRef;
   // Property to see if the Add Employee form is open
   private isOpen = false;
   isAddEmployeeFormOpen = false;
+  // Property to store the employee to be deleted
+  private employeeToDelete: Employee | null = null;
 
   // Inject the Renderer2 and EmployeeService
-  constructor(private renderer: Renderer2, private employeeService: EmployeeService) {
+  constructor(private renderer: Renderer2, private employeeService: EmployeeService, private storageService: StorageService) {
     // Subscribe to the isAddEmployeeFormOpen$ observable
     this.employeeService.isAddEmployeeFormOpen$.subscribe((isOpen) => {
       this.isAddEmployeeFormOpen = isOpen;
     });
   }
- // Property to store the employee to be deleted
- private employeeToDelete: Employee | null = null;
+
+  ngOnInit() {
+    this.employees = this.storageService.fetchEmployees();
+
+    this.employeesFetchedSub = this.storageService.employeesFetched.subscribe(
+      (fetchedEmployees: Employee[]) => {
+        this.employees = fetchedEmployees;
+      }
+    );
+  }
+
+  ngOnDestroy() {
+    this.employeesFetchedSub.unsubscribe();
+  }
 
 // Method to open the offcanvas element
 openOffcanvas(employee: Employee) {
@@ -66,7 +81,8 @@ closeOffcanvas() {
 
   // Method to handle the employeeAdded event
   onEmployeeAdded(newEmployee: Employee) {
-    this.employees.push(newEmployee);
+    // this.employees.push(newEmployee);
+    this.storageService.addEmployee(newEmployee);
     this.closeAddEmployeeForm();
   }
 
@@ -76,7 +92,7 @@ closeOffcanvas() {
   }
 
   // Method to open the Edit Form
-  openEditForm(event: Event, employee: Employee) {
+  openEditForm(event: Event, employee: Employee, index: number) {
     console.log('Opening Edit Form');
     // Stop the offCanvas from opening
     event.stopPropagation();
@@ -99,6 +115,7 @@ closeOffcanvas() {
       if (index !== -1) {
         this.employees.splice(index, 1);
       }
+      this.storageService.deleteEmployee(index);
       // Close the delete confirmation modal
       this.employeeService.openDeleteModal(null);
     }
