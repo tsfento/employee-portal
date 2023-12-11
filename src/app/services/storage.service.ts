@@ -72,7 +72,7 @@ export class StorageService {
       };
 
       this.sendUserInfo.next(this.userInfo);
-    })
+    });
   }
 
   fetchUserDetails(authData: IAuthData) {
