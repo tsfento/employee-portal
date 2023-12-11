@@ -35,7 +35,7 @@ submitForm() {
   };
 
   // Close the form
-  this.closeForm.emit();
+  this.cancelForm();
 }
 
 // Method to close the form without adding a new employee

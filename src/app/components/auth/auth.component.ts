@@ -31,29 +31,32 @@ export class AuthComponent implements OnInit {
 
       if (this.isSignInMode) {
         // Sign in
-        this.authService.signIn(email, password).subscribe(
-          () => {
-
-            this.router.navigate(['/personnel']);
+        this.authService.signIn(email, password).subscribe({
+          next: () => {
           },
-          (error) => {
+          error: (error) => {
             this.errorMsg = error.message;
+          },
+          complete: () => {
+            this.router.navigate(['/personnel']);
           }
-        );
+        });
       } else {
         // Sign up
-        this.authService.signUp(email, password, firstName, lastName).subscribe(
-          () => {
+        this.authService.signUp(email, password, firstName, lastName).subscribe({
+          next: () => {
             this.successMessage = 'Sign-up successful!';
             // Clear the form
             form.reset();
             // Toggle to sign-in mode after successful signup
             this.toggleAuthMode();
           },
-          (error) => {
+          error: (error) => {
             this.errorMsg = 'Something went wrong';
+          },
+          complete: () => {
           }
-        );
+        });
       }
     }
   }
