@@ -29,11 +29,10 @@
         <p class="employee-title">{{ employee.title }}</p>
         <div class="icons-container">
           <!-- Edit Icon -->
-         <!-- Edit Icon -->
 <i class="material-icons edit-icon" (click)="openEditForm($event, employee)" title="Edit Employee">edit_note</i>
-
           <!-- Delete Icon -->
-          <i class="material-icons delete-icon" (click)="deleteEmployee($event, employee)" title="Delete Employee">delete</i>
+          <i class="material-icons delete-icon" (click)="confirmDeleteEmployeeModal(employee)" title="Delete Employee">delete</i>
+
         </div>
         <a href="#" class="employee-email">{{ employee.email }}</a>
       </div>
@@ -41,14 +40,17 @@
   <app-edit-employee *ngIf="employeeService.isEditEmployeeFormOpen$ | async"
   (closeForm)="employeeService.closeEditForm()" (click)="preventOffCanvas($event)">
 </app-edit-employee>
-  </div>
+<!-- Delete Employee Confirmation Modal -->
+<app-delete-employee
+  [employeeToDelete]="employeeToDelete"
+  (confirmDelete)="confirmDeleteEmployee($event)"
+  (cancelDelete)="cancelDeleteEmployeeModal()">
+</app-delete-employee>
   </div>
   <!-- Add Employee Button -->
   <button class="btn btn-employee-list" (click)="openAddEmployeeForm()">
     <span class="material-symbols-outlined employee-list-button-icon">add</span>
   </button>
-
-
   <!-- Offcanvas  -->
   <div #offcanvas class="offcanvas offcanvas-end details" id="offcanvasExample" tabindex="-1" aria-labelledby="offcanvasExampleLabel"(click)="closeOffcanvas()">
   <div class="offcanvas-header" data-bs-theme="dark">
@@ -58,7 +60,6 @@
     </button>
     <!-- Add Employee Form Modal -->
     <app-add-employee *ngIf="isAddEmployeeFormOpen" (employeeAdded)="onEmployeeAdded($event)" (closeForm)="closeAddEmployeeForm()"></app-add-employee>
-
   </div>
   <div class="offcanvas-body">
     <!-- Offcanvas content -->
@@ -147,8 +148,6 @@
             <span class="material-symbols-outlined box-button-icon">add</span>
           </button>
         </div>
-
-
         <!-- Company Documents Box -->
         <div class="offcanvas-box">
           <div class="ms-3 mt-3 offcanvas-box-header">
@@ -172,7 +171,6 @@
     <button class="btn btn-offcanvas-box">
             <span class="material-symbols-outlined box-button-icon">add</span>
           </button>
-
       <!-- Company Documents Box -->
       <div class="offcanvas-box">
         <div class="ms-3 mt-3 offcanvas-box-header">
@@ -193,16 +191,11 @@
         <li class="document-item">Employee Benefit Details - <a href="path/to/document">Download</a></li>
         <li class="document-item">Company Financial Reports - <a href="path/to/document">View</a></li>
   </ul>
-  <app-delete-employee
-      *ngIf="showDeleteModal"
-      (cancel)="closeDeleteModal()"
-      (deleteEmployee)="performDeleteAction()"
-    ></app-delete-employee>
+  <!-- Add Employee Button -->
   <button class="btn btn-offcanvas-box">
           <span class="material-symbols-outlined box-button-icon">add</span>
         </button>
     </div>
-
       </div>
         </div>
         </div>

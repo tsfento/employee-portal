@@ -1,22 +1,35 @@
-// delete-employee.component.ts
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
+import { Employee } from '../models/employee.model';
+import { EmployeeService } from '../../employee.service';
 
 @Component({
   selector: 'app-delete-employee',
-  templateUrl: 'delete-employee.component.html',
-  styleUrls: ['delete-employee.component.css']
+  templateUrl: './delete-employee.component.html',
+  styleUrls: ['./delete-employee.component.css']
 })
-export class DeleteEmployeeComponent {
-  @Output() cancel = new EventEmitter<void>();
-  @Output() deleteEmployee = new EventEmitter<void>();
+export class DeleteEmployeeComponent implements OnInit {
+  @Input() employeeToDelete: Employee | null = null;
+  @Output() confirmDelete: EventEmitter<Employee | null> = new EventEmitter<Employee | null>();
+  @Output() cancelDelete: EventEmitter<void> = new EventEmitter<void>();
 
-  closeModal() {
-    this.cancel.emit();
+  constructor(private employeeService: EmployeeService) {}
+
+  ngOnInit() {
+    // Subscribe to changes in the deleteModalData$ observable from the EmployeeService
+    this.employeeService.deleteModalData$.subscribe((employee) => {
+      this.employeeToDelete = employee;
+    });
   }
 
-  deleteTask() {
-    this.deleteEmployee.emit();
+  // Method to handle cofirmation of deleting an employee
+  confirm() {
+    console.log('Confirming deletion:', this.employeeToDelete);
+    this.confirmDelete.emit(this.employeeToDelete);
+  }
+
+  // Method to handle cancellation of deleting an employee
+  cancel() {
+    console.log('Cancelling deletion');
+    this.cancelDelete.emit();
   }
 }
-
-

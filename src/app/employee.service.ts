@@ -6,48 +6,55 @@ import { Employee } from './components/models/employee.model';
   providedIn: 'root',
 })
 export class EmployeeService {
+  // BehaviorSubject to store the data for the delete modal
+  private deleteModalData = new BehaviorSubject<Employee | null>(null);
+  deleteModalData$: Observable<Employee | null> = this.deleteModalData.asObservable();
 
-  private employeesSubject = new BehaviorSubject<Employee[]>([]);
+  // BehaviorSubject to store the employees
+  private employeesSubject = new BehaviorSubject<Employee[]>([
+
+  ]);
   employees$: Observable<Employee[]> = this.employeesSubject.asObservable();
 
-  // Properties to see if the Add Employee form is open
-  private isAddEmployeeFormOpenSubject = new BehaviorSubject<boolean>(false);
+  // BehaviorSubject to track if the add employee form is open
+  private isAddEmployeeFormOpenSubject = new
+  BehaviorSubject<boolean>(false);
   isAddEmployeeFormOpen$: Observable<boolean> = this.isAddEmployeeFormOpenSubject.asObservable();
 
-  // Add the selectedEmployeeSubject property
+  // BehaviorSubject to track the employee selected for editing
   private selectedEmployeeSubject = new BehaviorSubject<Employee | null>(null);
   selectedEmployee$: Observable<Employee | null> = this.selectedEmployeeSubject.asObservable();
 
-  // Add the isEditEmployeeFormOpenSubject property
+  // BehaviorSubject to track if the edit employee form is open
   isEditEmployeeFormOpen = new BehaviorSubject<boolean>(false);
   isEditEmployeeFormOpen$: Observable<boolean> = this.isEditEmployeeFormOpen.asObservable();
 
   constructor() {}
 
-  // Method to open the Add Employee form
+  // Method to open the add employee form
   openAddEmployeeForm() {
     this.isAddEmployeeFormOpenSubject.next(true);
   }
 
-  // Method to close the Add Employee form
+  // Method to close the add employee form
   closeAddEmployeeForm() {
     this.isAddEmployeeFormOpenSubject.next(false);
   }
 
-  // Method to open the Edit Employee form
+  // Method to open the edit employee form
   openEditForm(employee: Employee) {
     console.log('Opening Edit Form');
     this.selectedEmployeeSubject.next(employee);
     this.isEditEmployeeFormOpen.next(true);
   }
-
+  // Method to close the edit employee form
   closeEditForm() {
     console.log('Closing Edit Form');
     this.selectedEmployeeSubject.next(null);
     this.isEditEmployeeFormOpen.next(false);
   }
 
-  // Method to update the employee
+  // Method to update the employee information
   updateEmployee(updatedEmployee: Employee) {
     const currentEmployees = this.employeesSubject.getValue();
     const index = currentEmployees.findIndex((e) => e.email === updatedEmployee.email);
@@ -56,8 +63,11 @@ export class EmployeeService {
       currentEmployees[index] = updatedEmployee;
       this.employeesSubject.next([...currentEmployees]);
     }
-
-    // Reset the form and edit mode
     this.closeEditForm();
+  }
+
+  // Method to open the delete modal
+  openDeleteModal(employee: Employee | null) {
+    this.deleteModalData.next(employee);
   }
 }
