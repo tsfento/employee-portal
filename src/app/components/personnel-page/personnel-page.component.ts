@@ -1,6 +1,6 @@
 import { Component, ElementRef, Renderer2, ViewChild } from '@angular/core';
 import { Employee } from '../models/employee.model';
-import { EmployeeService } from '../../employee.service';
+import { EmployeeService } from '../../services/employee.service';
 import { take } from 'rxjs/operators';
 
 @Component({

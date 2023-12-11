@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
 import { Employee } from '../models/employee.model';
-import { EmployeeService } from '../../employee.service';
+import { EmployeeService } from '../../services/employee.service';
 
 @Component({
   selector: 'app-delete-employee',
