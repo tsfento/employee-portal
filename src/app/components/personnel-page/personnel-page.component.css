@@ -120,14 +120,11 @@
 }
 
 .employee-box {
-  position: relative;
   width: 309px;
   height: 309px;
   background-color: #3a405a;
   color: white;
   border-radius: 20px;
-  overflow: hidden;
-  padding: 30px;
 }
 .employee-img {
   width: 100px;
@@ -206,27 +203,4 @@
 
 .btn-search:hover {
   background-color: #e9afa3;
-}
-
-.icons-container {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-}
-
-.material-icons {
-  font-size: 24px;
-  cursor: pointer;
-  margin-left: 10px;
-}
-
-.edit-icon {
-  color: #4285f4;
-}
-
-.delete-icon {
-  color: #d32f2f;
 }
