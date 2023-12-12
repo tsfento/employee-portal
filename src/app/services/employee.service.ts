@@ -36,6 +36,7 @@ export class EmployeeService {
   // Method to reset the employees to the original list
   resetEmployeeFilter() {
     this.employeesSubject.next([...this.originalEmployees]);
+    console.log(this.originalEmployees);
   }
 
 
