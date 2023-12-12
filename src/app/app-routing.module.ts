@@ -6,6 +6,7 @@ import { ContainerComponent } from './components/container/container.component';
 import { PersonnelPageComponent } from './components/personnel-page/personnel-page.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { authGuard } from './components/auth/auth.guard';
+import { PayrollComponent } from './components/payroll/payroll.component';
 
 
 const routes: Routes = [
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: 'user', component: ContainerComponent, canActivate: [authGuard], children: [
     { path: 'admin', component: AdminComponent }
   ] },
+  { path: 'payroll', component: PayrollComponent }
 
 
 ];

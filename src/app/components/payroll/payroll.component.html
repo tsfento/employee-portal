@@ -1,0 +1,55 @@
+<!-- Payroll Calculater -->
+<div class="payroll-calculator">
+  <h3>Payroll Calculator</h3>
+  <input type="number" [(ngModel)]="hourlyRate" placeholder="Hourly Rate">
+  <input type="number" [(ngModel)]="hoursWorked" placeholder="Hours Worked">
+  <button (click)="calculatePay()">Calculate</button>
+  <p *ngIf="totalPay">Total Pay: {{ totalPay | currency }}</p>
+</div>
+<!-- Payroll Summary -->
+<div class="payroll-container">
+  <h2>Payroll Summary</h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Employee</th>
+        <th>Role</th>
+        <th>Salary</th>
+        <th>Pay Period</th>
+        <th>Total Paid</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Ronald Mack</td>
+        <td>Chief Sustainability Officer</td>
+        <td>$5000</td>
+        <td>01/01/2023 - 01/31/2023</td>
+        <td>$5000</td>
+      </tr>
+      <tr>
+        <td>Justin Jones</td>
+        <td>Social Media Manager</td>
+        <td>$1000</td>
+        <td>01/01/2023 - 01/31/2023</td>
+        <td>$1000</td>
+      </tr>
+      <tr>
+        <td>Brooklynn Peterson</td>
+        <td>Human Resource Specialist</td>
+        <td>$2000</td>
+        <td>01/01/2023 - 01/31/2023</td>
+        <td>$2000</td>
+      </tr>
+      <tr>
+        <td>Adalynn Burdock</td>
+        <td>Public Relations Manager</td>
+        <td>$4000</td>
+        <td>01/01/2023 - 01/31/2023</td>
+        <td>$4000</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
