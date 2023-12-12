@@ -2,13 +2,15 @@
 import { Component, ElementRef, Renderer2, ViewChild } from '@angular/core';
 import { Employee } from 'src/app/models/employee.model';
 import { AddEmployeeComponent } from '../add-employee/add-employee.component';
-
+import { DOCUMENT } from '@angular/common';
+import { inject } from '@angular/core';
 @Component({
   selector: 'app-personnel-page',
   templateUrl: 'personnel-page.component.html',
   styleUrls: ['personnel-page.component.css']
 })
 export class PersonnelPageComponent {
+   document = inject(DOCUMENT);
   employees: Employee[] = [
     { name: 'Darlton Carlyle', title: 'Marketing Coordinator', email: 'dcarlyle@conglomo.com', imageUrl: './assets/images/Delton-Sewell-Image-1.jpg' }
   ];
@@ -28,14 +30,12 @@ export class PersonnelPageComponent {
       this.renderer.addClass(offcanvasElement, 'show');
       this.isOpen = true;
 
-      setTimeout(() => {
-        window.addEventListener('click', this.closeOffcanvasHandler);
-      });
     }
   }
 
   closeOffcanvasHandler = (event: Event) => {
     const offcanvasElement = this.offcanvas.nativeElement;
+
 
     if (this.isOpen && !offcanvasElement.contains(event.target as Node)) {
       this.closeOffcanvas();
@@ -66,4 +66,12 @@ export class PersonnelPageComponent {
     this.employees.push(newEmployee);
     this.closeAddEmployeeForm();
   }
+
+  addtolist(listid: string, addedcontent: string){
+    var list=document.getElementById(listid);
+    var li = document.createElement("li");
+    li.appendChild(document.createTextNode(addedcontent));
+    list.appendChild(li);
+  }
 }
+

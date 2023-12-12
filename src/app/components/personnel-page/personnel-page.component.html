@@ -39,7 +39,7 @@
 
 
 <!-- Offcanvas  -->
-<div #offcanvas class="offcanvas offcanvas-end details" id="offcanvasExample" tabindex="-1" aria-labelledby="offcanvasExampleLabel"(click)="closeOffcanvas()">
+<div #offcanvas class="offcanvas offcanvas-end details" id="offcanvasExample" tabindex="-1" aria-labelledby="offcanvasExampleLabel">
 <div class="offcanvas-header" data-bs-theme="dark">
   <h5 class="offcanvas-title" id="offcanvasExampleLabel">Employee Details</h5>
   <button type="button" class="btn btn-offcanvas-close" (click)="closeOffcanvas()">
@@ -60,7 +60,7 @@
         &nbsp;TODO
       </div>
       <div class="mt-3 offcanvas-box-body">
-        <ul class="todo-list">
+        <ul id="todolist" class="todo-list">
           <!--List of TODO items -->
       <li class="to-do-item">Schedule monthly team meeting and prepare the agenda</li>
     <li class="to-do-item">Update employee records with recent changes in contact details</li>
@@ -70,9 +70,12 @@
     <li class="to-do-item">Prepare a report on employee turnover for the past year</li>
         </ul>
       </div>
-      <button class="btn btn-offcanvas-box">
+      <button (click)="addtolist('todolist', this.document.getElementById('todolisttextbox').value)" class="btn btn-offcanvas-box">
         <span class="material-symbols-outlined box-button-icon">add</span>
       </button>
+      <form>
+        <input type="text" id="todolisttextbox" name="textbox">
+    </form>
     </div>
     <!-- Event Box -->
       <div class="offcanvas-box">
