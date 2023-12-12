@@ -130,4 +130,9 @@ export class StorageService {
     this.employees.splice(deleteIndex, 1);
     this.storeEmployees(this.employees.slice());
   }
+
+  // Method to get all employees
+  getAllEmployees(): Employee[] {
+    return this.employees.slice();
+  }
 }

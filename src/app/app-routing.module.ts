@@ -11,7 +11,7 @@ import { OrgChartComponent } from './components/org-chart/org-chart.component';
 
 const routes: Routes = [
   { path: 'welcome', component: LandingPageComponent, canActivate: [authGuard] },
-  { path: '', component: ContainerComponent, canActivate: [authGuard], children: [
+  { path: '', component: ContainerComponent, children: [
     { path: 'admin', component: AdminComponent },
     { path: 'personnel', component: PersonnelPageComponent },
     { path: 'org-chart', component: OrgChartComponent },
