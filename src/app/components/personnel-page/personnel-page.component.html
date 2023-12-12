@@ -6,19 +6,7 @@
   <!-- Body content -->
   <div class="body">
     <!-- Navigation Bar -->
-    <ul class="nav nav-tabs sticky-top pt-2 top-nav">
-      <li class="nav-item">
-        <a href="#" class="nav-link">All</a>
-      </li>
-      <li class="nav-item me-2">
-        <a href="#" class="nav-link active">Advertising</a>
-      </li>
-      <!-- Search form -->
-      <form class="d-flex flex-fill" role="search" style="height: 33px;">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-search me-2" type="button">Search</button>
-      </form>
-    </ul>
+     <app-navbar></app-navbar>
     <app-add-employee *ngIf="isAddEmployeeFormOpen" (employeeAdded)="onEmployeeAdded($event)" (closeForm)="closeAddEmployeeForm()"></app-add-employee>
   <!-- Employee Boxes -->
   <div class="employee-parent ms-3 mt-3 me-3 mb-3">

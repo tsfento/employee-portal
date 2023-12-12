@@ -52,6 +52,7 @@ export class StorageService {
   sendUserInfo = new Subject<{ name: string, email: string, image: string }>();
 
 
+
   constructor(private http: HttpClient) {}
 
   storeUserDetails(authData: IAuthData) {
@@ -129,5 +130,9 @@ export class StorageService {
   deleteEmployee(deleteIndex: number) {
     this.employees.splice(deleteIndex, 1);
     this.storeEmployees(this.employees.slice());
+  }
+   // Method to get all employees
+   getAllEmployees(): Employee[] {
+    return this.employees;
   }
 }

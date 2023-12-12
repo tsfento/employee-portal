@@ -31,14 +31,24 @@ export class PersonnelPageComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.employees = this.storageService.fetchEmployees();
+    // Subscribe to updates from EmployeeService
+    this.employeeService.employees$.subscribe(employees => {
+        this.employees = employees;
+    });
 
+    // Fetch the initial list of employees from StorageService and update EmployeeService
+    const initialEmployees = this.storageService.fetchEmployees();
+    this.employeeService.setEmployees(initialEmployees);
+
+    // Subscribe to the employeesFetched observable from StorageService
     this.employeesFetchedSub = this.storageService.employeesFetched.subscribe(
-      (fetchedEmployees: Employee[]) => {
-        this.employees = fetchedEmployees;
-      }
+        (fetchedEmployees: Employee[]) => {
+            this.employees = fetchedEmployees;
+            // EmployeeService to update the employees
+            this.employeeService.setEmployees(fetchedEmployees);
+        }
     );
-  }
+}
 
   ngOnDestroy() {
     this.employeesFetchedSub.unsubscribe();

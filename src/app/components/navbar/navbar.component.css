@@ -1,0 +1,40 @@
+.navbar {
+  border-bottom: 1px solid white;
+  background-color: #3a405a;
+  margin-bottom: 20px;
+}
+
+.top-nav {
+  border-bottom: 1px solid white;
+  background-color: #3a405a;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: white;
+}
+
+.nav-link:hover {
+  color: #f9dec9;
+}
+
+.btn-search {
+  background-color: #f9dec9;
+  line-height: 1;
+}
+
+.btn-search:hover {
+  background-color: #e9afa3;
+}
+
+form {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+  margin-top: 10px;
+}
+
+form input {
+  width: 300px;
+  margin-right: 10px;
+}

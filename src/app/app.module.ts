@@ -14,6 +14,7 @@ import { AuthInterceptorService } from './components/auth/auth-interceptor.servi
 import { AddEmployeeComponent } from './components/add-employee/add-employee.component';
 import { EditEmployeeComponent } from './components/edit-employee/edit-employee.component';
 import { DeleteEmployeeComponent } from './components/delete-employee/delete-employee.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { DeleteEmployeeComponent } from './components/delete-employee/delete-emp
     AdminComponent,
     AddEmployeeComponent,
     EditEmployeeComponent,
-    DeleteEmployeeComponent
+    DeleteEmployeeComponent,
+    NavbarComponent
 
 
   ],
