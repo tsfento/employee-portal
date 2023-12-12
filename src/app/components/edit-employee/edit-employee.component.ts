@@ -16,13 +16,15 @@ export class EditEmployeeComponent implements OnInit {
   // Local property to hold the employee
   employee: Employee;
   isEditEmployeeFormOpen: boolean = false;
+  editIndex: number;
 
   constructor(private employeeService: EmployeeService, private storageService: StorageService) {}
 
   ngOnInit() {
     // Subscribe to the selectedEmployee$ observable
-    this.employeeService.selectedEmployee$.subscribe((selectedEmployee) => {
+    this.employeeService.selectedEmployee$.subscribe(([selectedEmployee, index]) => {
       this.selectedEmployee = selectedEmployee;
+      this.editIndex = index;
       // Set the flag to see if the form is open
       this.isEditEmployeeFormOpen = !!selectedEmployee;
       // If there is a selected employee, copy it to the local property
@@ -40,7 +42,7 @@ export class EditEmployeeComponent implements OnInit {
   submitForm() {
     console.log('Submit and Cancel');
     this.employeeUpdated.emit(this.employee);
-    this.storageService.editEmployee(this.employee, 1);
+    this.storageService.editEmployee(this.selectedEmployee, this.editIndex);
     this.closeForm.emit();
   }
   // Method to cancel the form

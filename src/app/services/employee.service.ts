@@ -22,8 +22,8 @@ export class EmployeeService {
   isAddEmployeeFormOpen$: Observable<boolean> = this.isAddEmployeeFormOpenSubject.asObservable();
 
   // BehaviorSubject to track the employee selected for editing
-  private selectedEmployeeSubject = new BehaviorSubject<Employee | null>(null);
-  selectedEmployee$: Observable<Employee | null> = this.selectedEmployeeSubject.asObservable();
+  private selectedEmployeeSubject = new BehaviorSubject<[Employee, number] | null>(null);
+  selectedEmployee$: Observable<[Employee, number] | null> = this.selectedEmployeeSubject.asObservable();
 
   // BehaviorSubject to track if the edit employee form is open
   isEditEmployeeFormOpen = new BehaviorSubject<boolean>(false);
@@ -42,9 +42,9 @@ export class EmployeeService {
   }
 
   // Method to open the edit employee form
-  openEditForm(employee: Employee) {
+  openEditForm(employee: Employee, index: number) {
     console.log('Opening Edit Form');
-    this.selectedEmployeeSubject.next(employee);
+    this.selectedEmployeeSubject.next([employee, index]);
     this.isEditEmployeeFormOpen.next(true);
   }
   // Method to close the edit employee form
