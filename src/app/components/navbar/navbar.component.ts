@@ -27,5 +27,4 @@ resetSearch() {
   this.employeeService.resetEmployeeFilter();
 }
 
-
 }

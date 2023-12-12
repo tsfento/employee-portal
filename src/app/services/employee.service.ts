@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Employee } from '../components/models/employee.model';
+import { StorageService } from './storage.service';
 
 @Injectable({
   providedIn: 'root',
@@ -9,8 +10,6 @@ export class EmployeeService {
   // BehaviorSubject to store the data for the delete modal
   private deleteModalData = new BehaviorSubject<Employee | null>(null);
   deleteModalData$: Observable<Employee | null> = this.deleteModalData.asObservable();
-
-  private originalEmployees: Employee[] = [];
 
   // BehaviorSubject to store the employees
   private employeesSubject = new BehaviorSubject<Employee[]>([
@@ -31,14 +30,19 @@ export class EmployeeService {
   isEditEmployeeFormOpen = new BehaviorSubject<boolean>(false);
   isEditEmployeeFormOpen$: Observable<boolean> = this.isEditEmployeeFormOpen.asObservable();
 
-  constructor() {}
-
-  // Method to reset the employees to the original list
-  resetEmployeeFilter() {
-    this.employeesSubject.next([...this.originalEmployees]);
-    console.log(this.originalEmployees);
+  constructor(private storageService: StorageService) {
+    this.loadInitialEmployees();
   }
 
+  private loadInitialEmployees() {
+    const employees = this.storageService.getAllEmployees();
+    this.setEmployees(employees);
+  }
+  // Method to reset the employees to the original list
+  resetEmployeeFilter() {
+    const employees = this.storageService.getAllEmployees();
+    this.employeesSubject.next(employees);
+  }
 
   // Method to open the add employee form
   openAddEmployeeForm() {
@@ -97,7 +101,7 @@ export class EmployeeService {
     this.employeesSubject.next(filteredEmployees);
   }
 
-  // Method to set
+  // Method to set the employees
   setEmployees(employees: Employee[]) {
     this.employeesSubject.next(employees);
 }
