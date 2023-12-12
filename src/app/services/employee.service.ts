@@ -56,14 +56,12 @@ export class EmployeeService {
 
   // Method to open the edit employee form
 
-  openEditForm(employee: Employee) {
-    this.selectedEmployeeSubject.next(employee);
   openEditForm(employee: Employee, index: number) {
     console.log('Opening Edit Form');
     this.selectedEmployeeSubject.next([employee, index]);
     this.isEditEmployeeFormOpen.next(true);
   }
-    
+
   // Method to close the edit employee form
   closeEditForm() {
     this.selectedEmployeeSubject.next(null);
