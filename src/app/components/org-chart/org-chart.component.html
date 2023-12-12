@@ -1,14 +1,28 @@
 <div class="container mt-5 text-center">
-  <h1 class="top-level rectangle" (click)="logEmployees()">CEO</h1>
-  <ol class="level-2-wrapper" style="--level-2-length: 3">
-    <li>
-      <h3 class="level-2 rectangle">Somebody</h3>
-    </li>
-    <li>
-      <h3 class="level-2 rectangle">Somebody</h3>
-    </li>
-    <li>
-      <h3 class="level-2 rectangle">Somebody</h3>
-    </li>
-  </ol>
+  <div class="top-level-div">
+    <h1 class="top-level rectangle" (click)="logEmployees()">{{ topLevelEmployees[0].name }}</h1>
+    <div class="level-2-div">
+      <ol class="level-2-wrapper" style="--level-2-length: {{ employees.length }}">
+        <li *ngFor="let employee of employees">
+          <div class="level-2 rectangle">
+            <img src="{{ employee.imageUrl }}" style="width: 100px; height: 100px; object-fit: cover; border-radius: 50%;">
+            <h5 class="mt-1 mb-2">{{ employee.name }}</h5>
+            <h5>{{ employee.title }}</h5>
+          </div>
+        </li>
+        <div class="level-3-div">
+          <li *ngFor="let employee of employees" id="{{ employee.name }}">
+            <ng-container *ngIf="employee.name">
+              <div class="level-2 rectangle">
+                <img src="{{ employee.imageUrl }}" style="width: 100px; height: 100px; object-fit: cover; border-radius: 50%;">
+                <h5>{{ employee.name }}</h5>
+                <br>
+                <h5>{{ employee.title }}</h5>
+              </div>
+            </ng-container>
+          </li>
+        </div>
+      </ol>
+    </div>
+  </div>
 </div>

@@ -11,6 +11,11 @@ import { Subscription } from 'rxjs';
 export class OrgChartComponent implements OnInit, OnDestroy {
   employees: Employee[] = [];
   fetchedEmployeesSub: Subscription
+  topLevelEmployees: Employee[] = [];
+  secondLevelEmployees: Employee[] = [];
+  thirdLevelEmployees: Employee[] = [];
+  fourthLevelEmployees: Employee[] = [];
+
 
   constructor(private storageService: StorageService) {}
 
@@ -20,8 +25,12 @@ export class OrgChartComponent implements OnInit, OnDestroy {
     this.fetchedEmployeesSub = this.storageService.employeesFetched.subscribe(
       fetchedEmployees => {
         this.employees = fetchedEmployees;
+
+        this.splitEmployeesArray();
       }
     );
+
+    this.splitEmployeesArray();
   }
 
   ngOnDestroy() {
@@ -30,5 +39,13 @@ export class OrgChartComponent implements OnInit, OnDestroy {
 
   logEmployees() {
     console.log(this.employees);
+  }
+
+  splitEmployeesArray() {
+    for (let i = 0; i < this.employees.length; i++) {
+      if (this.employees[i].name === 'Robert Mack') {
+        this.topLevelEmployees.push(this.employees[i]);
+      }
+    }
   }
 }
