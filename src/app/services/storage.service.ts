@@ -123,6 +123,8 @@ export class StorageService {
   }
 
   editEmployee(employeeToEdit: Employee, editIndex: number) {
+    this.employees[editIndex] = employeeToEdit;
+    this.storeEmployees(this.employees.slice());
   }
 
   deleteEmployee(deleteIndex: number) {

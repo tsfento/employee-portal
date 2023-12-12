@@ -106,7 +106,7 @@ closeOffcanvas() {
     console.log('Opening Edit Form');
     // Stop the offCanvas from opening
     event.stopPropagation();
-    this.employeeService.openEditForm(employee);
+    this.employeeService.openEditForm(employee, index);
   }
 
   // Method to handle clicking on an employee box
