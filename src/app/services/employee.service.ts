@@ -10,6 +10,8 @@ export class EmployeeService {
   private deleteModalData = new BehaviorSubject<Employee | null>(null);
   deleteModalData$: Observable<Employee | null> = this.deleteModalData.asObservable();
 
+  private originalEmployees: Employee[] = [];
+
   // BehaviorSubject to store the employees
   private employeesSubject = new BehaviorSubject<Employee[]>([
 
@@ -31,6 +33,12 @@ export class EmployeeService {
 
   constructor() {}
 
+  // Method to reset the employees to the original list
+  resetEmployeeFilter() {
+    this.employeesSubject.next([...this.originalEmployees]);
+  }
+
+
   // Method to open the add employee form
   openAddEmployeeForm() {
     this.isAddEmployeeFormOpenSubject.next(true);
@@ -43,13 +51,11 @@ export class EmployeeService {
 
   // Method to open the edit employee form
   openEditForm(employee: Employee) {
-    console.log('Opening Edit Form');
     this.selectedEmployeeSubject.next(employee);
     this.isEditEmployeeFormOpen.next(true);
   }
   // Method to close the edit employee form
   closeEditForm() {
-    console.log('Closing Edit Form');
     this.selectedEmployeeSubject.next(null);
     this.isEditEmployeeFormOpen.next(false);
   }
@@ -70,4 +76,29 @@ export class EmployeeService {
   openDeleteModal(employee: Employee | null) {
     this.deleteModalData.next(employee);
   }
+
+  // Method to filter the employees
+  filterEmployees(query: string): void {
+    const allEmployees = this.employeesSubject.getValue();
+
+    if (!query.trim()) {
+      // Reset the list to show all employees if the query is empty
+      this.employeesSubject.next(allEmployees);
+      return;
+    }
+
+    const filteredEmployees = allEmployees.filter(employee =>
+      employee.name.toLowerCase().includes(query.toLowerCase()) ||
+      employee.title.toLowerCase().includes(query.toLowerCase()) ||
+      employee.email.toLowerCase().includes(query.toLowerCase())
+    );
+
+    this.employeesSubject.next(filteredEmployees);
+  }
+
+  // Method to set
+  setEmployees(employees: Employee[]) {
+    this.employeesSubject.next(employees);
+}
+
 }

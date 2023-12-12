@@ -155,10 +155,6 @@
   text-decoration: none;
 }
 
-.nav li {
-  list-style-type: none;
-}
-
 .company-name {
   color: white;
   font-size: 30px;
@@ -179,35 +175,6 @@
   font-size: 15px;
   line-height: 0.5;
 }
-
-.navbar {
-  border-bottom: 1px solid white;
-  background-color: #3a405a;
-}
-
-.top-nav {
-  border-bottom: 1px solid white;
-  background-color: #3a405a;
-}
-
-.nav-link {
-  text-decoration: none;
-  color: white;
-}
-
-.nav-link:hover {
-  color: #f9dec9;
-}
-
-.btn-search {
-  background-color: #f9dec9;
-  line-height: 1;
-}
-
-.btn-search:hover {
-  background-color: #e9afa3;
-}
-
 .icons-container {
   position: absolute;
   top: 10px;

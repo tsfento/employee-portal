@@ -5,7 +5,8 @@
   </div>
   <!-- Body content -->
   <div class="body">
-    
+    <!-- Navigation Bar -->
+     <app-navbar></app-navbar>
     <app-add-employee *ngIf="isAddEmployeeFormOpen" (employeeAdded)="onEmployeeAdded($event)" (closeForm)="closeAddEmployeeForm()"></app-add-employee>
   <!-- Employee Boxes -->
   <div class="employee-parent ms-3 mt-3 me-3 mb-3">
