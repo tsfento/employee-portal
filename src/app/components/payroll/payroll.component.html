@@ -1,5 +1,7 @@
 <div class="full-container">
-<!-- Payroll -->
+   <!-- Container for Calculator and Pie Chart -->
+   <div class="top-container">
+<!-- Payroll Calculator-->
 <div class="payroll-calculator">
   <h3>Payroll Calculator</h3>
   <input type="number" [(ngModel)]="hourlyRate" placeholder="Hourly Rate">
@@ -8,6 +10,10 @@
   <p *ngIf="totalPay">Total Pay: {{ totalPay | currency }}</p>
   <button (click)="clearCalculator()">Clear</button>
   <p *ngIf="totalPay">Total Pay: {{ totalPay | currency }}</p>
+</div>
+<!-- Pie Chart Canvas -->
+<div class="pie-chart-container">
+  <canvas #pieChart></canvas>
 </div>
 <!-- Payroll Summary -->
 <div class="payroll-container">
