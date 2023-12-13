@@ -29,7 +29,6 @@ body {
   position: relative;
   padding: 20px;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.15);
-  /* border: 1px solid darkgrey; */
   border-radius: 20px;
 }
 
@@ -54,15 +53,15 @@ body {
 .level-2-wrapper {
   position: relative;
   display: grid;
-  grid-template-columns: repeat(var(--level-2-length), 1fr);
+  grid-template-columns: repeat(2, 1fr);
 }
 
 .level-2-wrapper::before {
   content: '';
   position: absolute;
   top: -20px;
-  left: calc(50% / var(--level-2-length));
-  width: 80%;
+  left: 25%;
+  width: 50%;
   height: 3px;
   background: black;
 }
