@@ -14,4 +14,9 @@ export class PayrollComponent {
   calculatePay() {
     this.totalPay = this.hourlyRate * this.hoursWorked;
   }
+  clearCalculator() {
+    this.hourlyRate = null;
+    this.hoursWorked = null;
+    this.totalPay = null;
+  }
 }

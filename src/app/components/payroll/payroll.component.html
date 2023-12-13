@@ -1,9 +1,12 @@
-<!-- Payroll Calculater -->
+<div class="full-container">
+<!-- Payroll -->
 <div class="payroll-calculator">
   <h3>Payroll Calculator</h3>
   <input type="number" [(ngModel)]="hourlyRate" placeholder="Hourly Rate">
   <input type="number" [(ngModel)]="hoursWorked" placeholder="Hours Worked">
   <button (click)="calculatePay()">Calculate</button>
+  <p *ngIf="totalPay">Total Pay: {{ totalPay | currency }}</p>
+  <button (click)="clearCalculator()">Clear</button>
   <p *ngIf="totalPay">Total Pay: {{ totalPay | currency }}</p>
 </div>
 <!-- Payroll Summary -->
@@ -50,6 +53,7 @@
       </tr>
     </tbody>
   </table>
+</div>
 </div>
 
 
