@@ -100,3 +100,8 @@
   display: none;
   color: #888;
 }
+
+.reports-label {
+  color: #555;
+  font-size: 18px;
+}

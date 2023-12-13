@@ -1,7 +1,6 @@
 import { Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
-import { Employee } from '../models/employee.model';
+import { Employee } from 'src/app/models/employee.model';
 import { EmployeeService } from '../../services/employee.service';
-import { take } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 import { StorageService } from 'src/app/services/storage.service';
 

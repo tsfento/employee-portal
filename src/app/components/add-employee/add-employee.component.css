@@ -23,7 +23,7 @@
   background-color: #fff;
   padding: 20px;
   border: none;
-  z-index: 1001; 
+  z-index: 1001;
 }
 .add-employee-form .modal-header {
   color: black;
@@ -96,4 +96,9 @@
 .add-employee-form select.form-control option:disabled {
   display: none;
   color: #888;
+}
+
+.reports-label {
+  color: #555;
+  font-size: 18px;
 }
