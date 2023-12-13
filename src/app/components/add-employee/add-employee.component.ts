@@ -1,17 +1,21 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Employee } from 'src/app/models/employee.model';
 import { EmployeeService } from 'src/app/services/employee.service';
+import { StorageService } from 'src/app/services/storage.service';
 
 @Component({
 selector: 'app-add-employee',
 templateUrl: 'add-employee.component.html',
 styleUrls: ['add-employee.component.css']
 })
-export class AddEmployeeComponent {
+export class AddEmployeeComponent implements OnInit {
+  employees: Employee[] = [];
 newEmployee = {
   name: '',
   title: '',
   email: '',
-  imageUrl: ''
+  imageUrl: '',
+  reportsTo: ''
 };
 
 @Output() employeeAdded = new EventEmitter<any>();
@@ -20,6 +24,12 @@ newEmployee = {
 // Flag to see if the form is open
 isAddEmployeeFormOpen = true;
 onCancelForm: any;
+
+constructor(private storageService: StorageService) {}
+
+ngOnInit() {
+this.employees = this.storageService.getAllEmployees();
+}
 
 // Method to submit the form
 submitForm() {
@@ -31,7 +41,8 @@ submitForm() {
     name: '',
     title: '',
     email: '',
-    imageUrl: ''
+    imageUrl: '',
+    reportsTo: ''
   };
 
   // Close the form

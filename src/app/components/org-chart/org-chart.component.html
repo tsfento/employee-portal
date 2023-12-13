@@ -2,22 +2,22 @@
   <div class="top-level-div">
     <h1 class="top-level rectangle" (click)="logEmployees()">{{ topLevelEmployees[0].name }}</h1>
     <div class="level-2-div">
-      <ol class="level-2-wrapper" style="--level-2-length: {{ employees.length }}">
-        <li *ngFor="let employee of employees">
+      <ol class="level-2-wrapper" style="--level-2-length: {{ secondLevelEmployees.length }}">
+        <li *ngFor="let secondLevelEmployee of secondLevelEmployees">
           <div class="level-2 rectangle">
-            <img src="{{ employee.imageUrl }}" style="width: 100px; height: 100px; object-fit: cover; border-radius: 50%;">
-            <h5 class="mt-1 mb-2">{{ employee.name }}</h5>
-            <h5>{{ employee.title }}</h5>
+            <img src="{{ secondLevelEmployee.imageUrl }}">
+            <h5 class="mt-1 mb-2">{{ secondLevelEmployee.name }}</h5>
+            <h5>{{ secondLevelEmployee.title }}</h5>
           </div>
         </li>
         <div class="level-3-div">
-          <li *ngFor="let employee of employees" id="{{ employee.name }}">
-            <ng-container *ngIf="employee.name">
+          <li *ngFor="let thirdLevelEmployee of thirdLevelEmployees">
+            <ng-container>
               <div class="level-2 rectangle">
-                <img src="{{ employee.imageUrl }}" style="width: 100px; height: 100px; object-fit: cover; border-radius: 50%;">
-                <h5>{{ employee.name }}</h5>
+                <img src="{{ thirdLevelEmployee.imageUrl }}">
+                <h5>{{ thirdLevelEmployee.name }}</h5>
                 <br>
-                <h5>{{ employee.title }}</h5>
+                <h5>{{ thirdLevelEmployee.title }}</h5>
               </div>
             </ng-container>
           </li>
