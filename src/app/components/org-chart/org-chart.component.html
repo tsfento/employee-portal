@@ -1,7 +1,5 @@
 <div class="container mt-5 text-center">
-  <div class="top-level-div">
     <h1 class="top-level rectangle" (click)="logEmployees()">{{ topLevelEmployees[0].name }}</h1>
-    <div class="level-2-div">
       <ol class="level-2-wrapper" style="--level-2-length: {{ secondLevelEmployees.length }}">
         <li *ngFor="let secondLevelEmployee of secondLevelEmployees">
           <div class="level-2 rectangle">
@@ -10,19 +8,21 @@
             <h5>{{ secondLevelEmployee.title }}</h5>
           </div>
         </li>
-        <div class="level-3-div">
-          <li *ngFor="let thirdLevelEmployee of thirdLevelEmployees">
-            <ng-container>
-              <div class="level-2 rectangle">
-                <img src="{{ thirdLevelEmployee.imageUrl }}">
-                <h5>{{ thirdLevelEmployee.name }}</h5>
-                <br>
-                <h5>{{ thirdLevelEmployee.title }}</h5>
-              </div>
-            </ng-container>
+        <ol class="level-3-wrapper">
+          <li>
+            <h3 class="level-3 rectangle">...</h3>
           </li>
-        </div>
+          <li>
+            <h3 class="level-3 rectangle">...</h3>
+          </li>
+        </ol>
+        <ol class="level-3-wrapper">
+          <li>
+            <h3 class="level-3 rectangle">...</h3>
+          </li>
+          <li>
+            <h3 class="level-3 rectangle">...</h3>
+          </li>
+        </ol>
       </ol>
-    </div>
-  </div>
 </div>

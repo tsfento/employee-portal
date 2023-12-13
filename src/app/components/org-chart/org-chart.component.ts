@@ -25,7 +25,7 @@ export class OrgChartComponent implements OnInit, OnDestroy {
     this.fetchedEmployeesSub = this.storageService.employeesFetched.subscribe(
       fetchedEmployees => {
         this.employees = fetchedEmployees;
-        this.splitEmployeesArray();
+        this.splitTopLevelEmployees();
       },
     );
   }
@@ -38,26 +38,47 @@ export class OrgChartComponent implements OnInit, OnDestroy {
     console.log(this.employees);
   }
 
-  splitEmployeesArray() {
+  splitTopLevelEmployees() {
     for (let i = 0; i < this.employees.length; i++) {
       if (this.employees[i].reportsTo === 'na') {
         this.topLevelEmployees.push(this.employees[i]);
       }
+    }
 
+    this.splitSecondLevelEmployees();
+  }
+
+  splitSecondLevelEmployees() {
+    for (let i = 0; i < this.employees.length; i++) {
       for (let j = 0; j < this.topLevelEmployees.length; j++) {
         if (this.employees[i].reportsTo === this.topLevelEmployees[j].name) {
           this.secondLevelEmployees.push(this.employees[i]);
         }
       }
+    }
 
-      for (let k = 0; k < this.secondLevelEmployees.length; k++) {
-        if (this.employees[i].reportsTo === this.secondLevelEmployees[k].name) {
+    this.splitThirdLevelEmployees();
+  }
+
+  splitThirdLevelEmployees() {
+    for (let i = 0; i < this.employees.length; i++) {
+      for (let j = 0; j < this.secondLevelEmployees.length; j++) {
+        if (this.employees[i].reportsTo === this.secondLevelEmployees[j].name) {
           this.thirdLevelEmployees.push(this.employees[i]);
         }
       }
     }
 
-    console.log(this.secondLevelEmployees);
-    console.log(this.thirdLevelEmployees);
+    this.splitFourthLevelEmployees();
+  }
+
+  splitFourthLevelEmployees() {
+    for (let i = 0; i < this.employees.length; i++) {
+      for (let j = 0; j < this.thirdLevelEmployees.length; j++) {
+        if (this.employees[i].reportsTo === this.secondLevelEmployees[j].name) {
+          this.fourthLevelEmployees.push(this.employees[i]);
+        }
+      }
+    }
   }
 }
