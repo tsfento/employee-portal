@@ -31,7 +31,7 @@ import { PayrollComponent } from './components/payroll/payroll.component';
     AddEmployeeComponent,
     EditEmployeeComponent,
     DeleteEmployeeComponent,
-    OrgChartComponent
+    OrgChartComponent,
     NavbarComponent,
     PayrollComponent
   ],

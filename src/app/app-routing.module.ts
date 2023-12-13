@@ -16,7 +16,7 @@ const routes: Routes = [
     { path: 'admin', component: AdminComponent },
     { path: 'personnel', component: PersonnelPageComponent },
     { path: 'org-chart', component: OrgChartComponent },
-    { path: 'payroll', compnoent: PayrollComponent },
+    { path: 'payroll', component: PayrollComponent },
   ] },
   { path: 'landing', component: LandingPageComponent },
   { path: 'auth', component: AuthComponent },
