@@ -19,16 +19,16 @@
             <li *ngIf="thirdLevelEmployee.reportsTo === secondLevelEmployee.name && i % 2 === 0">
               <div class="level-3 rectangle">
                 <img src="{{ thirdLevelEmployee.imageUrl }}">
-                <h3 class="mt-1 mb-2">{{ thirdLevelEmployee.name }}</h3>
-                <h5>{{ thirdLevelEmployee.title }}</h5>
+                <h4 class="mt-1 mb-2">{{ thirdLevelEmployee.name }}</h4>
+                <h6>{{ thirdLevelEmployee.title }}</h6>
               </div>
               <ol class="level-4-wrapper">
                 <ng-container *ngFor="let fourthLevelEmployee of fourthLevelEmployees; let i = index">
                   <li *ngIf="fourthLevelEmployee.reportsTo === thirdLevelEmployee.name">
                     <div class="level-4 rectangle">
                       <img src="{{ fourthLevelEmployee.imageUrl }}">
-                      <h3 class="mt-1 mb-2">{{ fourthLevelEmployee.name }}</h3>
-                      <h5>{{ fourthLevelEmployee.title }}</h5>
+                      <h4 class="mt-1 mb-2">{{ fourthLevelEmployee.name }}</h4>
+                      <h6>{{ fourthLevelEmployee.title }}</h6>
                     </div>
                   </li>
                 </ng-container>
@@ -39,16 +39,16 @@
             <li *ngIf="thirdLevelEmployee.reportsTo === secondLevelEmployee.name && i % 2 !== 0">
               <div class="level-3 rectangle">
                 <img src="{{ thirdLevelEmployee.imageUrl }}">
-                <h3 class="mt-1 mb-2">{{ thirdLevelEmployee.name }}</h3>
-                <h5>{{ thirdLevelEmployee.title }}</h5>
+                <h4 class="mt-1 mb-2">{{ thirdLevelEmployee.name }}</h4>
+                <h6>{{ thirdLevelEmployee.title }}</h6>
               </div>
               <ol class="level-4-wrapper">
                 <ng-container *ngFor="let fourthLevelEmployee of fourthLevelEmployees; let i = index">
                   <li *ngIf="fourthLevelEmployee.reportsTo === thirdLevelEmployee.name">
                     <div class="level-4 rectangle">
                       <img src="{{ fourthLevelEmployee.imageUrl }}">
-                      <h3 class="mt-1 mb-2">{{ fourthLevelEmployee.name }}</h3>
-                      <h5>{{ fourthLevelEmployee.title }}</h5>
+                      <h4 class="mt-1 mb-2">{{ fourthLevelEmployee.name }}</h4>
+                      <h6>{{ fourthLevelEmployee.title }}</h6>
                     </div>
                   </li>
                 </ng-container>
@@ -70,16 +70,16 @@
             <li *ngIf="thirdLevelEmployee.reportsTo === secondLevelEmployee.name && i % 2 === 0">
               <div class="level-3 rectangle">
                 <img src="{{ thirdLevelEmployee.imageUrl }}">
-                <h3 class="mt-1 mb-2">{{ thirdLevelEmployee.name }}</h3>
-                <h5>{{ thirdLevelEmployee.title }}</h5>
+                <h4 class="mt-1 mb-2">{{ thirdLevelEmployee.name }}</h4>
+                <h6>{{ thirdLevelEmployee.title }}</h6>
               </div>
               <ol class="level-4-wrapper">
                 <ng-container *ngFor="let fourthLevelEmployee of fourthLevelEmployees; let i = index">
                   <li *ngIf="fourthLevelEmployee.reportsTo === thirdLevelEmployee.name">
                     <div class="level-4 rectangle">
                       <img src="{{ fourthLevelEmployee.imageUrl }}">
-                      <h3 class="mt-1 mb-2">{{ fourthLevelEmployee.name }}</h3>
-                      <h5>{{ fourthLevelEmployee.title }}</h5>
+                      <h4 class="mt-1 mb-2">{{ fourthLevelEmployee.name }}</h4>
+                      <h6>{{ fourthLevelEmployee.title }}</h6>
                     </div>
                   </li>
                 </ng-container>
@@ -90,16 +90,16 @@
             <li *ngIf="thirdLevelEmployee.reportsTo === secondLevelEmployee.name && i % 2 !== 0">
               <div class="level-3 rectangle">
                 <img src="{{ thirdLevelEmployee.imageUrl }}">
-                <h3 class="mt-1 mb-2">{{ thirdLevelEmployee.name }}</h3>
-                <h5>{{ thirdLevelEmployee.title }}</h5>
+                <h4 class="mt-1 mb-2">{{ thirdLevelEmployee.name }}</h4>
+                <h6>{{ thirdLevelEmployee.title }}</h6>
               </div>
               <ol class="level-4-wrapper">
                 <ng-container *ngFor="let fourthLevelEmployee of fourthLevelEmployees; let i = index">
                   <li *ngIf="fourthLevelEmployee.reportsTo === thirdLevelEmployee.name">
                     <div class="level-4 rectangle">
                       <img src="{{ fourthLevelEmployee.imageUrl }}">
-                      <h3 class="mt-1 mb-2">{{ fourthLevelEmployee.name }}</h3>
-                      <h5>{{ fourthLevelEmployee.title }}</h5>
+                      <h4 class="mt-1 mb-2">{{ fourthLevelEmployee.name }}</h4>
+                      <h6>{{ fourthLevelEmployee.title }}</h6>
                     </div>
                   </li>
                 </ng-container>
