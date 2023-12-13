@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Subject } from 'rxjs';
 import { Organization } from 'src/app/models/organization.model';
 
 
@@ -18,6 +19,7 @@ export class AdminComponent implements OnInit {
     '60062',
     '555-555-1234'
   )
+  companyName = new Subject<string>();
 
   ngOnInit() {
     this.adminForm = new FormGroup({
@@ -32,6 +34,15 @@ export class AdminComponent implements OnInit {
 
   onSubmitForm() {
     this.company.name = this.adminForm.get('orgName').value;
+    this.company.address = this.adminForm.get('orgAddress').value;
+    this.company.city = this.adminForm.get('orgCity').value;
+    this.company.state = this.adminForm.get('orgState').value;
+    this.company.zip = this.adminForm.get('orgZip').value;
+    this.company.phone = this.adminForm.get('orgPhone').value;
+
+    this.companyName.next(this.company.name);
+
+    this.onResetForm();
   }
 
   onResetForm() {

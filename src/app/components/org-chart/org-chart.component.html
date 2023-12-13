@@ -1,68 +1,46 @@
 <div class="container mt-5 text-center">
-    <div class="top-level rectangle">
-      <img src="{{ topLevelEmployees[0].imageUrl }}">
-            <h3 class="mt-1 mb-2">{{ topLevelEmployees[0].name }}</h3>
-            <h5>{{ topLevelEmployees[0].title }}</h5>
-    </div>
-      <ol class="level-2-wrapper" style="--level-2-length: {{ secondLevelEmployees.length }}">
-        <li *ngFor="let secondLevelEmployee of secondLevelEmployees">
-          <div class="level-2 rectangle">
-            <img src="{{ secondLevelEmployee.imageUrl }}">
-            <h3 class="mt-1 mb-2">{{ secondLevelEmployee.name }}</h3>
-            <h5>{{ secondLevelEmployee.title }}</h5>
-          </div>
+  <!-- Top Level -->
+  <div class="top-level rectangle">
+    <img src="{{ topLevelEmployees[0].imageUrl }}">
+          <h3 class="mt-1 mb-2">{{ topLevelEmployees[0].name }}</h3>
+          <h5>{{ topLevelEmployees[0].title }}</h5>
+  </div>
+  <!-- End Top Level -->
+  <!-- Second Level -->
+  <ol class="level-2-wrapper" style="--level-2-length: {{ secondLevelEmployees.length }}">
+    <li *ngFor="let secondLevelEmployee of secondLevelEmployees">
+      <div class="level-2 rectangle">
+        <img src="{{ secondLevelEmployee.imageUrl }}">
+        <h3 class="mt-1 mb-2">{{ secondLevelEmployee.name }}</h3>
+        <h5>{{ secondLevelEmployee.title }}</h5>
+      </div>
+      <!-- Third Level -->
+      <ol class="level-3-wrapper">
+        <li *ngFor="let thirdLevelEmployee of thirdLevelEmployees">
+          <ng-container *ngIf="thirdLevelEmployee.reportsTo === secondLevelEmployee.name">
+            <div class="level-3 rectangle">
+              <img src="{{ thirdLevelEmployee.imageUrl }}">
+              <h3 class="mt-1 mb-2">{{ thirdLevelEmployee.name }}</h3>
+              <h5>{{ thirdLevelEmployee.title }}</h5>
+            </div>
+          </ng-container>
+          <!-- Fourth Level -->
+          <ol class="level-4-wrapper">
+            <li *ngFor="let fourthLevelEmployee of fourthLevelEmployees">
+              <ng-container *ngIf="fourthLevelEmployee.reportsTo === thirdLevelEmployee.name">
+                <div class="level-4 rectangle">
+                  <img src="{{ fourthLevelEmployee.imageUrl }}">
+                  <h3 class="mt-1 mb-2">{{ fourthLevelEmployee.name }}</h3>
+                  <h5>{{ fourthLevelEmployee.title }}</h5>
+                </div>
+              </ng-container>
+            </li>
+          </ol>
+          <!-- End Fourth Level -->
         </li>
-        <ol class="level-3-wrapper">
-          <li>
-            <div class="level-3 rectangle">
-              <h3>...</h3>
-            </div>
-            <ol class="level-4-wrapper">
-              <li>
-                <div class="level-4 rectangle">
-                  <h3>...</h3>
-                </div>
-              </li>
-            </ol>
-          </li>
-          <li>
-            <div class="level-3 rectangle">
-              <h3>...</h3>
-            </div>
-            <ol class="level-4-wrapper">
-              <li>
-                <div class="level-4 rectangle">
-                  <h3>...</h3>
-                </div>
-              </li>
-            </ol>
-          </li>
-        </ol>
-        <ol class="level-3-wrapper">
-          <li>
-            <div class="level-3 rectangle">
-              <h3>...</h3>
-            </div>
-            <ol class="level-4-wrapper">
-              <li>
-                <div class="level-4 rectangle">
-                  <h3>...</h3>
-                </div>
-              </li>
-            </ol>
-          </li>
-          <li>
-            <div class="level-3 rectangle">
-              <h3>...</h3>
-            </div>
-            <ol class="level-4-wrapper">
-              <li>
-                <div class="level-4 rectangle">
-                  <h3>...</h3>
-                </div>
-              </li>
-            </ol>
-          </li>
-        </ol>
       </ol>
+      <!-- End Third Level -->
+    </li>
+  </ol>
+  <!-- End Second Level -->
 </div>
