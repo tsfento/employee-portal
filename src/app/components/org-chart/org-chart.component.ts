@@ -75,7 +75,7 @@ export class OrgChartComponent implements OnInit, OnDestroy {
   splitFourthLevelEmployees() {
     for (let i = 0; i < this.employees.length; i++) {
       for (let j = 0; j < this.thirdLevelEmployees.length; j++) {
-        if (this.employees[i].reportsTo === this.secondLevelEmployees[j].name) {
+        if (this.employees[i].reportsTo === this.thirdLevelEmployees[j].name) {
           this.fourthLevelEmployees.push(this.employees[i]);
         }
       }
