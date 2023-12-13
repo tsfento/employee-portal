@@ -1,9 +1,9 @@
-import { Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Employee } from '../models/employee.model';
 import { EmployeeService } from '../../services/employee.service';
-import { take } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 import { StorageService } from 'src/app/services/storage.service';
+import { Offcanvas } from 'bootstrap';
 
 @Component({
   selector: 'app-personnel-page',
@@ -11,78 +11,52 @@ import { StorageService } from 'src/app/services/storage.service';
   styleUrls: ['personnel-page.component.css']
 })
 export class PersonnelPageComponent implements OnInit, OnDestroy {
-  // Array of employees
   employees: Employee[] = [];
   employeesFetchedSub: Subscription;
-// Add the ViewChild decorator
+
   @ViewChild('offcanvas') offcanvas!: ElementRef;
-  // Property to see if the Add Employee form is open
-  private isOpen = false;
   isAddEmployeeFormOpen = false;
-  // Property to store the employee to be deleted
   private employeeToDelete: Employee | null = null;
 
-  // Inject the Renderer2 and EmployeeService
-  constructor(private renderer: Renderer2, private employeeService: EmployeeService, private storageService: StorageService) {
-    // Subscribe to the isAddEmployeeFormOpen$ observable
+  constructor(private employeeService: EmployeeService, private storageService: StorageService) {
     this.employeeService.isAddEmployeeFormOpen$.subscribe((isOpen) => {
       this.isAddEmployeeFormOpen = isOpen;
     });
   }
 
   ngOnInit() {
-    // Subscribe to updates from EmployeeService
     this.employeeService.employees$.subscribe(employees => {
         this.employees = employees;
     });
 
-    // Fetch the initial list of employees from StorageService and update EmployeeService
     const initialEmployees = this.storageService.fetchEmployees();
     this.employeeService.setEmployees(initialEmployees);
 
-    // Subscribe to the employeesFetched observable from StorageService
     this.employeesFetchedSub = this.storageService.employeesFetched.subscribe(
         (fetchedEmployees: Employee[]) => {
             this.employees = fetchedEmployees;
-            // EmployeeService to update the employees
             this.employeeService.setEmployees(fetchedEmployees);
         }
     );
-}
+  }
 
   ngOnDestroy() {
     this.employeesFetchedSub.unsubscribe();
   }
 
-// Method to open the offcanvas element
-openOffcanvas(employee: Employee) {
-  const offcanvasElement = this.offcanvas.nativeElement;
-  if (!this.isOpen) {
-    this.renderer.addClass(offcanvasElement, 'show');
-    this.isOpen = true;
-    setTimeout(() => {
-      window.addEventListener('click', this.closeOffcanvasHandler);
-    });
+  // Method to open the offcanvas element
+  openOffcanvas(employee: Employee) {
+    const offcanvasElement = this.offcanvas.nativeElement;
+    const bsOffcanvas = new Offcanvas(offcanvasElement);
+    bsOffcanvas.show();
   }
-}
-// Method to close the offcanvas element
-closeOffcanvasHandler = (event: Event) => {
-  const offcanvasElement = this.offcanvas.nativeElement;
-  // Check if the click event is outside the offcanvas element
-  if (this.isOpen && !offcanvasElement.contains(event.target as Node)) {
-    this.closeOffcanvas();
+
+  // Method to close the offcanvas element
+  closeOffcanvas() {
+    const offcanvasElement = this.offcanvas.nativeElement;
+    const bsOffcanvas = new Offcanvas(offcanvasElement);
+    bsOffcanvas.hide();
   }
-};
-// Method to close the offcanvas element
-closeOffcanvas() {
-  const offcanvasElement = this.offcanvas.nativeElement;
-  this.renderer.removeClass(offcanvasElement, 'show');
-  this.isOpen = false;
-  // Remove the event listener after the offcanvas is closed
-  setTimeout(() => {
-    window.removeEventListener('click', this.closeOffcanvasHandler);
-  }, 300);
-}
   // Method to open the Add Employee form
   openAddEmployeeForm() {
     console.log('Opening Add Employee Form');

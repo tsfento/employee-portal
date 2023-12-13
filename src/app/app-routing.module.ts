@@ -13,10 +13,13 @@ const routes: Routes = [
   { path: 'welcome', component: LandingPageComponent, canActivate: [authGuard] },
   { path: '', component: ContainerComponent, canActivate: [authGuard], children: [
     { path: 'admin', component: AdminComponent },
-    { path: 'personnel', component: PersonnelPageComponent },
-  ] },
+  { path: 'personnel', component: PersonnelPageComponent },
+  { path: 'payroll', component: PayrollComponent },
+] },
   { path: 'landing', component: LandingPageComponent },
   { path: 'auth', component: AuthComponent },
+  { path: 'payroll', component: PayrollComponent },
+
 ];
 
 @NgModule({
