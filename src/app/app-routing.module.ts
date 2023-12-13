@@ -10,17 +10,13 @@ import { PayrollComponent } from './components/payroll/payroll.component';
 
 
 const routes: Routes = [
-
-  { path: '', component: LandingPageComponent, canActivate: [authGuard] },
+  { path: 'welcome', component: LandingPageComponent, canActivate: [authGuard] },
+  { path: '', component: ContainerComponent, canActivate: [authGuard], children: [
+    { path: 'admin', component: AdminComponent },
+    { path: 'personnel', component: PersonnelPageComponent },
+  ] },
   { path: 'landing', component: LandingPageComponent },
   { path: 'auth', component: AuthComponent },
-  { path: 'personnel', component: PersonnelPageComponent, canActivate: [authGuard] },
-  { path: 'user', component: ContainerComponent, canActivate: [authGuard], children: [
-    { path: 'admin', component: AdminComponent }
-  ] },
-  { path: 'payroll', component: PayrollComponent }
-
-
 ];
 
 @NgModule({
