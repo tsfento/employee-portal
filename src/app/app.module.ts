@@ -15,6 +15,7 @@ import { AddEmployeeComponent } from './components/add-employee/add-employee.com
 import { EditEmployeeComponent } from './components/edit-employee/edit-employee.component';
 import { DeleteEmployeeComponent } from './components/delete-employee/delete-employee.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { PayrollComponent } from './components/payroll/payroll.component';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     AddEmployeeComponent,
     EditEmployeeComponent,
     DeleteEmployeeComponent,
-    NavbarComponent
+    NavbarComponent,
+    PayrollComponent
 
 
   ],
