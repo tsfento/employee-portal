@@ -1,27 +1,67 @@
 <div class="container mt-5 text-center">
-    <h1 class="top-level rectangle" (click)="logEmployees()">{{ topLevelEmployees[0].name }}</h1>
+    <div class="top-level rectangle">
+      <img src="{{ topLevelEmployees[0].imageUrl }}">
+            <h3 class="mt-1 mb-2">{{ topLevelEmployees[0].name }}</h3>
+            <h5>{{ topLevelEmployees[0].title }}</h5>
+    </div>
       <ol class="level-2-wrapper" style="--level-2-length: {{ secondLevelEmployees.length }}">
         <li *ngFor="let secondLevelEmployee of secondLevelEmployees">
           <div class="level-2 rectangle">
             <img src="{{ secondLevelEmployee.imageUrl }}">
-            <h5 class="mt-1 mb-2">{{ secondLevelEmployee.name }}</h5>
+            <h3 class="mt-1 mb-2">{{ secondLevelEmployee.name }}</h3>
             <h5>{{ secondLevelEmployee.title }}</h5>
           </div>
         </li>
         <ol class="level-3-wrapper">
           <li>
-            <h3 class="level-3 rectangle">...</h3>
+            <div class="level-3 rectangle">
+              <h3>...</h3>
+            </div>
+            <ol class="level-4-wrapper">
+              <li>
+                <div class="level-4 rectangle">
+                  <h3>...</h3>
+                </div>
+              </li>
+            </ol>
           </li>
           <li>
-            <h3 class="level-3 rectangle">...</h3>
+            <div class="level-3 rectangle">
+              <h3>...</h3>
+            </div>
+            <ol class="level-4-wrapper">
+              <li>
+                <div class="level-4 rectangle">
+                  <h3>...</h3>
+                </div>
+              </li>
+            </ol>
           </li>
         </ol>
         <ol class="level-3-wrapper">
           <li>
-            <h3 class="level-3 rectangle">...</h3>
+            <div class="level-3 rectangle">
+              <h3>...</h3>
+            </div>
+            <ol class="level-4-wrapper">
+              <li>
+                <div class="level-4 rectangle">
+                  <h3>...</h3>
+                </div>
+              </li>
+            </ol>
           </li>
           <li>
-            <h3 class="level-3 rectangle">...</h3>
+            <div class="level-3 rectangle">
+              <h3>...</h3>
+            </div>
+            <ol class="level-4-wrapper">
+              <li>
+                <div class="level-4 rectangle">
+                  <h3>...</h3>
+                </div>
+              </li>
+            </ol>
           </li>
         </ol>
       </ol>
