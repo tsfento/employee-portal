@@ -15,6 +15,8 @@ import { AddEmployeeComponent } from './components/add-employee/add-employee.com
 import { EditEmployeeComponent } from './components/edit-employee/edit-employee.component';
 import { DeleteEmployeeComponent } from './components/delete-employee/delete-employee.component';
 import { OrgChartComponent } from './components/org-chart/org-chart.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { PayrollComponent } from './components/payroll/payroll.component';
 
 
 @NgModule({
@@ -30,8 +32,8 @@ import { OrgChartComponent } from './components/org-chart/org-chart.component';
     EditEmployeeComponent,
     DeleteEmployeeComponent,
     OrgChartComponent
-
-
+    NavbarComponent,
+    PayrollComponent
   ],
   imports: [
     BrowserModule,
@@ -39,8 +41,6 @@ import { OrgChartComponent } from './components/org-chart/org-chart.component';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-
-
   ],
   providers: [
     {

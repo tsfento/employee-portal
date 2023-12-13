@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Employee } from 'src/app/models/employee.model';
+import { StorageService } from './storage.service';
 
 @Injectable({
   providedIn: 'root',
@@ -29,7 +30,19 @@ export class EmployeeService {
   isEditEmployeeFormOpen = new BehaviorSubject<boolean>(false);
   isEditEmployeeFormOpen$: Observable<boolean> = this.isEditEmployeeFormOpen.asObservable();
 
-  constructor() {}
+  constructor(private storageService: StorageService) {
+    this.loadInitialEmployees();
+  }
+
+  private loadInitialEmployees() {
+    const employees = this.storageService.getAllEmployees();
+    this.setEmployees(employees);
+  }
+  // Method to reset the employees to the original list
+  resetEmployeeFilter() {
+    const employees = this.storageService.getAllEmployees();
+    this.employeesSubject.next(employees);
+  }
 
   // Method to open the add employee form
   openAddEmployeeForm() {
@@ -42,14 +55,15 @@ export class EmployeeService {
   }
 
   // Method to open the edit employee form
+
   openEditForm(employee: Employee, index: number) {
     console.log('Opening Edit Form');
     this.selectedEmployeeSubject.next([employee, index]);
     this.isEditEmployeeFormOpen.next(true);
   }
+
   // Method to close the edit employee form
   closeEditForm() {
-    console.log('Closing Edit Form');
     this.selectedEmployeeSubject.next(null);
     this.isEditEmployeeFormOpen.next(false);
   }
@@ -70,4 +84,29 @@ export class EmployeeService {
   openDeleteModal(employee: Employee | null) {
     this.deleteModalData.next(employee);
   }
+
+  // Method to filter the employees
+  filterEmployees(query: string): void {
+    const allEmployees = this.employeesSubject.getValue();
+
+    if (!query.trim()) {
+      // Reset the list to show all employees if the query is empty
+      this.employeesSubject.next(allEmployees);
+      return;
+    }
+
+    const filteredEmployees = allEmployees.filter(employee =>
+      employee.name.toLowerCase().includes(query.toLowerCase()) ||
+      employee.title.toLowerCase().includes(query.toLowerCase()) ||
+      employee.email.toLowerCase().includes(query.toLowerCase())
+    );
+
+    this.employeesSubject.next(filteredEmployees);
+  }
+
+  // Method to set the employees
+  setEmployees(employees: Employee[]) {
+    this.employeesSubject.next(employees);
+}
+
 }
