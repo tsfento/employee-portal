@@ -12,6 +12,7 @@
 
 .offcanvas {
   background-color: #f9dec9;
+  width: 75%;
 }
 
 .offcanvas-header {
@@ -26,14 +27,13 @@
 }
 
 .offcanvas-box {
-  width: 100%;
-  height: 265px;
   background-color: #ededed;
   box-shadow: 2px 2px 5px #3a405a;
   border: 1px solid #3a405a;
   border-radius: 10px;
   margin-bottom: 15px;
   position: relative;
+  overflow: hidden;
 }
 
 /* Responsive design for smaller screens */
@@ -120,11 +120,14 @@
 }
 
 .employee-box {
+  position: relative;
   width: 309px;
   height: 309px;
   background-color: #3a405a;
   color: white;
   border-radius: 20px;
+  overflow: hidden;
+  padding: 30px;
 }
 .employee-img {
   width: 100px;
@@ -152,10 +155,6 @@
   text-decoration: none;
 }
 
-.nav li {
-  list-style-type: none;
-}
-
 .company-name {
   color: white;
   font-size: 30px;
@@ -176,31 +175,25 @@
   font-size: 15px;
   line-height: 0.5;
 }
-
-.navbar {
-  border-bottom: 1px solid white;
-  background-color: #3a405a;
+.icons-container {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
 }
 
-.top-nav {
-  border-bottom: 1px solid white;
-  background-color: #3a405a;
+.material-icons {
+  font-size: 24px;
+  cursor: pointer;
+  margin-left: 10px;
 }
 
-.nav-link {
-  text-decoration: none;
-  color: white;
+.edit-icon {
+  color: #4285f4;
 }
 
-.nav-link:hover {
-  color: #f9dec9;
-}
-
-.btn-search {
-  background-color: #f9dec9;
-  line-height: 1;
-}
-
-.btn-search:hover {
-  background-color: #e9afa3;
+.delete-icon {
+  color: #d32f2f;
 }

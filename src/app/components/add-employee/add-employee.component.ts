@@ -1,44 +1,55 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Employee } from 'src/app/models/employee.model';
+import { EmployeeService } from 'src/app/services/employee.service';
+import { StorageService } from 'src/app/services/storage.service';
 
 @Component({
 selector: 'app-add-employee',
 templateUrl: 'add-employee.component.html',
 styleUrls: ['add-employee.component.css']
 })
-export class AddEmployeeComponent {
+export class AddEmployeeComponent implements OnInit {
+  employees: Employee[] = [];
 newEmployee = {
   name: '',
   title: '',
   email: '',
-  imageUrl: ''
+  imageUrl: '',
+  reportsTo: ''
 };
 
 @Output() employeeAdded = new EventEmitter<any>();
 @Output() closeForm = new EventEmitter<void>();
 
-// Flag to control the visibility of the form
+// Flag to see if the form is open
 isAddEmployeeFormOpen = true;
 onCancelForm: any;
 
-// Function to handle form submission
-submitForm() {
+constructor(private storageService: StorageService) {}
 
-  // Emit the new employee data to the parent component
+ngOnInit() {
+this.employees = this.storageService.getAllEmployees();
+}
+
+// Method to submit the form
+submitForm() {
+  // Emit the new employee
   this.employeeAdded.emit(this.newEmployee);
 
-  // Reset the form or perform any other necessary actions
+  // Reset the form
   this.newEmployee = {
     name: '',
     title: '',
     email: '',
-    imageUrl: ''
+    imageUrl: '',
+    reportsTo: ''
   };
 
   // Close the form
-  this.onCancelForm();
+  this.closeForm.emit();
 }
 
-// Function to close the form without adding a new employee
+// Method to close the form without adding a new employee
 cancelForm() {
   this.isAddEmployeeFormOpen = false;
   this.closeForm.emit();

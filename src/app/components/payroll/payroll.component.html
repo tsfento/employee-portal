@@ -1,0 +1,51 @@
+<div class="full-container">
+   <!-- Container for Calculator and Pie Chart -->
+   <div class="top-container">
+<!-- Payroll Calculator-->
+<div class="payroll-calculator">
+  <div *ngIf="totalPay" class="total-pay-overlay" (click)="clearCalculator()">
+    Total Pay: {{ totalPay | currency }}
+  </div>
+  <h3>Payroll Calculator</h3>
+  <input type="number" [(ngModel)]="hourlyRate" placeholder="Hourly Rate">
+  <input type="number" [(ngModel)]="hoursWorked" placeholder="Hours Worked">
+  <button (click)="calculatePay()">Calculate</button>
+  <button (click)="clearCalculator()">Clear</button>
+</div>
+
+<!-- Pie Chart Canvas -->
+<div class="pie-chart-container">
+  <canvas #pieChart></canvas>
+</div>
+<!-- Data Entry Form -->
+<div class="payroll-container">
+  <h2>Payroll Summary</h2>
+  <form (ngSubmit)="updatePayroll()">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Employee</th>
+          <th>Role</th>
+          <th>Salary</th>
+          <th>Pay Period</th>
+          <th>Total Paid</th>
+          <th class="header-delete-column"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let entry of payrollEntries; let i = index">
+          <td><input [(ngModel)]="entry.employee" name="employee{{i}}" (keydown.enter)="$event.preventDefault()" /></td>
+          <td><input [(ngModel)]="entry.role" name="role{{i}}" (keydown.enter)="$event.preventDefault()" /></td>
+          <td><div class="dollar-input"><input [(ngModel)]="entry.salary" name="salary{{i}}" (keydown.enter)="$event.preventDefault()" /></div></td>
+          <td><input [(ngModel)]="entry.payPeriod" name="payPeriod{{i}}" (keydown.enter)="$event.preventDefault()" /></td>
+          <td><div class="dollar-input"><input [(ngModel)]="entry.totalPaid" name="totalPaid{{i}}" (keydown.enter)="$event.preventDefault()" /></div></td>
+          <td class="delete-column">
+            <!-- Add the "X" icon here -->
+            <span class="close-icon" (click)="deleteEntry(i)">&#215;</span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <button type="submit">Update</button>
+  </form>
+</div>

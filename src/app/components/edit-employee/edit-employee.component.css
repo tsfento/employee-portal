@@ -1,0 +1,107 @@
+:host {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.edit-employee-form {
+  width: 70%;
+  max-width: 500px;
+  border-radius: 15px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+  background-color: #fff;
+  padding: 20px;
+  border: none;
+}
+
+.edit-employee-form .modal-header {
+  color: black;
+  border-bottom: none;
+  padding-bottom: 15px;
+}
+
+.edit-employee-form .modal-title {
+  font-weight: 500;
+  font-size: 24px;
+}
+
+.edit-employee-form .modal-body {
+  font-size: 18px;
+  color: #555;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+
+.edit-employee-form .modal-footer {
+  border-top: none;
+  padding-top: 20px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.edit-employee-form .left-inputs,
+.edit-employee-form .right-inputs {
+  flex: 1;
+  flex-basis: 0;
+}
+
+.edit-employee-form .left-inputs {
+  margin-right: 20px;
+}
+
+.edit-employee-form input[type="text"],
+.edit-employee-form input[type="date"],
+.edit-employee-form textarea,
+.edit-employee-form select,
+.edit-employee-form input[type="email"] {
+  border: 2px solid #ddd;
+  border-radius: 5px;
+  outline: none;
+  box-shadow: none;
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+.edit-employee-form .modal-footer button {
+  border-radius: 5px;
+  margin-left: 10px;
+}
+
+.edit-employee-form .btn-secondary {
+  background-color: darkslategray;
+  color: white;
+  border: none;
+}
+
+.edit-employee-form .btn-primary {
+  background-color: #4CAF50;
+  color: #fff;
+  border: none;
+}
+
+.edit-employee-form select.form-control option:disabled {
+  display: none;
+  color: #888;
+}
+
+.reports-label {
+  color: #555;
+  font-size: 18px;
+}

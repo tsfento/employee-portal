@@ -1,69 +1,72 @@
-// personnel-page.component.ts
-import { Component, ElementRef, Renderer2, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Employee } from 'src/app/models/employee.model';
-import { AddEmployeeComponent } from '../add-employee/add-employee.component';
-import { DOCUMENT } from '@angular/common';
-import { inject } from '@angular/core';
+import { EmployeeService } from '../../services/employee.service';
+import { Subscription } from 'rxjs';
+import { StorageService } from 'src/app/services/storage.service';
+import { Offcanvas } from 'bootstrap';
+
 @Component({
   selector: 'app-personnel-page',
   templateUrl: 'personnel-page.component.html',
   styleUrls: ['personnel-page.component.css']
 })
-export class PersonnelPageComponent {
-   document = inject(DOCUMENT);
-  employees: Employee[] = [
-    { name: 'Darlton Carlyle', title: 'Marketing Coordinator', email: 'dcarlyle@conglomo.com', imageUrl: './assets/images/Delton-Sewell-Image-1.jpg' }
-  ];
+export class PersonnelPageComponent implements OnInit, OnDestroy {
+  employees: Employee[] = [];
+  employeesFetchedSub: Subscription;
 
   @ViewChild('offcanvas') offcanvas!: ElementRef;
-  private isOpen = false;
-
-  // Correct property name
   isAddEmployeeFormOpen = false;
+  private employeeToDelete: Employee | null = null;
 
-  constructor(private renderer: Renderer2) {}
+  constructor(private employeeService: EmployeeService, private storageService: StorageService) {
+    this.employeeService.isAddEmployeeFormOpen$.subscribe((isOpen) => {
+      this.isAddEmployeeFormOpen = isOpen;
+    });
+  }
 
+  ngOnInit() {
+    this.employeeService.employees$.subscribe(employees => {
+        this.employees = employees;
+    });
+
+    const initialEmployees = this.storageService.fetchEmployees();
+    this.employeeService.setEmployees(initialEmployees);
+
+    this.employeesFetchedSub = this.storageService.employeesFetched.subscribe(
+        (fetchedEmployees: Employee[]) => {
+            this.employees = fetchedEmployees;
+            this.employeeService.setEmployees(fetchedEmployees);
+        }
+    );
+  }
+
+  ngOnDestroy() {
+    this.employeesFetchedSub.unsubscribe();
+  }
+
+  // Method to open the offcanvas element
   openOffcanvas(employee: Employee) {
     const offcanvasElement = this.offcanvas.nativeElement;
-
-    if (!this.isOpen) {
-      this.renderer.addClass(offcanvasElement, 'show');
-      this.isOpen = true;
-
-    }
+    const bsOffcanvas = new Offcanvas(offcanvasElement);
+    bsOffcanvas.show();
   }
 
-  closeOffcanvasHandler = (event: Event) => {
-    const offcanvasElement = this.offcanvas.nativeElement;
-
-
-    if (this.isOpen && !offcanvasElement.contains(event.target as Node)) {
-      this.closeOffcanvas();
-      window.removeEventListener('click', this.closeOffcanvasHandler);
-    }
-  };
-
+  // Method to close the offcanvas element
   closeOffcanvas() {
     const offcanvasElement = this.offcanvas.nativeElement;
-    this.renderer.removeClass(offcanvasElement, 'show');
-    this.isOpen = false;
-
-    setTimeout(() => {
-      window.removeEventListener('click', this.closeOffcanvasHandler);
-    }, 300);
+    const bsOffcanvas = new Offcanvas(offcanvasElement);
+    bsOffcanvas.hide();
   }
-
+  // Method to open the Add Employee form
   openAddEmployeeForm() {
     console.log('Opening Add Employee Form');
-    this.isAddEmployeeFormOpen = true;
+    this.employeeService.openAddEmployeeForm();
   }
 
-  closeAddEmployeeForm() {
-    this.isAddEmployeeFormOpen = false;
-  }
-
+  // Method to handle the employeeAdded event
   onEmployeeAdded(newEmployee: Employee) {
-    this.employees.push(newEmployee);
+    // this.employees.push(newEmployee);
+    this.storageService.addEmployee(newEmployee);
     this.closeAddEmployeeForm();
   }
 
@@ -72,6 +75,54 @@ export class PersonnelPageComponent {
     var li = document.createElement("li");
     li.appendChild(document.createTextNode(addedcontent));
     list.appendChild(li);
+  }
+  // Method to close the Add Employee form
+  closeAddEmployeeForm() {
+    this.employeeService.closeAddEmployeeForm();
+  }
+
+  // Method to open the Edit Form
+  openEditForm(event: Event, employee: Employee, index: number) {
+    console.log('Opening Edit Form');
+    // Stop the offCanvas from opening
+    event.stopPropagation();
+    this.employeeService.openEditForm(employee, index);
+  }
+
+  // Method to handle clicking on an employee box
+  onEmployeeBoxClick(event: Event, employee: Employee) {
+    console.log('Employee box clicked');
+    this.openOffcanvas(employee);
+  }
+  preventOffCanvas(event: Event): void {
+    event.stopPropagation();
+
+  }
+  // Method to confirm the deletion
+  confirmDeleteEmployee() {
+    if (this.employeeToDelete) {
+      const index = this.employees.indexOf(this.employeeToDelete);
+      if (index !== -1) {
+        this.employees.splice(index, 1);
+      }
+      this.storageService.deleteEmployee(index);
+      // Close the delete confirmation modal
+      this.employeeService.openDeleteModal(null);
+    }
+  }
+
+  // Method to show the delete confirmation modal
+  confirmDeleteEmployeeModal(employee: Employee) {
+    event.stopPropagation();
+    this.employeeToDelete = employee;
+  }
+
+  // Method to cancel the deletion
+  cancelDeleteEmployeeModal() {
+    event.stopPropagation();
+    this.employeeService.openDeleteModal(null);
+    this.employeeToDelete = null;
+
   }
 }
 
