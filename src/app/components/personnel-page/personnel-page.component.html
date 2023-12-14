@@ -64,9 +64,12 @@
       <li class="to-do-item">Complete documentation for upcoming audit</li>
       <li class="to-do-item">Update the job descriptions for open positions on the careers page</li>
       <li class="to-do-item">Prepare a report on employee turnover for the past year</li>
+      <input class=todotextbox type="text" id="myTextBox" name="myTextBox" placeholder="Add Item..." #todoRef>
           </ul>
+
         </div>
-        <button class="btn btn-offcanvas-box">
+        <button class="btn btn-offcanvas-box" (click)="addItem(todoRef)">
+
           <span class="material-symbols-outlined box-button-icon">add</span>
         </button>
       </div>
@@ -84,6 +87,7 @@
       <li class="event-item">Labor Law Update Seminar - August 15th</li>
       <li class="event-item">Team Building Retreat - September 10th</li>
       <li class="event-item">End-of-Year Benefits Enrollment Period - October 1st to 31st</li>
+      <input class=eventtextbox type="text" id="myTextBox" name="myTextBox" placeholder="Add Item...">
             </ul>
           </div>
           <button class="btn btn-offcanvas-box">
@@ -107,6 +111,7 @@
               <li class="task-item">Finalize details for the remote work policy update</li>
               <li class="task-item">Review and approve time-off requests</li>
               <li class="task-item">Review and update employee handbooks</li>
+              <input class=tasktextbox type="text" id="myTextBox" name="myTextBox" placeholder="Add Item...">
             </ul>
           </div>
           <button class="btn btn-offcanvas-box">
@@ -126,6 +131,7 @@
               <li class="news-item">Innovation Award: Our Team's Latest Tech Advancement - Discover</li>
               <li class="news-item">Community Outreach: Successful Charity Event Last Weekend - Highlights</li>
               <li class="news-item">Employee Spotlight: Interview with Our Employee of the Month - Profile</li>
+              <input class=newstextbox type="text" id="myTextBox" name="myTextBox" placeholder="Add Item...">
             </ul>
           </div>
           <button class="btn btn-offcanvas-box">
@@ -151,6 +157,7 @@
           <li class="document-item">Diversity and Inclusion Report - <a href="path/to/document">View</a></li>
           <li class="document-item">Employee Benefit Details - <a href="path/to/document">Download</a></li>
           <li class="document-item">Company Financial Reports - <a href="path/to/document">View</a></li>
+          <input class=doctextbox type="text" id="myTextBox" name="myTextBox" placeholder="Add Item...">
     </ul>
     <button class="btn btn-offcanvas-box">
             <span class="material-symbols-outlined box-button-icon">add</span>

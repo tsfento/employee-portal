@@ -118,4 +118,11 @@ export class PersonnelPageComponent implements OnInit, OnDestroy {
     this.employeeToDelete = null;
 
   }
+  addItem(todoRef:HTMLInputElement){
+    const ul = document.querySelector(".todo-list");
+    const li = document.createElement("li");
+    li.setAttribute("class", "to-do-item");
+    li.innerText=todoRef.value;
+    ul.appendChild(li); 
+  }
 }

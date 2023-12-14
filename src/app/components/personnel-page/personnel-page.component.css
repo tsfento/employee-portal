@@ -197,3 +197,38 @@
 .delete-icon {
   color: #d32f2f;
 }
+
+.todotextbox{
+  border-radius: 5px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  width:450px;
+}
+
+.eventtextbox{
+  border-radius: 5px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  width:450px;
+}
+
+.tasktextbox{
+  border-radius: 5px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  width:450px;
+}
+
+.newstextbox{
+  border-radius: 5px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  width:450px;
+}
+
+.doctextbox{
+  border-radius: 5px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  width:450px;
+}
