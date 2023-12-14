@@ -102,9 +102,11 @@ export class StorageService {
   }
 
   storeEmployees(employees: Employee[]) {
+    const sortedEmployees = employees.sort((a, b) => a.name.split(' ')[1].localeCompare(b.name.split(' ')[1]));
+
     this.http.put<Employee[]>(
       `https://employee-portal-f13b1-default-rtdb.firebaseio.com/employees.json`,
-      employees
+      sortedEmployees
     ).subscribe((response: Employee[]) => {
       this.employees = response;
       this.employeesFetched.next(this.employees.slice());
