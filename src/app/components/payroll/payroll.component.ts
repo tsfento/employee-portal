@@ -15,10 +15,6 @@ export class PayrollComponent implements AfterViewInit {
   newEmployeeData = { name: '', role: '', salary: 0, payPeriod: '', totalPaid: 0 };
   payrollEntries: any[] = [];
 
-  ngOnInit() {
-    this.payrollEntries = [...this.previousEmployeeEntries];
-  }
-
   ngAfterViewInit() {
     Chart.register(ChartDataLabels);
     this.createPieChart();
@@ -115,43 +111,12 @@ export class PayrollComponent implements AfterViewInit {
       }
     };
 
-    this.pieChart.nativeElement.width = 800; 
+    this.pieChart.nativeElement.width = 800;
   this.pieChart.nativeElement.height = 800;
 
     // Create the chart with the configuration
     new Chart(context, chartConfig);
   }
-
-  previousEmployeeEntries = [
-    {
-      employee: 'Ronald Mack',
-      role: 'Chief Sustainability Officer',
-      salary: 5000,
-      payPeriod: '01/01/2023 - 01/31/2023',
-      totalPaid: 5000,
-    },
-    {
-      employee: 'Justin Jones',
-      role: 'Social Media Manager',
-      salary: 1000,
-      payPeriod: '01/01/2023 - 01/31/2023',
-      totalPaid: 1000,
-    },
-    {
-      employee: 'Brooklynn Peterson',
-      role: 'Human Resource Specialist',
-      salary: 2000,
-      payPeriod: '01/01/2023 - 01/31/2023',
-      totalPaid: 2000,
-    },
-    {
-      employee: 'Adalynn Burdock',
-      role: 'Public Relations Manager',
-      salary: 4000,
-      payPeriod: '01/01/2023 - 01/31/2023',
-      totalPaid: 4000,
-    },
-  ];
 
    // Method to add a new employee to the payroll summary
    addEmployee() {
@@ -187,10 +152,11 @@ export class PayrollComponent implements AfterViewInit {
     const calculatedHeight = minHeight + numRows * rowHeight + 'px';
     return calculatedHeight;
   }
+
+  // Method to delete an entry from the payrollEntries array
   deleteEntry(index: number) {
     if (index >= 0 && index < this.payrollEntries.length) {
       this.payrollEntries.splice(index, 1);
     }
   }
-
 }

@@ -36,9 +36,9 @@
         <tr *ngFor="let entry of payrollEntries; let i = index">
           <td><input [(ngModel)]="entry.employee" name="employee{{i}}" (keydown.enter)="$event.preventDefault()" /></td>
           <td><input [(ngModel)]="entry.role" name="role{{i}}" (keydown.enter)="$event.preventDefault()" /></td>
-          <td><input [(ngModel)]="entry.salary" name="salary{{i}}" (keydown.enter)="$event.preventDefault()" /></td>
+          <td><div class="dollar-input"><input [(ngModel)]="entry.salary" name="salary{{i}}" (keydown.enter)="$event.preventDefault()" /></div></td>
           <td><input [(ngModel)]="entry.payPeriod" name="payPeriod{{i}}" (keydown.enter)="$event.preventDefault()" /></td>
-          <td><input [(ngModel)]="entry.totalPaid" name="totalPaid{{i}}" (keydown.enter)="$event.preventDefault()" /></td>
+          <td><div class="dollar-input"><input [(ngModel)]="entry.totalPaid" name="totalPaid{{i}}" (keydown.enter)="$event.preventDefault()" /></div></td>
           <td class="delete-column">
             <!-- Add the "X" icon here -->
             <span class="close-icon" (click)="deleteEntry(i)">&#215;</span>
@@ -49,5 +49,3 @@
     <button type="submit">Update</button>
   </form>
 </div>
-
-

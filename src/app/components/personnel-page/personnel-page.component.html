@@ -36,12 +36,12 @@
     <span class="material-symbols-outlined employee-list-button-icon">add</span>
   </button>
   <!-- Offcanvas  -->
-  <div #offcanvas class="offcanvas offcanvas-end details" id="offcanvasExample" tabindex="-1" aria-labelledby="offcanvasExampleLabel"(click)="closeOffcanvas()">
-  <div class="offcanvas-header" data-bs-theme="dark">
-    <h5 class="offcanvas-title" id="offcanvasExampleLabel">Employee Details</h5>
-    <button type="button" class="btn btn-offcanvas-close" (click)="closeOffcanvas()">
-      <span class="material-symbols-outlined box-button-icon">close</span>
-    </button>
+  <div #offcanvas class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+    <div class="offcanvas-header">
+      <h5 id="offcanvasExampleLabel">Employee Details</h5>
+      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
     <!-- Add Employee Form Modal -->
     <app-add-employee *ngIf="isAddEmployeeFormOpen" (employeeAdded)="onEmployeeAdded($event)" (closeForm)="closeAddEmployeeForm()"></app-add-employee>
   </div>
