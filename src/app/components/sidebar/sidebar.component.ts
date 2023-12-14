@@ -2,7 +2,6 @@ import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { AuthService } from '../auth/auth.service';
 import { Subscription } from 'rxjs';
 import { StorageService } from 'src/app/services/storage.service';
-import { AdminComponent } from '../admin/admin.component';
 
 export interface IUserInfo {
   name: string;
@@ -18,7 +17,6 @@ export interface IUserInfo {
 export class SidebarComponent implements OnInit, OnDestroy {
   userInfoSub: Subscription;
   user: IUserInfo = { name: '', email: '', image: ''};
-  @ViewChild(AdminComponent) admin: AdminComponent;
   companyName: string = '';
   companySub: Subscription;
 
@@ -29,15 +27,17 @@ export class SidebarComponent implements OnInit, OnDestroy {
       this.user = userInfo;
     });
 
-    this.companyName = this.admin.company.name;
+    this.companyName = this.storageService.getOrganization().name;
 
-    this.companySub = this.admin.companyName.subscribe(company => {
-      this.companyName = company;
+    this.companySub = this.storageService.sendCompanyDetails.subscribe(
+      company => {
+        this.companyName = company.name;
     });
   }
 
   ngOnDestroy() {
     this.userInfoSub.unsubscribe();
+    this.companySub.unsubscribe();
   }
 
   logout() {
