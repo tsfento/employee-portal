@@ -5,6 +5,7 @@ import { Subject } from "rxjs";
 import { IAuthData } from "../components/auth/auth.service";
 import { environment } from "../environments/environment.production";
 import { IUserInfo } from "../components/sidebar/sidebar.component";
+import { Organization } from "../models/organization.model";
 
 const API_KEY = environment.firebaseAPIKey;
 const UPDATE_USER_URL = `https://identitytoolkit.googleapis.com/v1/accounts:update?key=${API_KEY}`;
@@ -50,8 +51,15 @@ export class StorageService {
   employeesFetched = new Subject<Employee[]>();
   userInfo: IUserInfo;
   sendUserInfo = new Subject<{ name: string, email: string, image: string }>();
-
-
+  company = new Organization(
+    'Conglomo LLC',
+    '123 Fake St.',
+    'Shermer',
+    'IL',
+    '60062',
+    '555-555-1234'
+  );
+  sendCompanyDetails = new Subject<Organization>();
 
   constructor(private http: HttpClient) {}
 
@@ -131,8 +139,18 @@ export class StorageService {
     this.employees.splice(deleteIndex, 1);
     this.storeEmployees(this.employees.slice());
   }
-   // Method to get all employees
-   getAllEmployees(): Employee[] {
-    return this.employees;
+
+  // Method to get all employees
+  getAllEmployees(): Employee[] {
+    return this.employees.slice();
+  }
+
+  setOrganization(org: Organization) {
+    this.company = org;
+    this.sendCompanyDetails.next(this.company);
+  }
+
+  getOrganization() {
+    return this.company;
   }
 }

@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output, OnChanges, SimpleChanges, OnInit } from '@angular/core';
-import { Employee } from '../models/employee.model';
+import { Employee } from 'src/app/models/employee.model';
 import { EmployeeService } from '../../services/employee.service';
 import { StorageService } from 'src/app/services/storage.service';
 
@@ -14,6 +14,7 @@ export class EditEmployeeComponent implements OnInit {
   @Output() closeForm = new EventEmitter<void>();
 
   // Local property to hold the employee
+  employees: Employee[] = [];
   employee: Employee;
   isEditEmployeeFormOpen: boolean = false;
   editIndex: number;
@@ -21,6 +22,7 @@ export class EditEmployeeComponent implements OnInit {
   constructor(private employeeService: EmployeeService, private storageService: StorageService) {}
 
   ngOnInit() {
+    this.employees = this.storageService.getAllEmployees();
     // Subscribe to the selectedEmployee$ observable
     this.employeeService.selectedEmployee$.subscribe(([selectedEmployee, index]) => {
       this.selectedEmployee = selectedEmployee;

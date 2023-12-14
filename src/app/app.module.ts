@@ -14,6 +14,7 @@ import { AuthInterceptorService } from './components/auth/auth-interceptor.servi
 import { AddEmployeeComponent } from './components/add-employee/add-employee.component';
 import { EditEmployeeComponent } from './components/edit-employee/edit-employee.component';
 import { DeleteEmployeeComponent } from './components/delete-employee/delete-employee.component';
+import { OrgChartComponent } from './components/org-chart/org-chart.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { PayrollComponent } from './components/payroll/payroll.component';
 
@@ -30,10 +31,9 @@ import { PayrollComponent } from './components/payroll/payroll.component';
     AddEmployeeComponent,
     EditEmployeeComponent,
     DeleteEmployeeComponent,
+    OrgChartComponent,
     NavbarComponent,
     PayrollComponent
-
-
   ],
   imports: [
     BrowserModule,
@@ -41,8 +41,6 @@ import { PayrollComponent } from './components/payroll/payroll.component';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-
-
   ],
   providers: [
     {

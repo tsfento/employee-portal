@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { AuthService } from '../auth/auth.service';
 import { Subscription } from 'rxjs';
 import { StorageService } from 'src/app/services/storage.service';
@@ -17,6 +17,8 @@ export interface IUserInfo {
 export class SidebarComponent implements OnInit, OnDestroy {
   userInfoSub: Subscription;
   user: IUserInfo = { name: '', email: '', image: ''};
+  companyName: string = '';
+  companySub: Subscription;
 
   constructor(private authService: AuthService, private storageService: StorageService) {}
 
@@ -24,10 +26,18 @@ export class SidebarComponent implements OnInit, OnDestroy {
     this.userInfoSub = this.storageService.sendUserInfo.subscribe(userInfo => {
       this.user = userInfo;
     });
+
+    this.companyName = this.storageService.getOrganization().name;
+
+    this.companySub = this.storageService.sendCompanyDetails.subscribe(
+      company => {
+        this.companyName = company.name;
+    });
   }
 
   ngOnDestroy() {
     this.userInfoSub.unsubscribe();
+    this.companySub.unsubscribe();
   }
 
   logout() {

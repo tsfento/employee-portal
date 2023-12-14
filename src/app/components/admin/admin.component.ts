@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Organization } from 'src/app/models/organization.model';
+import { StorageService } from 'src/app/services/storage.service';
 
 
 @Component({
@@ -10,16 +11,13 @@ import { Organization } from 'src/app/models/organization.model';
 })
 export class AdminComponent implements OnInit {
   adminForm: FormGroup;
-  company = new Organization(
-    'Conglomo LLC',
-    '123 Fake St.',
-    'Shermer',
-    'IL',
-    '60062',
-    '555-555-1234'
-  )
+  company: Organization;
+
+  constructor(private storageService: StorageService) {}
 
   ngOnInit() {
+    this.company = this.storageService.getOrganization();
+
     this.adminForm = new FormGroup({
       orgName: new FormControl(this.company.name, Validators.required),
       orgAddress: new FormControl(this.company.address, Validators.required),
@@ -32,6 +30,15 @@ export class AdminComponent implements OnInit {
 
   onSubmitForm() {
     this.company.name = this.adminForm.get('orgName').value;
+    this.company.address = this.adminForm.get('orgAddress').value;
+    this.company.city = this.adminForm.get('orgCity').value;
+    this.company.state = this.adminForm.get('orgState').value;
+    this.company.zip = this.adminForm.get('orgZip').value;
+    this.company.phone = this.adminForm.get('orgPhone').value;
+
+    this.storageService.setOrganization(this.company);
+
+    this.onResetForm();
   }
 
   onResetForm() {

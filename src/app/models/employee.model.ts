@@ -4,5 +4,6 @@ export class Employee {
     public title: string,
     public email: string,
     public imageUrl: string,
+    public reportsTo: string,
   ) {}
 }
