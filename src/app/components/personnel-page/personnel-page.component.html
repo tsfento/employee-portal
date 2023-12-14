@@ -1,8 +1,4 @@
 <section class="layout">
-<!-- Sidebar -->
-<div class="sidebar sticky-top">
-  <app-sidebar></app-sidebar>
-</div>
 <!-- Body content -->
 <div class="body">
   <!-- Navigation Bar -->
@@ -70,11 +66,11 @@
     <li class="to-do-item">Prepare a report on employee turnover for the past year</li>
         </ul>
       </div>
-      <button (click)="addtolist('todolist', this.document.getElementById('todolisttextbox').value)" class="btn btn-offcanvas-box">
+      <button (click)="addtolist('todolist', todoRef.value)" class="btn btn-offcanvas-box">
         <span class="material-symbols-outlined box-button-icon">add</span>
       </button>
       <form>
-        <input type="text" id="todolisttextbox" name="textbox">
+        <input type="text" id="todolisttextbox" name="textbox" #todoRef>
     </form>
     </div>
     <!-- Event Box -->
