@@ -16,9 +16,8 @@
 <i class="material-icons edit-icon" (click)="openEditForm($event, employee, i)" title="Edit Employee">edit_note</i>
           <!-- Delete Icon -->
           <i class="material-icons delete-icon" (click)="confirmDeleteEmployeeModal(employee)" title="Delete Employee">delete</i>
-
         </div>
-        <a href="#" class="employee-email">{{ employee.email }}</a>
+        <p class="employee-email">{{ employee.email }}</p>
       </div>
   <!-- Edit Employee Form Modal -->
   <app-edit-employee *ngIf="employeeService.isEditEmployeeFormOpen$ | async"
