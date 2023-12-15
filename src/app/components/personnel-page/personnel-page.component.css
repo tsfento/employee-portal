@@ -185,10 +185,6 @@
   margin-top: 30px;
 }
 
-.employee-name:hover, .employee-title:hover, .employee-email:hover {
-  color: #e9afa3;
-  font-weight: bold;
-}
 
 
 .icons-container {
