@@ -41,8 +41,6 @@
       <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body">
-    <!-- Add Employee Form Modal -->
-    <app-add-employee *ngIf="isAddEmployeeFormOpen" (employeeAdded)="onEmployeeAdded($event)" (closeForm)="closeAddEmployeeForm()"></app-add-employee>
   </div>
   <div class="offcanvas-body">
     <!-- Offcanvas content -->
