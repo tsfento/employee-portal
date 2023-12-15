@@ -76,7 +76,6 @@ export class PersonnelPageComponent implements OnInit, OnDestroy {
 
   // Method to open the Edit Form
   openEditForm(event: Event, employee: Employee, index: number) {
-    console.log('Opening Edit Form');
     // Stop the offCanvas from opening
     event.stopPropagation();
     this.employeeService.openEditForm(employee, index);
