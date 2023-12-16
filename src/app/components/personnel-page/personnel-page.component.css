@@ -133,11 +133,12 @@
 }
 
 .employee-box:hover {
-  transform: scale(1.05);
-  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.5);
-  color:#e9afa3;
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.6);
+  border: 2px solid #4285f4;
+  color: #e9afa3;
   cursor: pointer;
 }
+
 
 .employee-img {
   width: 150px;
