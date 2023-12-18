@@ -2,6 +2,11 @@ import { Component, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { Chart } from 'chart.js/auto';
 import  ChartDataLabels  from 'chartjs-plugin-datalabels';
 
+const EXAMPLE_PAYROLL_DATA = [
+  { employee: 'Cherilyn Baxter', role: 'Brand Strategist', salary: 70000, payPeriod: 'Bi-Weekly', totalPaid: 2692 },
+  { employee: 'Justin Jones', role: 'Marketing Lead', salary: 65000, payPeriod: 'Bi-Weekly', totalPaid: 2500 },
+
+];
 @Component({
   selector: 'app-payroll',
   templateUrl: './payroll.component.html',
@@ -13,7 +18,7 @@ export class PayrollComponent implements AfterViewInit {
   hoursWorked: number;
   totalPay: number;
   newEmployeeData = { name: '', role: '', salary: 0, payPeriod: '', totalPaid: 0 };
-  payrollEntries: any[] = [];
+  payrollEntries: any[] = EXAMPLE_PAYROLL_DATA;
 
   ngAfterViewInit() {
     Chart.register(ChartDataLabels);
