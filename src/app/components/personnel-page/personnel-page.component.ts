@@ -61,6 +61,7 @@ export class PersonnelPageComponent implements OnInit, OnDestroy {
   }
   // Method to open the Add Employee form
   openAddEmployeeForm() {
+    console.log('Opening Add Employee Form');
     this.employeeService.openAddEmployeeForm();
   }
 
@@ -78,6 +79,7 @@ export class PersonnelPageComponent implements OnInit, OnDestroy {
 
   // Method to open the Edit Form
   openEditForm(event: Event, employee: Employee, index: number) {
+    console.log('Opening Edit Form');
     // Stop the offCanvas from opening
     event.stopPropagation();
     this.employeeService.openEditForm(employee, index);
@@ -85,6 +87,7 @@ export class PersonnelPageComponent implements OnInit, OnDestroy {
 
   // Method to handle clicking on an employee box
   onEmployeeBoxClick(event: Event, employee: Employee) {
+    console.log('Employee box clicked');
     this.openOffcanvas(employee);
   }
   preventOffCanvas(event: Event): void {
@@ -93,18 +96,14 @@ export class PersonnelPageComponent implements OnInit, OnDestroy {
   }
   // Method to confirm the deletion
   confirmDeleteEmployee() {
-    console.log('Deletion process started');
-    event.stopPropagation();
     if (this.employeeToDelete) {
       const index = this.employees.indexOf(this.employeeToDelete);
-      console.log('Employee found for deletion');
       if (index !== -1) {
         this.employees.splice(index, 1);
       }
       this.storageService.deleteEmployee(index);
       // Close the delete confirmation modal
       this.employeeService.openDeleteModal(null);
-      console.log('Employee deleted')
     }
   }
 

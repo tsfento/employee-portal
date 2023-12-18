@@ -229,10 +229,4 @@
 .list-container {
   overflow-y: auto;
   flex-grow: 1;
-
 }
-
-.edit-icon:hover, .delete-icon:hover {
-  color: white;
-}
-

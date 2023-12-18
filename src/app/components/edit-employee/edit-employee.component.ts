@@ -52,5 +52,4 @@ export class EditEmployeeComponent implements OnInit {
     console.log('Submit and Cancel');
     this.closeForm.emit();
   }
-  
 }
