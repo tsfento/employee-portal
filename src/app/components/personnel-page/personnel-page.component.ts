@@ -44,6 +44,8 @@ export class PersonnelPageComponent implements OnInit, OnDestroy {
     this.employeesFetchedSub.unsubscribe();
   }
 
+
+
   // Method to open the offcanvas element
   openOffcanvas(employee: Employee) {
     const offcanvasElement = this.offcanvas.nativeElement;
@@ -119,4 +121,65 @@ export class PersonnelPageComponent implements OnInit, OnDestroy {
     this.employeeToDelete = null;
 
   }
+
+  // Method to add a new item to the todo list
+  addItem(todoRef:HTMLInputElement){
+    const ul = document.querySelector(".todo-list");
+    const li = document.createElement("li");
+    li.setAttribute("class", "to-do-item");
+    li.innerText=todoRef.value;
+    ul.appendChild(li);
+    todoRef.value='';
+  }
+
+  // Method to add a new item to the event list
+  addItemEvent(eventRef: HTMLInputElement) {
+    const ul = document.querySelector(".event-list");
+    const li = document.createElement("li");
+    li.setAttribute("class", "event-item");
+    li.innerText = eventRef.value;
+    ul.appendChild(li);
+    eventRef.value = '';
+  }
+
+  // Method to add a new item to the task list
+  addItemTask(taskRef: HTMLInputElement) {
+    const ul = document.querySelector(".task-list");
+    const li = document.createElement("li");
+    li.setAttribute("class", "task-item");
+    li.innerText = taskRef.value;
+    ul.appendChild(li);
+    taskRef.value = '';
+  }
+
+  // Method to add a new item to the news list
+  addItemNews(newsRef: HTMLInputElement) {
+    const ul = document.querySelector(".news-list");
+    const li = document.createElement("li");
+    li.setAttribute("class", "news-item");
+    li.innerText = newsRef.value;
+    ul.appendChild(li);
+    newsRef.value = '';
+  }
+
+  // Method to add a new item to the document list
+  addItemDocument(docRef: HTMLInputElement) {
+    const ul = document.querySelector(".document-list");
+    const li = document.createElement("li");
+    li.setAttribute("class", "document-item");
+    li.innerText = docRef.value;
+    ul.appendChild(li);
+    docRef.value = '';
+  }
+
+  // Method to add a new item to the training list
+  addItemTraining(trainingRef: HTMLInputElement) {
+    const ul = document.querySelector(".training-list");
+    const li = document.createElement("li");
+    li.setAttribute("class", "training-item");
+    li.innerText = trainingRef.value;
+    ul.appendChild(li);
+    trainingRef.value = '';
+  }
+
 }
