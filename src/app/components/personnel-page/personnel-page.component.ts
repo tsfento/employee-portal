@@ -44,6 +44,8 @@ export class PersonnelPageComponent implements OnInit, OnDestroy {
     this.employeesFetchedSub.unsubscribe();
   }
 
+
+
   // Method to open the offcanvas element
   openOffcanvas(employee: Employee) {
     const offcanvasElement = this.offcanvas.nativeElement;
@@ -168,6 +170,8 @@ export class PersonnelPageComponent implements OnInit, OnDestroy {
     ul.appendChild(li);
     docRef.value = '';
   }
+
+  // Method to add a new item to the training list
   addItemTraining(trainingRef: HTMLInputElement) {
     const ul = document.querySelector(".training-list");
     const li = document.createElement("li");
@@ -176,4 +180,5 @@ export class PersonnelPageComponent implements OnInit, OnDestroy {
     ul.appendChild(li);
     trainingRef.value = '';
   }
+
 }
