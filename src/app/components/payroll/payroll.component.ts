@@ -3,7 +3,7 @@ import { Chart } from 'chart.js/auto';
 import  ChartDataLabels  from 'chartjs-plugin-datalabels';
 
 const EXAMPLE_PAYROLL_DATA = [
-  { employee: 'Cherilyn Baxter', role: 'Brand Strategist', salary: 70000, payPeriod: 'Bi-Weekly', totalPaid: 2692 },
+  { employee: 'Cherilyn Baxter', role: 'Brand Strategist', salary: 70000, payPeriod: 'Bi-Weekly', totalPaid: 2800 },
   { employee: 'Justin Jones', role: 'Marketing Lead', salary: 65000, payPeriod: 'Bi-Weekly', totalPaid: 2500 },
 
 ];
