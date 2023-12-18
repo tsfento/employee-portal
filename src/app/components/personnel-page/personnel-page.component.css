@@ -1,7 +1,14 @@
-/* .body {
+.layout {
+  display: grid;
+  grid:
+    "sidebar body" 1fr
+    / auto 1fr;
+}
+
+.body {
   grid-area: body;
   background-color: #f9dec9;
-} */
+}
 
 .offcanvas {
   background-color: #f9dec9;
