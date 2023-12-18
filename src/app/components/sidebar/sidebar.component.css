@@ -145,5 +145,8 @@ li {
   .logout-dropdown {
     position: absolute;
   }
+   .sidebar {
+    height: 100vh;
+  }
 }
 /* end media query */
