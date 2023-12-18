@@ -4,6 +4,10 @@
     <!-- Navigation Bar -->
      <app-navbar></app-navbar>
     <app-add-employee *ngIf="isAddEmployeeFormOpen" (employeeAdded)="onEmployeeAdded($event)" (closeForm)="closeAddEmployeeForm()"></app-add-employee>
+    <!-- Add Employee Button -->
+  <button class="btn btn-employee-list" (click)="openAddEmployeeForm()">
+    <span class="material-symbols-outlined employee-list-button-icon">add</span>
+  </button>
   <!-- Employee Boxes -->
   <div class="employee-parent ms-3 mt-3 me-3 mb-3">
     <div class="employee-box text-center" *ngFor="let employee of employees; let i = index" (click)="onEmployeeBoxClick($event, employee)">
@@ -16,9 +20,8 @@
 <i class="material-icons edit-icon" (click)="openEditForm($event, employee, i)" title="Edit Employee">edit_note</i>
           <!-- Delete Icon -->
           <i class="material-icons delete-icon" (click)="confirmDeleteEmployeeModal(employee)" title="Delete Employee">delete</i>
-
         </div>
-        <a href="#" class="employee-email">{{ employee.email }}</a>
+        <p class="employee-email">{{ employee.email }}<p>
       </div>
   <!-- Edit Employee Form Modal -->
   <app-edit-employee *ngIf="employeeService.isEditEmployeeFormOpen$ | async"
@@ -31,10 +34,6 @@
   (cancelDelete)="cancelDeleteEmployeeModal()">
 </app-delete-employee>
   </div>
-  <!-- Add Employee Button -->
-  <button class="btn btn-employee-list" (click)="openAddEmployeeForm()">
-    <span class="material-symbols-outlined employee-list-button-icon">add</span>
-  </button>
   <!-- Offcanvas  -->
   <div #offcanvas class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
     <div class="offcanvas-header">
@@ -55,134 +54,144 @@
           <span class="material-symbols-outlined box-header-icon">fact_check</span>
           &nbsp;TODO
         </div>
-        <div class="mt-3 offcanvas-box-body">
+        <div class="offcanvas-box-body">
+          <div class="list-container">
           <ul class="todo-list">
             <!--List of TODO items -->
-        <li class="to-do-item">Schedule monthly team meeting and prepare the agenda</li>
-      <li class="to-do-item">Update employee records with recent changes in contact details</li>
-      <li class="to-do-item">Coordinate with IT for new hire onboarding setups</li>
-      <li class="to-do-item">Complete documentation for upcoming audit</li>
-      <li class="to-do-item">Update the job descriptions for open positions on the careers page</li>
-      <li class="to-do-item">Prepare a report on employee turnover for the past year</li>
+            <li class="to-do-item">Schedule monthly team meeting and prepare the agenda</li>
+            <li class="to-do-item">Update employee records with recent changes in contact details</li>
+            <li class="to-do-item">Complete documentation for upcoming audit</li>
           </ul>
         </div>
-        <button class="btn btn-offcanvas-box">
-          <span class="material-symbols-outlined box-button-icon">add</span>
-        </button>
+          <!-- Input and Button Container -->
+          <div class="input-button-container">
+            <input class="todotextbox" type="text" id="todoTextBox" name="todoTextBox" placeholder="Add Item..." #todoRef>
+            <button class="btn btn-offcanvas-box" (click)="addItem(todoRef)">
+              <span class="material-symbols-outlined box-button-icon">add</span>
+            </button>
+          </div>
+        </div>
       </div>
-      <!-- Event Box -->
-        <div class="offcanvas-box">
-          <div class="ms-3 mt-3 offcanvas-box-header">
-            <span class="material-symbols-outlined box-header-icon">event</span>
-            &nbsp;Upcoming Events
-          </div>
-          <div class="mt-3 offcanvas-box-body">
-            <ul class="event-list">
-              <!-- List of Event Items -->
-              <li class="event list-text">
-                <li class="event-item">Remote Work Policy Webinar - July 22nd</li>
-      <li class="event-item">Labor Law Update Seminar - August 15th</li>
-      <li class="event-item">Team Building Retreat - September 10th</li>
-      <li class="event-item">End-of-Year Benefits Enrollment Period - October 1st to 31st</li>
-            </ul>
-          </div>
-          <button class="btn btn-offcanvas-box">
-            <span class="material-symbols-outlined box-button-icon">add</span>
-          </button>
-        </div>
-        <!-- Tasks to Review Box -->
-        <div class="offcanvas-box">
-          <div class="ms-3 mt-3 offcanvas-box-header">
-            <span class="material-symbols-outlined box-header-icon">task</span>
-            &nbsp;Tasks to Review
-          </div>
-          <div class="mt-3 offcanvas-box-body">
-            <ul class="task-list">
-              <!-- List of Task List Items -->
-              <li class="task-item">Review and update employee handbooks</li>
-              <li class="task-item">Evaluate recent job applications for the Marketing Manager position</li>
-              <li class="task-item">Complete quarterly compliance training updates</li>
-              <li class="task-item">Prepare performance review materials for upcoming evaluations</li>
-              <li class="task-item">Verify and update employee emergency contact information</li>
-              <li class="task-item">Finalize details for the remote work policy update</li>
-              <li class="task-item">Review and approve time-off requests</li>
-              <li class="task-item">Review and update employee handbooks</li>
-            </ul>
-          </div>
-          <button class="btn btn-offcanvas-box">
-            <span class="material-symbols-outlined box-button-icon">add</span>
-          </button>
-        </div>
-        <!-- Company News Box -->
-        <div class="offcanvas-box">
-          <div class="ms-3 mt-3 offcanvas-box-header">
-            <span class="material-symbols-outlined box-header-icon">newspaper</span>
-            &nbsp;Company News
-          </div>
-          <div class="mt-3 offcanvas-box-body">
-            <ul class="news-list">
-              <!-- List of Company News Items -->
-              <li class="news-item">CEO's Quarterly Address Highlights Company Growth - Read More</li>
-              <li class="news-item">Innovation Award: Our Team's Latest Tech Advancement - Discover</li>
-              <li class="news-item">Community Outreach: Successful Charity Event Last Weekend - Highlights</li>
-              <li class="news-item">Employee Spotlight: Interview with Our Employee of the Month - Profile</li>
-            </ul>
-          </div>
-          <button class="btn btn-offcanvas-box">
-            <span class="material-symbols-outlined box-button-icon">add</span>
-          </button>
-        </div>
-        <!-- Company Documents Box -->
-        <div class="offcanvas-box">
-          <div class="ms-3 mt-3 offcanvas-box-header">
-            <span class="material-symbols-outlined box-header-icon">folder</span>
-            &nbsp;Company Documents
-          </div>
-      <div class="mt-3 offcanvas-box-body">
-        <ul class="document-list">
-          <!-- List of Ducuments Items -->
-          <li class="document-item">Employee Handbook - <a href="path/to/document">Download</a></li>
-          <li class="document-item">HR Policies and Procedures - <a href="path/to/document">Download</a></li>
-          <li class="document-item">Annual Business Plan - <a href="path/to/document">View</a></li>
-          <li class="document-item">Safety and Compliance Guidelines - <a href="path/to/document">View</a></li>
-          <li class="document-item">Code of Conduct - <a href="path/to/document">Download</a></li>
-          <li class="document-item">Emergency Response Plan - <a href="path/to/document">Download</a></li>
-          <li class="document-item">Remote Work Policy - <a href="path/to/document">View</a></li>
-          <li class="document-item">Diversity and Inclusion Report - <a href="path/to/document">View</a></li>
-          <li class="document-item">Employee Benefit Details - <a href="path/to/document">Download</a></li>
-          <li class="document-item">Company Financial Reports - <a href="path/to/document">View</a></li>
-    </ul>
-    <button class="btn btn-offcanvas-box">
-            <span class="material-symbols-outlined box-button-icon">add</span>
-          </button>
-      <!-- Company Documents Box -->
-      <div class="offcanvas-box">
-        <div class="ms-3 mt-3 offcanvas-box-header">
-          <span class="material-symbols-outlined box-header-icon">folder</span>
-          &nbsp;Company Documents
-        </div>
-    <div class="mt-3 offcanvas-box-body">
-      <ul class="document-list">
-        <!-- List of Ducuments Items -->
-        <li class="document-item">Employee Handbook - <a href="path/to/document">Download</a></li>
-        <li class="document-item">HR Policies and Procedures - <a href="path/to/document">Download</a></li>
-        <li class="document-item">Annual Business Plan - <a href="path/to/document">View</a></li>
-        <li class="document-item">Safety and Compliance Guidelines - <a href="path/to/document">View</a></li>
-        <li class="document-item">Code of Conduct - <a href="path/to/document">Download</a></li>
-        <li class="document-item">Emergency Response Plan - <a href="path/to/document">Download</a></li>
-        <li class="document-item">Remote Work Policy - <a href="path/to/document">View</a></li>
-        <li class="document-item">Diversity and Inclusion Report - <a href="path/to/document">View</a></li>
-        <li class="document-item">Employee Benefit Details - <a href="path/to/document">Download</a></li>
-        <li class="document-item">Company Financial Reports - <a href="path/to/document">View</a></li>
-  </ul>
-  <!-- Add Employee Button -->
-  <button class="btn btn-offcanvas-box">
-          <span class="material-symbols-outlined box-button-icon">add</span>
-        </button>
+     <!-- Event Box -->
+<div class="offcanvas-box">
+  <div class="ms-3 mt-3 offcanvas-box-header">
+    <span class="material-symbols-outlined box-header-icon">event</span>
+    &nbsp;Upcoming Events
+  </div>
+  <div class="offcanvas-box-body">
+    <!-- List Container for Event Items -->
+    <div class="list-container">
+      <ul class="event-list">
+        <li class="event-item">Remote Work Policy Webinar - July 22nd</li>
+        <li class="event-item">Labor Law Update Seminar - August 15th</li>
+        <li class="event-item">Team Building Retreat - September 10th</li>
+      </ul>
     </div>
-      </div>
-        </div>
-        </div>
-      </div>
+
+  </div>
+  <!-- Input and Button Container -->
+  <div class="input-button-container">
+    <input class="eventtextbox" type="text" id="eventTextBox" name="eventTextBox" placeholder="Add Item..." #eventRef>
+    <button class="btn btn-offcanvas-box" (click)="addItemEvent(eventRef)">
+      <span class="material-symbols-outlined box-button-icon">add</span>
+    </button>
+  </div>
+</div>
+       <!-- Tasks to Review Box -->
+<div class="offcanvas-box">
+  <div class="ms-3 mt-3 offcanvas-box-header">
+    <span class="material-symbols-outlined box-header-icon">task</span>
+    &nbsp;Tasks to Review
+  </div>
+  <div class="offcanvas-box-body">
+    <!-- List Container for Task Items -->
+    <div class="list-container">
+      <ul class="task-list">
+        <li class="task-item">Review and update employee handbooks</li>
+        <li class="task-item">Complete quarterly compliance training updates</li>
+        <li class="task-item">Review and approve time-off requests</li>
+      </ul>
+    </div>
+    <!-- Input and Button Container -->
+    <div class="input-button-container">
+      <input class="tasktextbox" type="text" id="taskTextBox" name="taskTextBox" placeholder="Add Item..." #taskRef>
+      <button class="btn btn-offcanvas-box" (click)="addItemTask(taskRef)">
+        <span class="material-symbols-outlined box-button-icon">add</span>
+      </button>
     </div>
   </div>
+</div>
+        <!-- Company News Box -->
+<div class="offcanvas-box">
+  <div class="ms-3 mt-3 offcanvas-box-header">
+    <span class="material-symbols-outlined box-header-icon">newspaper</span>
+    &nbsp;Company News
+  </div>
+  <div class="offcanvas-box-body">
+    <!-- List Container for News Items -->
+    <div class="list-container">
+      <ul class="news-list">
+        <li class="news-item">CEO's Quarterly Address Highlights Company Growth - Read More</li>
+        <li class="news-item">Innovation Award: Our Team's Latest Tech Advancement - Discover</li>
+        <li class="news-item">Employee Spotlight: Interview with Our Employee of the Month - Profile</li>
+      </ul>
+    </div>
+    <!-- Input and Button Container -->
+    <div class="input-button-container">
+      <input class="newstextbox" type="text" id="newsTextBox" name="newsTextBox" placeholder="Add Item..." #newsRef>
+      <button class="btn btn-offcanvas-box" (click)="addItemNews(newsRef)">
+        <span class="material-symbols-outlined box-button-icon">add</span>
+      </button>
+    </div>
+  </div>
+</div>
+<!-- Company Documents Box -->
+<div class="offcanvas-box">
+  <div class="ms-3 mt-3 offcanvas-box-header">
+    <span class="material-symbols-outlined box-header-icon">folder</span>
+    &nbsp;Company Documents
+  </div>
+  <div class="offcanvas-box-body">
+    <!-- List Container for Document Items -->
+    <div class="list-container">
+      <ul class="document-list">
+        <li class="document-item">Employee Handbook - <a href="path/to/document">Download</a></li>
+        <li class="document-item">HR Policies and Procedures - <a href="path/to/document">Download</a></li>
+        <li class="document-item">Safety and Compliance Guidelines - <a href="path/to/document">View</a></li>
+      </ul>
+    </div>
+    <!-- Input and Button Container -->
+    <div class="input-button-container">
+      <input class="doctextbox" type="text" id="docTextBox" name="docTextBox" placeholder="Add Item..." #docRef>
+      <button class="btn btn-offcanvas-box" (click)="addItemDocument(docRef)">
+        <span class="material-symbols-outlined box-button-icon">add</span>
+      </button>
+    </div>
+  </div>
+</div>
+<!-- Employee Training & Development Box -->
+<div class="offcanvas-box">
+  <div class="ms-3 mt-3 offcanvas-box-header">
+    <span class="material-symbols-outlined box-header-icon">school</span>
+    &nbsp;Employee Training & Development
+  </div>
+  <div class="offcanvas-box-body">
+    <!-- List Container for Training Items -->
+    <div class="list-container">
+      <ul class="training-list">
+        <li class="training-item">Leadership Skills Workshop - Feb 10th</li>
+        <li class="training-item">Excel Advanced Course - Mar 3rd</li>
+        <li class="training-item">Team Building Activity - Apr 20th</li>
+        <!-- Other training and development items -->
+      </ul>
+    </div>
+  </div>
+   <!-- Input and Button Container -->
+   <div class="input-button-container">
+    <input class="trainingtextbox" type="text" id="trainingTextBox" name="trainingTextBox" placeholder="Add Item..." #trainingRef>
+    <button class="btn btn-offcanvas-box" (click)="addItemTraining(trainingRef)">
+      <span class="material-symbols-outlined box-button-icon">add</span>
+    </button>
+  </div>
+</div>
+

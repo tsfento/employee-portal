@@ -33,7 +33,8 @@ import { PayrollComponent } from './components/payroll/payroll.component';
     DeleteEmployeeComponent,
     OrgChartComponent,
     NavbarComponent,
-    PayrollComponent
+    PayrollComponent,
+    
   ],
   imports: [
     BrowserModule,
