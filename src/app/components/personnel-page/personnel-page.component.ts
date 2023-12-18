@@ -18,20 +18,25 @@ export class PersonnelPageComponent implements OnInit, OnDestroy {
   isAddEmployeeFormOpen = false;
   private employeeToDelete: Employee | null = null;
 
+  // Constructor to inject the EmployeeService
   constructor(private employeeService: EmployeeService, private storageService: StorageService) {
     this.employeeService.isAddEmployeeFormOpen$.subscribe((isOpen) => {
       this.isAddEmployeeFormOpen = isOpen;
     });
   }
 
+
   ngOnInit() {
+    // Subscribe to the employees$ observable
     this.employeeService.employees$.subscribe(employees => {
         this.employees = employees;
     });
 
+    // Fetch the employees from the storage service
     const initialEmployees = this.storageService.fetchEmployees();
     this.employeeService.setEmployees(initialEmployees);
 
+    // Subscribe to the employeesFetched event
     this.employeesFetchedSub = this.storageService.employeesFetched.subscribe(
         (fetchedEmployees: Employee[]) => {
             this.employees = fetchedEmployees;
@@ -41,10 +46,9 @@ export class PersonnelPageComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
+    // Unsubscribe from the employeesFetched event
     this.employeesFetchedSub.unsubscribe();
   }
-
-
 
   // Method to open the offcanvas element
   openOffcanvas(employee: Employee) {
@@ -61,7 +65,6 @@ export class PersonnelPageComponent implements OnInit, OnDestroy {
   }
   // Method to open the Add Employee form
   openAddEmployeeForm() {
-    console.log('Opening Add Employee Form');
     this.employeeService.openAddEmployeeForm();
   }
 
@@ -79,7 +82,6 @@ export class PersonnelPageComponent implements OnInit, OnDestroy {
 
   // Method to open the Edit Form
   openEditForm(event: Event, employee: Employee, index: number) {
-    console.log('Opening Edit Form');
     // Stop the offCanvas from opening
     event.stopPropagation();
     this.employeeService.openEditForm(employee, index);
@@ -87,7 +89,6 @@ export class PersonnelPageComponent implements OnInit, OnDestroy {
 
   // Method to handle clicking on an employee box
   onEmployeeBoxClick(event: Event, employee: Employee) {
-    console.log('Employee box clicked');
     this.openOffcanvas(employee);
   }
   preventOffCanvas(event: Event): void {
@@ -180,5 +181,4 @@ export class PersonnelPageComponent implements OnInit, OnDestroy {
     ul.appendChild(li);
     trainingRef.value = '';
   }
-
 }
