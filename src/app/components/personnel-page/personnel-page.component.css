@@ -11,16 +11,20 @@
 .offcanvas-parent {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+  grid-auto-rows: minmax(min-content, 1fr);
 }
 
 .offcanvas-box {
+  display: flex;
+  flex-direction: column;
   background-color: #ededed;
   box-shadow: 2px 2px 5px #3a405a;
   border: 1px solid #3a405a;
   border-radius: 10px;
   margin-bottom: 15px;
   margin-right: 15px;
-  overflow: hidden;
+  overflow: auto;
+
 }
 
 /* Responsive design for smaller screens */
@@ -45,6 +49,8 @@
 .offcanvas-box-body {
   scrollbar-color: darkgrey lightgrey;
   scrollbar-width: thin;
+  flex-grow: 1;
+  overflow: auto;
 }
 .offcanvas-end.details {
   transform: translateX(100%);
