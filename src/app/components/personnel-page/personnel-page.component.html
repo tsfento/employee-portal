@@ -35,7 +35,7 @@
 </app-delete-employee>
   </div>
   <!-- Offcanvas  -->
-  <div #offcanvas class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+  <div #offcanvas class="offcanvas offcanvas-end show" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
     <div class="offcanvas-header">
       <h5 id="offcanvasExampleLabel">Employee Details</h5>
       <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -87,13 +87,14 @@
         <li class="event-item">Team Building Retreat - September 10th</li>
       </ul>
     </div>
-    <!-- Input and Button Container -->
-    <div class="input-button-container">
-      <input class="eventtextbox" type="text" id="eventTextBox" name="eventTextBox" placeholder="Add Item..." #eventRef>
-      <button class="btn btn-offcanvas-box" (click)="addItemEvent(eventRef)">
-        <span class="material-symbols-outlined box-button-icon">add</span>
-      </button>
-    </div>
+
+  </div>
+  <!-- Input and Button Container -->
+  <div class="input-button-container">
+    <input class="eventtextbox" type="text" id="eventTextBox" name="eventTextBox" placeholder="Add Item..." #eventRef>
+    <button class="btn btn-offcanvas-box" (click)="addItemEvent(eventRef)">
+      <span class="material-symbols-outlined box-button-icon">add</span>
+    </button>
   </div>
 </div>
        <!-- Tasks to Review Box -->
@@ -169,12 +170,29 @@
   </div>
 </div>
 
-  <!-- Add Employee Button -->
-  <button class="btn btn-offcanvas-box">
-          <span class="material-symbols-outlined box-button-icon">add</span>
-        </button>
+<!-- Employee Training & Development Box -->
+<div class="offcanvas-box">
+  <div class="ms-3 mt-3 offcanvas-box-header">
+    <span class="material-symbols-outlined box-header-icon">school</span>
+    &nbsp;Employee Training & Development
+  </div>
+  <div class="offcanvas-box-body">
+    <!-- List Container for Training Items -->
+    <div class="list-container">
+      <ul class="training-list">
+        <li class="training-item">Leadership Skills Workshop - Feb 10th</li>
+        <li class="training-item">Excel Advanced Course - Mar 3rd</li>
+        <li class="training-item">Team Building Activity - Apr 20th</li>
+        <!-- Other training and development items -->
+      </ul>
     </div>
-      </div>
-        </div>
-        </div>
-      </div>
+  </div>
+   <!-- Input and Button Container -->
+   <div class="input-button-container">
+    <input class="trainingtextbox" type="text" id="trainingTextBox" name="trainingTextBox" placeholder="Add Item..." #trainingRef>
+    <button class="btn btn-offcanvas-box" (click)="addItemTraining(trainingRef)">
+      <span class="material-symbols-outlined box-button-icon">add</span>
+    </button>
+  </div>
+</div>
+

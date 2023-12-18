@@ -126,6 +126,7 @@ export class PersonnelPageComponent implements OnInit, OnDestroy {
     li.setAttribute("class", "to-do-item");
     li.innerText=todoRef.value;
     ul.appendChild(li);
+    todoRef.value='';
   }
 
   // Method to add a new item to the event list
@@ -166,5 +167,13 @@ export class PersonnelPageComponent implements OnInit, OnDestroy {
     li.innerText = docRef.value;
     ul.appendChild(li);
     docRef.value = '';
+  }
+  addItemTraining(trainingRef: HTMLInputElement) {
+    const ul = document.querySelector(".training-list");
+    const li = document.createElement("li");
+    li.setAttribute("class", "training-item");
+    li.innerText = trainingRef.value;
+    ul.appendChild(li);
+    trainingRef.value = '';
   }
 }
