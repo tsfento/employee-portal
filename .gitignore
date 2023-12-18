@@ -42,5 +42,6 @@ testem.log
 Thumbs.db
 
 # Other
+src/app/environments/
 src/app/environments/environment.production.ts
 src/app/environments/environment.ts
