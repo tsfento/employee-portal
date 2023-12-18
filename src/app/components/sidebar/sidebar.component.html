@@ -1,65 +1,63 @@
-<div class="sidebar">
+<div class="sidebar sticky-top">
   <nav class="nav flex-column sidebar-div">
-    <div class="sticky-top">
-      <div class="mt-4 mb-2 text-center">
-        <img class="logo-img" src="./assets/images/c_logo.png" alt=""><span class="logo-text">&nbsp;Coterie</span>
-      </div>
-      <hr class="ms-3 me-3">
-      <p class="company-name mt-2 mb-4 text-center">{{ companyName }}</p>
-      <ul class="mb-auto">
-        <li>
-          <p class="btn-sidebar" role="button" routerLink="./personnel" routerLinkActive="active">
-            <span class="material-symbols-outlined btn-icon">groups</span>
-            <span class="btn-text">&nbsp;&nbsp;Personnel</span>
-          </p>
-        </li>
-        <li class="mt-3">
-          <p class="btn-sidebar" role="button" routerLink="./org-chart" routerLinkActive="active">
-            <span class="material-symbols-outlined btn-icon">tenancy</span>
-            <span class="btn-text">&nbsp;&nbsp;Org Chart</span>
-          </p>
-        </li>
-        <li class="mt-3">
-          <p class="btn-sidebar" role="button" routerLink="/payroll" routerLinkActive="active">
-            <span class="material-symbols-outlined btn-icon">paid</span>
-            <span class="btn-text">&nbsp;&nbsp;Payroll</span>
-          </p>
-        </li>
-        <li class="mt-3">
-          <p class="btn-sidebar" role="button" routerLink="./admin" routerLinkActive="active">
-            <span class="material-symbols-outlined btn-icon">settings</span>
-            <span class="btn-text">&nbsp;&nbsp;Admin</span>
-          </p>
-        </li>
-      </ul>
+    <div class="mt-4 mb-2 text-center">
+      <img class="logo-img" src="./assets/images/c_logo.png" alt=""><span class="logo-text">&nbsp;Coterie</span>
     </div>
-  </nav>
-  <div class="container p-2 sticky-bottom user-info-box">
-    <hr class="ms-2 me-2">
-    <div class="row">
-      <div class="col-2 ms-2 mt-1 user-info-img">
-        <div class="dropup-center">
-          <a role="button" class="user-menu-link" data-bs-toggle="dropdown" aria-expanded="false"><img src="{{ user.image }}" style="max-height: 30px; border-radius: 50%;"></a>
-          <ul class="dropdown-menu mb-2 logout-menu">
-            <li class="logout-item">
-              <a role="button" class="dropdown-item" (click)="logout()">
-                <span class="bi material-symbols-outlined logout-dropdown">logout</span>
-              </a>
-            </li>
-          </ul>
+    <hr class="ms-3 me-3">
+    <p class="company-name mt-2 mb-4 text-center">{{ companyName }}</p>
+    <ul class="mb-auto">
+      <li>
+        <p class="btn-sidebar" role="button" routerLink="./personnel" routerLinkActive="active">
+          <span class="material-symbols-outlined btn-icon">groups</span>
+          <span class="btn-text">&nbsp;&nbsp;Personnel</span>
+        </p>
+      </li>
+      <li class="mt-3">
+        <p class="btn-sidebar" role="button" routerLink="./org-chart" routerLinkActive="active">
+          <span class="material-symbols-outlined btn-icon">tenancy</span>
+          <span class="btn-text">&nbsp;&nbsp;Org Chart</span>
+        </p>
+      </li>
+      <li class="mt-3">
+        <p class="btn-sidebar" role="button" routerLink="/payroll" routerLinkActive="active">
+          <span class="material-symbols-outlined btn-icon">paid</span>
+          <span class="btn-text">&nbsp;&nbsp;Payroll</span>
+        </p>
+      </li>
+      <li class="mt-3">
+        <p class="btn-sidebar" role="button" routerLink="./admin" routerLinkActive="active">
+          <span class="material-symbols-outlined btn-icon">settings</span>
+          <span class="btn-text">&nbsp;&nbsp;Admin</span>
+        </p>
+      </li>
+    </ul>
+    <div class="container p-2 user-info-box">
+      <hr class="ms-2 me-2">
+      <div class="row">
+        <div class="col-2 ms-2 mt-1 user-info-img">
+          <div class="dropup-center">
+            <a role="button" class="user-menu-link" data-bs-toggle="dropdown" aria-expanded="false"><img src="{{ user.image }}" style="max-height: 30px; border-radius: 50%;"></a>
+            <ul class="dropdown-menu mb-2 logout-menu">
+              <li class="logout-item">
+                <a role="button" class="dropdown-item" (click)="logout()">
+                  <span class="bi material-symbols-outlined logout-dropdown">logout</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="name">{{ user.name }}</div>
+          <div class="email">{{ user.email }}</div>
+        </div>
+        <div class="col-3 ms-2 mt-2">
+          <a class="click" (click)="logout()">
+            <span class="bi material-symbols-outlined ms-sm-2 ms-xl-4 logout">
+              logout
+            </span>
+          </a>
         </div>
       </div>
-      <div class="col-6">
-        <div class="name">{{ user.name }}</div>
-        <div class="email">{{ user.email }}</div>
-      </div>
-      <div class="col-3 ms-2 mt-2">
-        <a class="click" (click)="logout()">
-          <span class="bi material-symbols-outlined ms-sm-2 ms-xl-4 logout">
-            logout
-          </span>
-        </a>
-      </div>
     </div>
-  </div>
+  </nav>
 </div>
