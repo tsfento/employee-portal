@@ -89,7 +89,7 @@ export class AuthService {
 
   logout() {
     this.currentUser.next(null);
-    this.router.navigate(['/']);
+    this.router.navigate(['/welcome']);
     localStorage.removeItem('userData');
   }
 
