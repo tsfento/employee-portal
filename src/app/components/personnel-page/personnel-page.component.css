@@ -51,14 +51,10 @@
 .offcanvas-box-header {
   font-size: 20px;
   color: grey;
+  padding-bottom: 10px;
 }
 
-.offcanvas-box-body {
-  height: 185px;
-  overflow-y: auto;
-  scrollbar-color: darkgrey lightgrey;
-  scrollbar-width: thin;
-}
+
 .offcanvas-end.details {
   transform: translateX(100%);
   transition: transform 0.3s ease-in-out;
@@ -198,37 +194,35 @@
   color: #d32f2f;
 }
 
-.todotextbox{
+.todotextbox,
+.eventtextbox,
+.tasktextbox,
+.newstextbox,
+.doctextbox {
   border-radius: 5px;
   padding: 5px;
   border: 1px solid #ccc;
-  width:450px;
+  width: 450px;
+}
+.offcanvas-box-body {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }
 
-.eventtextbox{
-  border-radius: 5px;
-  padding: 5px;
-  border: 1px solid #ccc;
-  width:450px;
+.input-button-container {
+  margin-top: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 10px;
 }
-
-.tasktextbox{
-  border-radius: 5px;
-  padding: 5px;
-  border: 1px solid #ccc;
-  width:450px;
+.list-container {
+  overflow-y: auto;
+  flex-grow: 1;
 }
-
-.newstextbox{
-  border-radius: 5px;
-  padding: 5px;
-  border: 1px solid #ccc;
-  width:450px;
-}
-
-.doctextbox{
-  border-radius: 5px;
-  padding: 5px;
-  border: 1px solid #ccc;
-  width:450px;
+.input-button-container button {
+  margin-right: 15px;
+  margin-top: 5px;
 }
