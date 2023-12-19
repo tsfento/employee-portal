@@ -49,6 +49,7 @@ export class AuthService {
         expiresIn: +response.expiresIn
       }
 
+      // Send data from response to be handled
       this.handleAuthentication(authData, false);
     }));
   }
@@ -77,6 +78,7 @@ export class AuthService {
             expiresIn: +response.expiresIn
           }
 
+          // Send data from response to be handled
           this.handleAuthentication(authData, true);
         }),
 
@@ -87,9 +89,13 @@ export class AuthService {
       );
   }
 
+  // Log user out
   logout() {
+    // Set authenticated user to null
     this.currentUser.next(null);
+    // Route user to 'welcome' page
     this.router.navigate(['/welcome']);
+    // Remove localStorage data
     localStorage.removeItem('userData');
   }
 
@@ -121,21 +127,24 @@ export class AuthService {
     );
   }
 
+  // Handle user authentication from signup or login
   private handleAuthentication(authData: IAuthData, loggingIn: boolean) {
-    const expirationDate = new Date(new Date().getTime() + authData.expiresIn * 1000);
-
+    // Take response data from HTTP request and use it create a new User
     const loggedInUser = new User(
       '',
       '',
       authData.userId,
       authData.email,
       authData.token,
-      expirationDate
     );
 
+    // Notify currentUser subscribers of a new User
     this.currentUser.next(loggedInUser);
+    // Store userData in localStorage reference
     localStorage.setItem('userData', JSON.stringify(loggedInUser));
 
+    // If logging in, fetch User's name for display in sidebar
+    // Else, store it for fetching later
     if (loggingIn) {
       this.storageService.fetchUserDetails(authData);
     } else {

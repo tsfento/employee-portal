@@ -16,8 +16,10 @@ export class AdminComponent implements OnInit {
   constructor(private storageService: StorageService) {}
 
   ngOnInit() {
+    // Get company name from StorageService
     this.company = this.storageService.getOrganization();
 
+    // Reactive Form for admin tasks
     this.adminForm = new FormGroup({
       orgName: new FormControl(this.company.name, Validators.required),
       orgAddress: new FormControl(this.company.address, Validators.required),
@@ -36,6 +38,7 @@ export class AdminComponent implements OnInit {
     this.company.zip = this.adminForm.get('orgZip').value;
     this.company.phone = this.adminForm.get('orgPhone').value;
 
+    // Set Company name in StorageService for sidebar
     this.storageService.setOrganization(this.company);
 
     this.onResetForm();
