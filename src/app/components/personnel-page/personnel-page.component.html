@@ -21,7 +21,7 @@
           <!-- Delete Icon -->
           <i class="material-icons delete-icon" (click)="confirmDeleteEmployeeModal(employee)" title="Delete Employee">delete</i>
         </div>
-        <p class="employee-email">{{ employee.email }}</p>
+        <a href="mailto:{{ employee.email }}" (click)="email()" class="employee-email">{{ employee.email }}</a>
       </div>
   <!-- Edit Employee Form Modal -->
   <app-edit-employee *ngIf="employeeService.isEditEmployeeFormOpen$ | async"

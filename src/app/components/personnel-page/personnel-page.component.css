@@ -199,6 +199,10 @@
   margin-top: 30px;
 }
 
+.employee-email:hover {
+  color: #e9afa3 !important;
+}
+
 .icons-container {
   position: absolute;
   top: 10px;

@@ -1,21 +1,10 @@
 .navbar {
-  border-bottom: 1px solid white;
   background-color: #3a405a;
   margin-bottom: 20px;
 }
 
 .top-nav {
-  border-bottom: 1px solid white;
   background-color: #3a405a;
-}
-
-.nav-link {
-  text-decoration: none;
-  color: white;
-}
-
-.nav-link:hover {
-  color: #f9dec9;
 }
 
 .btn-search {
@@ -35,6 +24,6 @@ form {
 }
 
 form input {
-  width: 300px;
+  margin-left: 10px;
   margin-right: 10px;
 }

@@ -34,10 +34,7 @@ export class OrgChartComponent implements OnInit, OnDestroy {
     this.fetchedEmployeesSub.unsubscribe();
   }
 
-  logEmployees() {
-    console.log(this.employees);
-  }
-
+  // Push employees who report to 'na' to topLevelEmployees array
   splitTopLevelEmployees() {
     for (let i = 0; i < this.employees.length; i++) {
       if (this.employees[i].reportsTo === 'na') {
@@ -48,6 +45,7 @@ export class OrgChartComponent implements OnInit, OnDestroy {
     this.splitSecondLevelEmployees();
   }
 
+  // Push employees who report to topLevelEmployees to secondLevelEmployees array
   splitSecondLevelEmployees() {
     for (let i = 0; i < this.employees.length; i++) {
       for (let j = 0; j < this.topLevelEmployees.length; j++) {
@@ -60,6 +58,7 @@ export class OrgChartComponent implements OnInit, OnDestroy {
     this.splitThirdLevelEmployees();
   }
 
+  // Push employees who report to secondLevelEmployees to thirdLevelEmployees array
   splitThirdLevelEmployees() {
     for (let i = 0; i < this.employees.length; i++) {
       for (let j = 0; j < this.secondLevelEmployees.length; j++) {
@@ -72,6 +71,7 @@ export class OrgChartComponent implements OnInit, OnDestroy {
     this.splitFourthLevelEmployees();
   }
 
+  // Push employees who report to thirdLevelEmployees to fourthLevelEmployees array
   splitFourthLevelEmployees() {
     for (let i = 0; i < this.employees.length; i++) {
       for (let j = 0; j < this.thirdLevelEmployees.length; j++) {

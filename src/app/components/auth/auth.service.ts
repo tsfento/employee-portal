@@ -129,6 +129,9 @@ export class AuthService {
 
   // Handle user authentication from signup or login
   private handleAuthentication(authData: IAuthData, loggingIn: boolean) {
+    // Set expiration time for authentication token (3 hours)
+    const expirationDate = new Date(new Date().getTime() + authData.expiresIn * 1000);
+
     // Take response data from HTTP request and use it create a new User
     const loggedInUser = new User(
       '',
@@ -136,6 +139,7 @@ export class AuthService {
       authData.userId,
       authData.email,
       authData.token,
+      expirationDate
     );
 
     // Notify currentUser subscribers of a new User

@@ -114,6 +114,11 @@ export class PersonnelPageComponent implements OnInit, OnDestroy {
     this.employeeToDelete = employee;
   }
 
+  email() {
+    // Prevent offcanvas from opening when clicking email
+    event.stopPropagation();
+  }
+
   // Method to cancel the deletion
   cancelDeleteEmployeeModal() {
     event.stopPropagation();
