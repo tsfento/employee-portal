@@ -23,12 +23,15 @@ export class SidebarComponent implements OnInit, OnDestroy {
   constructor(private authService: AuthService, private storageService: StorageService) {}
 
   ngOnInit() {
+    // Subscribe to get displayName for User in user-info-box
     this.userInfoSub = this.storageService.sendUserInfo.subscribe(userInfo => {
       this.user = userInfo;
     });
 
+    // Get Company name to display in Sidebar
     this.companyName = this.storageService.getOrganization().name;
 
+    // Subscription to change company in sidebar
     this.companySub = this.storageService.sendCompanyDetails.subscribe(
       company => {
         this.companyName = company.name;

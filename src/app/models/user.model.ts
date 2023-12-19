@@ -1,3 +1,4 @@
+// Model for User using Firebase API docs for reference
 export class User {
   constructor(
     public firstName: string,
@@ -8,6 +9,7 @@ export class User {
     private _tokenExpDate?: Date,
   ) {}
 
+  // Getter for token used for authentication
   public get token() {
     if (!this._tokenExpDate || new Date() > this._tokenExpDate) return null;
 
