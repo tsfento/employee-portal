@@ -97,14 +97,18 @@ export class PersonnelPageComponent implements OnInit, OnDestroy {
   }
   // Method to confirm the deletion
   confirmDeleteEmployee() {
+    console.log('Deletion process started');
+    event.stopPropagation();
     if (this.employeeToDelete) {
       const index = this.employees.indexOf(this.employeeToDelete);
+      console.log('Employee found for deletion');
       if (index !== -1) {
         this.employees.splice(index, 1);
       }
       this.storageService.deleteEmployee(index);
       // Close the delete confirmation modal
       this.employeeService.openDeleteModal(null);
+      console.log('Employee deleted')
     }
   }
 

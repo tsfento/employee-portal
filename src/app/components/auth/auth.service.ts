@@ -35,18 +35,73 @@ signUp(email: string, password: string, firstName?: string, lastName?: string): 
     returnSecureToken: true,
   };
 
-  // POST request to Firebase API for signing up
-  return this.http.post(
-    `${this.baseUrl}signUp?key=${this.apiKey}`,
-    signUpData
-  ).pipe(tap(response => {
-    const authData: IAuthData = {
-      firstName: firstName,
-      lastName: lastName,
-      userId: response.localId,
+    // POST request to Firebase API for signing up
+    return this.http.post(
+      `${this.baseUrl}signUp?key=${this.apiKey}`,
+      signUpData
+    ).pipe(tap(response => {
+      const authData: IAuthData = {
+        firstName: firstName,
+        lastName: lastName,
+        userId: response.localId,
+        email: email,
+        token: response.idToken,
+        expiresIn: +response.expiresIn
+      }
+
+      this.handleAuthentication(authData, false);
+    }));
+  }
+  // Function to handle user sign-in
+  signIn(email: string, password: string): Observable<any> {
+    const signInData = {
       email: email,
-      token: response.idToken,
-      expiresIn: +response.expiresIn
+      password: password,
+      returnSecureToken: true,
+    };
+
+    return this.http
+      .post(`${this.baseUrl}signInWithPassword?key=${this.apiKey}`, signInData)
+      .pipe(
+        // Store the idToken when the user signs in successfully
+        tap((response: any) => {
+          if (response && response.idToken) {
+            this.idToken = response.idToken;
+          }
+          const authData: IAuthData = {
+            firstName: '',
+            lastName: '',
+            userId: response.localId,
+            email: signInData.email,
+            token: response.idToken,
+            expiresIn: +response.expiresIn
+          }
+
+          this.handleAuthentication(authData, true);
+        }),
+
+        // Error handling for sign-in requests
+        catchError((error: HttpErrorResponse) => {
+          return throwError(() => new Error('Something went wrong!'));
+        })
+      );
+  }
+
+  logout() {
+    this.currentUser.next(null);
+    this.router.navigate(['/welcome']);
+    localStorage.removeItem('userData');
+  }
+
+  // Function to see if user is authenticated
+  isUserAuthenticated(): Observable<boolean> {
+    if (this.idToken) {
+      // If the token exists, check authentication status
+      return this.checkUserAuthenticationStatus(this.idToken);
+    } else {
+      // No idToken available, user is not authenticated
+      return of(false);
+
     }
 
     this.handleAuthentication(authData, false);

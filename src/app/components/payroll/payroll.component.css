@@ -13,6 +13,7 @@ User
   grid-template-rows: repeat(2, 300px);
   gap: 20px;
   justify-content: center;
+  border-left: 1px solid darkgrey;
 }
 
 .top-container {
@@ -123,7 +124,7 @@ User
   box-sizing: border-box;
 }
 .payroll-container input {
-  width: 102%; 
+  width: 102%;
   margin: 10px auto;
   display: block;
   padding: 8px;

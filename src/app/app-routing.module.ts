@@ -12,7 +12,7 @@ import { PayrollComponent } from './components/payroll/payroll.component';
 
 const routes: Routes = [
   { path: 'welcome', component: LandingPageComponent, canActivate: [authGuard] },
-  { path: '', component: ContainerComponent, children: [
+  { path: '', component: ContainerComponent, canActivate: [authGuard], children: [
     { path: 'admin', component: AdminComponent },
     { path: 'personnel', component: PersonnelPageComponent },
     { path: 'org-chart', component: OrgChartComponent },
