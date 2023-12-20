@@ -147,6 +147,7 @@ export class PersonnelPageComponent implements OnInit, OnDestroy {
 
   // Method to add a new item to the todo list
   addItem(todoRef: HTMLInputElement){
+    // Old way involved directly appending to unordered list
     const ul = document.querySelector(".todo-list");
     const li = document.createElement("li");
     li.setAttribute("class", "to-do-item");
@@ -154,6 +155,8 @@ export class PersonnelPageComponent implements OnInit, OnDestroy {
     if (todoRef.value !== '') {
       li.innerText = todoRef.value;
       // ul.appendChild(li);
+
+      // New way adds to array on employee and uses ngFor
       if (this.offCanvasEmployee.todos === undefined) {
         this.offCanvasEmployee.todos = [];
       }
@@ -166,6 +169,7 @@ export class PersonnelPageComponent implements OnInit, OnDestroy {
 
   // Method to add a new item to the event list
   addItemEvent(eventRef: HTMLInputElement) {
+    // Old way involved directly appending to unordered list
     const ul = document.querySelector(".event-list");
     const li = document.createElement("li");
     li.setAttribute("class", "event-item");
@@ -173,6 +177,8 @@ export class PersonnelPageComponent implements OnInit, OnDestroy {
     if (eventRef.value !== '') {
       li.innerText = eventRef.value;
       // ul.appendChild(li);
+
+      // New way adds to array on employee and uses ngFor
       if (this.offCanvasEmployee.events === undefined) {
         this.offCanvasEmployee.events = [];
       }
@@ -185,6 +191,7 @@ export class PersonnelPageComponent implements OnInit, OnDestroy {
 
   // Method to add a new item to the task list
   addItemTask(taskRef: HTMLInputElement) {
+    // Old way involved directly appending to unordered list
     const ul = document.querySelector(".task-list");
     const li = document.createElement("li");
     li.setAttribute("class", "task-item");
@@ -192,6 +199,8 @@ export class PersonnelPageComponent implements OnInit, OnDestroy {
     if (taskRef.value !== '') {
       li.innerText = taskRef.value;
       // ul.appendChild(li);
+
+      // New way adds to array on employee and uses ngFor
       if (this.offCanvasEmployee.tasks === undefined) {
         this.offCanvasEmployee.tasks = [];
       }
@@ -204,6 +213,7 @@ export class PersonnelPageComponent implements OnInit, OnDestroy {
 
   // Method to add a new item to the news list
   addItemNews(newsRef: HTMLInputElement) {
+    // Old way involved directly appending to unordered list
     const ul = document.querySelector(".news-list");
     const li = document.createElement("li");
     li.setAttribute("class", "news-item");
@@ -211,6 +221,8 @@ export class PersonnelPageComponent implements OnInit, OnDestroy {
     if (newsRef.value !== '') {
       li.innerText = newsRef.value;
       // ul.appendChild(li);
+
+      // New way adds to array on employee and uses ngFor
       if (this.offCanvasEmployee.news === undefined) {
         this.offCanvasEmployee.news = [];
       }
@@ -223,6 +235,7 @@ export class PersonnelPageComponent implements OnInit, OnDestroy {
 
   // Method to add a new item to the document list
   addItemDocument(docRef: HTMLInputElement) {
+    // Old way involved directly appending to unordered list
     const ul = document.querySelector(".document-list");
     let li = document.createElement("li");
     li.setAttribute("class", "document-item");
@@ -230,6 +243,8 @@ export class PersonnelPageComponent implements OnInit, OnDestroy {
     if (docRef.value !== '') {
       li.innerText = docRef.value;
       // ul.appendChild(li);
+
+      // New way adds to array on employee and uses ngFor
       if (this.offCanvasEmployee.docs === undefined) {
         this.offCanvasEmployee.docs = [];
       }
@@ -243,6 +258,7 @@ export class PersonnelPageComponent implements OnInit, OnDestroy {
 
   // Method to add a new item to the training list
   addItemTraining(trainingRef: HTMLInputElement) {
+    // Old way involved directly appending to unordered list
     const ul = document.querySelector(".training-list");
     const li = document.createElement("li");
     li.setAttribute("class", "training-item");
@@ -250,6 +266,8 @@ export class PersonnelPageComponent implements OnInit, OnDestroy {
     if (trainingRef.value !== '') {
       li.innerText = trainingRef.value;
       // ul.appendChild(li);
+
+      // New way adds to array on employee and uses ngFor
       if (this.offCanvasEmployee.training === undefined) {
         this.offCanvasEmployee.training = [];
       }
