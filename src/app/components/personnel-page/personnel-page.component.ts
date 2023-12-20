@@ -17,6 +17,9 @@ export class PersonnelPageComponent implements OnInit, OnDestroy {
   @ViewChild('offcanvas') offcanvas!: ElementRef;
   offCanvasEmployee = new Employee('', '', '', '', '', [], [], [], [], [], []);
   offCanvasEmployeeIndex: number;
+  deleteListItemIcon: string = `&nbsp;<span class="delete-list-item material-symbols-outlined" (click)="deleteListItem(offCanvasEmployee.todos, j)">
+  delete_forever
+  </span>`
   isAddEmployeeFormOpen = false;
   private employeeToDelete: Employee | null = null;
 
@@ -151,7 +154,6 @@ export class PersonnelPageComponent implements OnInit, OnDestroy {
     if (todoRef.value !== '') {
       li.innerText = todoRef.value;
       // ul.appendChild(li);
-      // this.offCanvasEmployee.todos = [];
       if (this.offCanvasEmployee.todos === undefined) {
         this.offCanvasEmployee.todos = [];
       }
@@ -222,7 +224,7 @@ export class PersonnelPageComponent implements OnInit, OnDestroy {
   // Method to add a new item to the document list
   addItemDocument(docRef: HTMLInputElement) {
     const ul = document.querySelector(".document-list");
-    const li = document.createElement("li");
+    let li = document.createElement("li");
     li.setAttribute("class", "document-item");
 
     if (docRef.value !== '') {
@@ -231,6 +233,7 @@ export class PersonnelPageComponent implements OnInit, OnDestroy {
       if (this.offCanvasEmployee.docs === undefined) {
         this.offCanvasEmployee.docs = [];
       }
+
       this.offCanvasEmployee.docs.push(docRef.value);
       this.storageService.editEmployee(this.offCanvasEmployee, this.offCanvasEmployeeIndex);
     }
@@ -255,5 +258,10 @@ export class PersonnelPageComponent implements OnInit, OnDestroy {
     }
 
     trainingRef.value = '';
+  }
+
+  deleteListItem(array: any[], arrayIndex: number) {
+    array.splice(arrayIndex, 1);
+    this.storageService.editEmployee(this.offCanvasEmployee, this.offCanvasEmployeeIndex);
   }
 }

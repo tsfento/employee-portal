@@ -54,8 +54,10 @@
           <div class="list-container">
           <ul class="todo-list">
             <!--List of TODO items -->
-            <ng-container *ngFor="let todo of offCanvasEmployee.todos">
-              <li class="todo-item">{{ todo }}</li>
+            <ng-container *ngFor="let todo of offCanvasEmployee.todos; let j = index">
+              <li class="todo-item">{{ todo }}&nbsp;<span class="delete-list-item material-symbols-outlined" (click)="deleteListItem(offCanvasEmployee.todos, j)">
+                delete_forever
+                </span></li>
             </ng-container>
             <!-- <li class="to-do-item">Schedule monthly team meeting and prepare the agenda</li>
             <li class="to-do-item">Update employee records with recent changes in contact details</li>
@@ -82,7 +84,9 @@
     <div class="list-container">
       <ul class="event-list">
         <ng-container *ngFor="let event of offCanvasEmployee.events">
-          <li class="event-item">{{ event }}</li>
+          <li class="event-item">{{ event }}&nbsp;<span class="delete-list-item material-symbols-outlined" (click)="deleteListItem(offCanvasEmployee.todos, j)">
+            delete_forever
+            </span></li>
         </ng-container>
         <!-- <li class="event-item">Remote Work Policy Webinar - July 22nd</li>
         <li class="event-item">Labor Law Update Seminar - August 15th</li>
@@ -110,7 +114,9 @@
     <div class="list-container">
       <ul class="task-list">
         <ng-container *ngFor="let task of offCanvasEmployee.tasks">
-          <li class="task-item">{{ task }}</li>
+          <li class="task-item">{{ task }}&nbsp;<span class="delete-list-item material-symbols-outlined" (click)="deleteListItem(offCanvasEmployee.todos, j)">
+            delete_forever
+            </span></li>
         </ng-container>
         <!-- <li class="task-item">Review and update employee handbooks</li>
         <li class="task-item">Complete quarterly compliance training updates</li>
@@ -137,7 +143,9 @@
     <div class="list-container">
       <ul class="news-list">
         <ng-container *ngFor="let newsItem of offCanvasEmployee.news">
-          <li class="news-item">{{ newsItem }}</li>
+          <li class="news-item">{{ newsItem }}&nbsp;<span class="delete-list-item material-symbols-outlined" (click)="deleteListItem(offCanvasEmployee.todos, j)">
+            delete_forever
+            </span></li>
         </ng-container>
         <!-- <li class="news-item">CEO's Quarterly Address Highlights Company Growth - Read More</li>
         <li class="news-item">Innovation Award: Our Team's Latest Tech Advancement - Discover</li>
@@ -164,7 +172,9 @@
     <div class="list-container">
       <ul class="document-list">
         <ng-container *ngFor="let document of offCanvasEmployee.docs">
-          <li class="document-item" [innerHTML]="document"></li>
+          <li class="document-item" [innerHTML]="document">&nbsp;<span class="delete-list-item material-symbols-outlined" (click)="deleteListItem(offCanvasEmployee.todos, j)">
+            delete_forever
+            </span></li>
         </ng-container>
         <!-- <li class="document-item">Employee Handbook - <a href="path/to/document">Download</a></li>
         <li class="document-item">HR Policies and Procedures - <a href="path/to/document">Download</a></li>
@@ -191,7 +201,9 @@
     <div class="list-container">
       <ul class="training-list">
         <ng-container *ngFor="let trainingItem of offCanvasEmployee.training">
-          <li class="training-item">{{ trainingItem }}</li>
+          <li class="training-item">{{ trainingItem }}&nbsp;<span class="delete-list-item material-symbols-outlined" (click)="deleteListItem(offCanvasEmployee.todos, j)">
+            delete_forever
+            </span></li>
         </ng-container>
         <!-- <li class="training-item">Leadership Skills Workshop - Feb 10th</li>
         <li class="training-item">Excel Advanced Course - Mar 3rd</li>
