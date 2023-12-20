@@ -47,7 +47,7 @@ signUp(email: string, password: string, firstName?: string, lastName?: string): 
         email: email,
         token: response.idToken,
         expiresIn: +response.expiresIn
-      }
+      };
 
       this.handleAuthentication(authData, false);
     }));
@@ -101,64 +101,61 @@ signUp(email: string, password: string, firstName?: string, lastName?: string): 
     } else {
       // No idToken available, user is not authenticated
       return of(false);
-
     }
-
-    this.handleAuthentication(authData, false);
-  }));
-}
-// Function to handle user sign-in
-signIn(email: string, password: string): Observable<any> {
-  const signInData = {
-    email: email,
-    password: password,
-    returnSecureToken: true,
-  };
-
-  return this.http
-    .post(`${this.baseUrl}signInWithPassword?key=${this.apiKey}`, signInData)
-    .pipe(
-      // Store the idToken when the user signs in successfully
-      tap((response: any) => {
-        if (response && response.idToken) {
-          this.idToken = response.idToken;
-        }
-        const authData: IAuthData = {
-          firstName: '',
-          lastName: '',
-          userId: response.localId,
-          email: signInData.email,
-          token: response.idToken,
-          expiresIn: +response.expiresIn
-        }
-
-        this.handleAuthentication(authData, true);
-      }),
-
-      // Error handling for sign-in requests
-      catchError((error: HttpErrorResponse) => {
-        return throwError(() => new Error('Something went wrong!'));
-      })
-    );
-}
-
-// Function to log the user out
-logout() {
-  this.currentUser.next(null);
-  this.router.navigate(['/']);
-  localStorage.removeItem('userData');
-}
-
-// Function to see if user is authenticated
-isUserAuthenticated(): Observable<boolean> {
-  if (this.idToken) {
-    // If the token exists, check authentication status
-    return this.checkUserAuthenticationStatus(this.idToken);
-  } else {
-    // No idToken available, user is not authenticated
-    return of(false);
   }
-}
+
+// // Function to handle user sign-in
+// signIn(email: string, password: string): Observable<any> {
+//   const signInData = {
+//     email: email,
+//     password: password,
+//     returnSecureToken: true,
+//   };
+
+//   return this.http
+//     .post(`${this.baseUrl}signInWithPassword?key=${this.apiKey}`, signInData)
+//     .pipe(
+//       // Store the idToken when the user signs in successfully
+//       tap((response: any) => {
+//         if (response && response.idToken) {
+//           this.idToken = response.idToken;
+//         }
+//         const authData: IAuthData = {
+//           firstName: '',
+//           lastName: '',
+//           userId: response.localId,
+//           email: signInData.email,
+//           token: response.idToken,
+//           expiresIn: +response.expiresIn
+//         }
+
+//         this.handleAuthentication(authData, true);
+//       }),
+
+//       // Error handling for sign-in requests
+//       catchError((error: HttpErrorResponse) => {
+//         return throwError(() => new Error('Something went wrong!'));
+//       })
+//     );
+// }
+
+// // Function to log the user out
+// logout() {
+//   this.currentUser.next(null);
+//   this.router.navigate(['/']);
+//   localStorage.removeItem('userData');
+// }
+
+// // Function to see if user is authenticated
+// isUserAuthenticated(): Observable<boolean> {
+//   if (this.idToken) {
+//     // If the token exists, check authentication status
+//     return this.checkUserAuthenticationStatus(this.idToken);
+//   } else {
+//     // No idToken available, user is not authenticated
+//     return of(false);
+//   }
+// }
 
 // Helper function to validate user authentication status with Firebase
 private checkUserAuthenticationStatus(idToken: string): Observable<boolean> {
