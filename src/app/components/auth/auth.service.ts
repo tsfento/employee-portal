@@ -110,7 +110,6 @@ signUp(email: string, password: string, firstName?: string, lastName?: string): 
     }
   }
 
-=======
 // // Function to handle user sign-in
 // signIn(email: string, password: string): Observable<any> {
 //   const signInData = {

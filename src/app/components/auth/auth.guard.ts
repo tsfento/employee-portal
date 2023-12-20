@@ -26,5 +26,5 @@ map((user) => {
     }
     return router.createUrlTree(['welcome']);
   }
-})
+}));
 };
