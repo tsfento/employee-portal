@@ -6,5 +6,11 @@ export class Employee {
     public email: string,
     public imageUrl: string,
     public reportsTo: string,
+    public todos: string[] = [],
+    public events: string[] = [],
+    public tasks: string[] = [],
+    public news: string[] = [],
+    public docs: string[] = [],
+    public training: string[] = [],
   ) {}
 }

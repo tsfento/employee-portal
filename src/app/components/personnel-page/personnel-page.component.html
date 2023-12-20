@@ -10,7 +10,7 @@
   </button>
   <!-- Employee Boxes -->
   <div class="employee-parent ms-3 mt-3 me-3 mb-3">
-    <div class="employee-box text-center" *ngFor="let employee of employees; let i = index" (click)="onEmployeeBoxClick($event, employee)">
+    <div class="employee-box text-center" *ngFor="let employee of employees; let i = index" (click)="onEmployeeBoxClick($event, employee, i)">
       <div class="mt-4">
         <img class="employee-img" src="{{ employee.imageUrl }}" alt="Employee Image">
         <p class="employee-name mt-2">{{ employee.name }}</p>
@@ -37,11 +37,9 @@
   <!-- Offcanvas  -->
   <div #offcanvas class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
     <div class="offcanvas-header">
-      <h5 id="offcanvasExampleLabel">Employee Details</h5>
+      <h5 id="offcanvasExampleLabel">{{ offCanvasEmployee.name}}</h5>
       <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
-    <div class="offcanvas-body">
-  </div>
   <div class="offcanvas-body">
     <!-- Offcanvas content -->
     <div class="offcanvas-parent">
@@ -56,9 +54,12 @@
           <div class="list-container">
           <ul class="todo-list">
             <!--List of TODO items -->
-            <li class="to-do-item">Schedule monthly team meeting and prepare the agenda</li>
+            <ng-container *ngFor="let todo of offCanvasEmployee.todos">
+              <li class="todo-item">{{ todo }}</li>
+            </ng-container>
+            <!-- <li class="to-do-item">Schedule monthly team meeting and prepare the agenda</li>
             <li class="to-do-item">Update employee records with recent changes in contact details</li>
-            <li class="to-do-item">Complete documentation for upcoming audit</li>
+            <li class="to-do-item">Complete documentation for upcoming audit</li> -->
           </ul>
         </div>
           <!-- Input and Button Container -->
@@ -80,9 +81,12 @@
     <!-- List Container for Event Items -->
     <div class="list-container">
       <ul class="event-list">
-        <li class="event-item">Remote Work Policy Webinar - July 22nd</li>
+        <ng-container *ngFor="let event of offCanvasEmployee.events">
+          <li class="event-item">{{ event }}</li>
+        </ng-container>
+        <!-- <li class="event-item">Remote Work Policy Webinar - July 22nd</li>
         <li class="event-item">Labor Law Update Seminar - August 15th</li>
-        <li class="event-item">Team Building Retreat - September 10th</li>
+        <li class="event-item">Team Building Retreat - September 10th</li> -->
       </ul>
     </div>
 
@@ -105,9 +109,12 @@
     <!-- List Container for Task Items -->
     <div class="list-container">
       <ul class="task-list">
-        <li class="task-item">Review and update employee handbooks</li>
+        <ng-container *ngFor="let task of offCanvasEmployee.tasks">
+          <li class="task-item">{{ task }}</li>
+        </ng-container>
+        <!-- <li class="task-item">Review and update employee handbooks</li>
         <li class="task-item">Complete quarterly compliance training updates</li>
-        <li class="task-item">Review and approve time-off requests</li>
+        <li class="task-item">Review and approve time-off requests</li> -->
       </ul>
     </div>
     <!-- Input and Button Container -->
@@ -129,9 +136,12 @@
     <!-- List Container for News Items -->
     <div class="list-container">
       <ul class="news-list">
-        <li class="news-item">CEO's Quarterly Address Highlights Company Growth - Read More</li>
+        <ng-container *ngFor="let newsItem of offCanvasEmployee.news">
+          <li class="news-item">{{ newsItem }}</li>
+        </ng-container>
+        <!-- <li class="news-item">CEO's Quarterly Address Highlights Company Growth - Read More</li>
         <li class="news-item">Innovation Award: Our Team's Latest Tech Advancement - Discover</li>
-        <li class="news-item">Employee Spotlight: Interview with Our Employee of the Month - Profile</li>
+        <li class="news-item">Employee Spotlight: Interview with Our Employee of the Month - Profile</li> -->
       </ul>
     </div>
     <!-- Input and Button Container -->
@@ -153,9 +163,12 @@
     <!-- List Container for Document Items -->
     <div class="list-container">
       <ul class="document-list">
-        <li class="document-item">Employee Handbook - <a href="path/to/document">Download</a></li>
+        <ng-container *ngFor="let document of offCanvasEmployee.docs">
+          <li class="document-item" [innerHTML]="document"></li>
+        </ng-container>
+        <!-- <li class="document-item">Employee Handbook - <a href="path/to/document">Download</a></li>
         <li class="document-item">HR Policies and Procedures - <a href="path/to/document">Download</a></li>
-        <li class="document-item">Safety and Compliance Guidelines - <a href="path/to/document">View</a></li>
+        <li class="document-item">Safety and Compliance Guidelines - <a href="path/to/document">View</a></li> -->
       </ul>
     </div>
     <!-- Input and Button Container -->
@@ -177,9 +190,12 @@
     <!-- List Container for Training Items -->
     <div class="list-container">
       <ul class="training-list">
-        <li class="training-item">Leadership Skills Workshop - Feb 10th</li>
+        <ng-container *ngFor="let trainingItem of offCanvasEmployee.training">
+          <li class="training-item">{{ trainingItem }}</li>
+        </ng-container>
+        <!-- <li class="training-item">Leadership Skills Workshop - Feb 10th</li>
         <li class="training-item">Excel Advanced Course - Mar 3rd</li>
-        <li class="training-item">Team Building Activity - Apr 20th</li>
+        <li class="training-item">Team Building Activity - Apr 20th</li> -->
         <!-- Other training and development items -->
       </ul>
     </div>
