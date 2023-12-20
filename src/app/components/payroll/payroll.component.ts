@@ -41,7 +41,7 @@ export class PayrollComponent implements AfterViewInit {
   createPieChart() {
     const context = this.pieChart.nativeElement.getContext('2d');
 
-    // Define the chart configuration
+    // Chart configuration
     const chartConfig: any = {
       type: 'pie',
       data: {
@@ -134,6 +134,7 @@ export class PayrollComponent implements AfterViewInit {
     this.newEmployeeData = { name: '', role: '', salary: 0, payPeriod: '', totalPaid: 0 };
   }
 
+  // Method to update the payroll summary
   updatePayroll() {
     // Create a new entry based on the form data
     const newEntry = {

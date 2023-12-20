@@ -17,7 +17,7 @@
 <div class="pie-chart-container">
   <canvas #pieChart></canvas>
 </div>
-<!-- Data Entry Form -->
+<!-- Form for Payroll Summary -->
 <div class="payroll-container">
   <h2>Payroll Summary</h2>
   <form (ngSubmit)="updatePayroll()">
@@ -40,12 +40,13 @@
           <td><input [(ngModel)]="entry.payPeriod" name="payPeriod{{i}}" (keydown.enter)="$event.preventDefault()" /></td>
           <td><div class="dollar-input"><input [(ngModel)]="entry.totalPaid" name="totalPaid{{i}}" (keydown.enter)="$event.preventDefault()" /></div></td>
           <td class="delete-column">
-            <!-- Add the "X" icon here -->
+            <!-- "X" icon -->
             <span class="close-icon" (click)="deleteEntry(i)">&#215;</span>
           </td>
         </tr>
       </tbody>
     </table>
+    <!-- Update Button -->
     <button type="submit">Update</button>
   </form>
 </div>
