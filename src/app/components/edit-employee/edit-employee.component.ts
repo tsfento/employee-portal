@@ -37,20 +37,17 @@ export class EditEmployeeComponent implements OnInit {
   }
   // Method to prevent the off-canvas from closing when clicking inside the form
   preventOffCanvas(event: Event): void {
-    console.log('Preventing off-canvas');
     event.stopPropagation();
   }
   // Method to submit the form
   submitForm() {
-    console.log('Submit and Cancel');
     this.employeeUpdated.emit(this.employee);
     this.storageService.editEmployee(this.selectedEmployee, this.editIndex);
     this.closeForm.emit();
   }
   // Method to cancel the form
   cancelForm() {
-    console.log('Submit and Cancel');
     this.closeForm.emit();
   }
-  
+
 }

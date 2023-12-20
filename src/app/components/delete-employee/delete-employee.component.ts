@@ -28,7 +28,6 @@ export class DeleteEmployeeComponent implements OnInit {
 
   // Method to handle cancellation of deleting an employee
   cancel() {
-    console.log('Cancelling deletion');
     this.cancelDelete.emit();
   }
 }
