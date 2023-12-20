@@ -18,20 +18,25 @@ export class PersonnelPageComponent implements OnInit, OnDestroy {
   isAddEmployeeFormOpen = false;
   private employeeToDelete: Employee | null = null;
 
+  // Constructor to inject the EmployeeService
   constructor(private employeeService: EmployeeService, private storageService: StorageService) {
     this.employeeService.isAddEmployeeFormOpen$.subscribe((isOpen) => {
       this.isAddEmployeeFormOpen = isOpen;
     });
   }
 
+
   ngOnInit() {
+    // Subscribe to the employees$ observable
     this.employeeService.employees$.subscribe(employees => {
         this.employees = employees;
     });
 
+    // Fetch the employees from the storage service
     const initialEmployees = this.storageService.fetchEmployees();
     this.employeeService.setEmployees(initialEmployees);
 
+    // Subscribe to the employeesFetched event
     this.employeesFetchedSub = this.storageService.employeesFetched.subscribe(
         (fetchedEmployees: Employee[]) => {
             this.employees = fetchedEmployees;
@@ -41,10 +46,9 @@ export class PersonnelPageComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
+    // Unsubscribe from the employeesFetched event
     this.employeesFetchedSub.unsubscribe();
   }
-
-
 
   // Method to open the offcanvas element
   openOffcanvas(employee: Employee) {
@@ -181,5 +185,4 @@ export class PersonnelPageComponent implements OnInit, OnDestroy {
     ul.appendChild(li);
     trainingRef.value = '';
   }
-
 }

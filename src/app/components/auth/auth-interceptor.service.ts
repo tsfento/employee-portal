@@ -7,6 +7,7 @@ import { exhaustMap, take } from "rxjs";
 export class AuthInterceptorService implements HttpInterceptor {
   constructor(private authService: AuthService) {}
 
+  // Method to intercept the HTTP request
   intercept(req: HttpRequest<any>, next: HttpHandler) {
     return this.authService.currentUser.pipe(take(1), exhaustMap(user => {
       if (!user) {
