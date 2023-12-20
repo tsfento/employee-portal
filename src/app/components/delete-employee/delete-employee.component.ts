@@ -23,7 +23,6 @@ export class DeleteEmployeeComponent implements OnInit {
 
   // Method to handle cofirmation of deleting an employee
   confirm() {
-    console.log('Confirming deletion:', this.employeeToDelete);
     this.confirmDelete.emit(this.employeeToDelete);
   }
 
