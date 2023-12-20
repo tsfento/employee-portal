@@ -7,17 +7,21 @@ import { exhaustMap, take } from "rxjs";
 export class AuthInterceptorService implements HttpInterceptor {
   constructor(private authService: AuthService) {}
 
-  // Method to intercept the HTTP request
+
+  // Interceptor to attach user token to HTTP requests
   intercept(req: HttpRequest<any>, next: HttpHandler) {
     return this.authService.currentUser.pipe(take(1), exhaustMap(user => {
+      // If user is null, send the original request
       if (!user) {
         return next.handle(req);
       }
+      // Clone original request and attach auth token with HttpParams
       const modifiedReq = req.clone(
         {
           params: new HttpParams().set('auth', user.token)
         }
       );
+      // Return the cloned request with token
       return next.handle(modifiedReq);
     }));
   }

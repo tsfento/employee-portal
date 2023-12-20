@@ -11,6 +11,7 @@ const API_KEY = environment.firebaseAPIKey;
 const UPDATE_USER_URL = `https://identitytoolkit.googleapis.com/v1/accounts:update?key=${API_KEY}`;
 const LOOKUP_USER_URL = `https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=${API_KEY}`;
 
+// Interface for ResponseData when updating a user's data using Firebase API docs
 interface IStoreUserResponseData {
   localId: string;
   email: string;
@@ -23,6 +24,7 @@ interface IStoreUserResponseData {
   expiresIn: string;
 }
 
+// Interface for ResponseData when fetching a user's data using Firebase API docs
 interface IFetchUserResponseData {
   kind: string;
   users: [{
@@ -45,12 +47,12 @@ interface IFetchUserResponseData {
 @Injectable({
   providedIn: 'root'
 })
-
 export class StorageService {
   employees: Employee[] = [];
   employeesFetched = new Subject<Employee[]>();
   userInfo: IUserInfo;
   sendUserInfo = new Subject<{ name: string, email: string, image: string }>();
+  // Default data for fake Company in app
   company = new Organization(
     'Conglomo LLC',
     '123 Fake St.',
@@ -63,6 +65,7 @@ export class StorageService {
 
   constructor(private http: HttpClient) {}
 
+  // Store user details alongside account on Firebase for retrieval later
   storeUserDetails(authData: IAuthData) {
     this.http.post(
       UPDATE_USER_URL,
@@ -84,6 +87,7 @@ export class StorageService {
     });
   }
 
+  // Fetch user details from Firebase for display in sidebar and authentication
   fetchUserDetails(authData: IAuthData) {
     this.http.post(
       LOOKUP_USER_URL,
@@ -102,8 +106,10 @@ export class StorageService {
   }
 
   storeEmployees(employees: Employee[]) {
+    // Sort employees array alphabetically by last name
     const sortedEmployees = employees.sort((a, b) => a.name.split(' ')[1].localeCompare(b.name.split(' ')[1]));
 
+    // Store employees array on Firebase Realtime Database
     this.http.put<Employee[]>(
       `https://employee-portal-f13b1-default-rtdb.firebaseio.com/employees.json`,
       sortedEmployees
@@ -113,6 +119,7 @@ export class StorageService {
     });
   }
 
+  // Fetch employees array from Firebase Realtime Database
   fetchEmployees() {
     this.http.get<Employee[]>(
       `https://employee-portal-f13b1-default-rtdb.firebaseio.com/employees.json`,
@@ -126,17 +133,20 @@ export class StorageService {
     return this.employees.slice();
   }
 
+  // Add an employee to the employees array on Firebase
   addEmployee(sentEmployee: Employee) {
     this.fetchEmployees();
     this.employees.push(sentEmployee);
     this.storeEmployees(this.employees.slice());
   }
 
+  // Edit an existing employee and store the change on Firebase
   editEmployee(employeeToEdit: Employee, editIndex: number) {
     this.employees[editIndex] = employeeToEdit;
     this.storeEmployees(this.employees.slice());
   }
 
+  // Remove an employee and update the Firebase storage
   deleteEmployee(deleteIndex: number) {
     this.employees.splice(deleteIndex, 1);
     this.storeEmployees(this.employees.slice());
@@ -147,11 +157,13 @@ export class StorageService {
     return this.employees.slice();
   }
 
+  // Set company name for display in sidebar
   setOrganization(org: Organization) {
     this.company = org;
     this.sendCompanyDetails.next(this.company);
   }
 
+  // Return company name for display in sidebar
   getOrganization() {
     return this.company;
   }

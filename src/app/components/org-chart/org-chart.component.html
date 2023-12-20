@@ -1,4 +1,5 @@
 <div class="container mt-5 mb-5 text-center">
+  <!-- Top Level -->
   <ng-container *ngFor="let topLevelEmployee of topLevelEmployees">
     <div class="top-level rectangle">
       <img src="{{ topLevelEmployee.imageUrl }}">
@@ -6,6 +7,8 @@
       <h5>{{ topLevelEmployee.title }}</h5>
     </div>
   </ng-container>
+  <!-- End Top Level -->
+  <!-- Second Level 1 -->
   <ol class="level-2-wrapper" style="--level-2-length: {{ secondLevelEmployees.length }}">
     <ng-container *ngFor="let secondLevelEmployee of secondLevelEmployees; let i = index">
       <li *ngIf="i % 2 === 0">
@@ -14,7 +17,9 @@
           <h3 class="mt-1 mb-2">{{ secondLevelEmployee.name }}</h3>
           <h5>{{ secondLevelEmployee.title }}</h5>
         </div>
+        <!-- Third Level 1 -->
         <ol class="level-3-wrapper">
+          <!-- Third Level Col 1 -->
           <ng-container *ngFor="let thirdLevelEmployee of thirdLevelEmployees; let i = index">
             <li *ngIf="thirdLevelEmployee.reportsTo === secondLevelEmployee.name && i % 2 === 0">
               <div class="level-3 rectangle">
@@ -22,6 +27,7 @@
                 <h4 class="mt-1 mb-2">{{ thirdLevelEmployee.name }}</h4>
                 <h6>{{ thirdLevelEmployee.title }}</h6>
               </div>
+              <!-- Fourth Level -->
               <ol class="level-4-wrapper">
                 <ng-container *ngFor="let fourthLevelEmployee of fourthLevelEmployees; let i = index">
                   <li *ngIf="fourthLevelEmployee.reportsTo === thirdLevelEmployee.name">
@@ -33,8 +39,11 @@
                   </li>
                 </ng-container>
               </ol>
+              <!-- End Fourth Level -->
             </li>
           </ng-container>
+          <!-- End Third Level Col 1 -->
+          <!-- Third Level Col 2 -->
           <ng-container *ngFor="let thirdLevelEmployee of thirdLevelEmployees; let i = index">
             <li *ngIf="thirdLevelEmployee.reportsTo === secondLevelEmployee.name && i % 2 !== 0">
               <div class="level-3 rectangle">
@@ -42,6 +51,7 @@
                 <h4 class="mt-1 mb-2">{{ thirdLevelEmployee.name }}</h4>
                 <h6>{{ thirdLevelEmployee.title }}</h6>
               </div>
+              <!-- Fourth Level -->
               <ol class="level-4-wrapper">
                 <ng-container *ngFor="let fourthLevelEmployee of fourthLevelEmployees; let i = index">
                   <li *ngIf="fourthLevelEmployee.reportsTo === thirdLevelEmployee.name">
@@ -53,11 +63,16 @@
                   </li>
                 </ng-container>
               </ol>
+              <!-- End Fourth Level -->
             </li>
           </ng-container>
+          <!-- End Third Level Col 2 -->
         </ol>
+        <!-- End Third Level 1 -->
       </li>
     </ng-container>
+    <!-- End Second Level 1 -->
+    <!-- Second Level 2 -->
     <ng-container *ngFor="let secondLevelEmployee of secondLevelEmployees; let i = index">
       <li *ngIf="i % 2 !== 0">
         <div class="level-2 rectangle">
@@ -65,7 +80,9 @@
           <h3 class="mt-1 mb-2">{{ secondLevelEmployee.name }}</h3>
           <h5>{{ secondLevelEmployee.title }}</h5>
         </div>
+        <!-- Third Level 2 -->
         <ol class="level-3-wrapper">
+          <!-- Third Level 2 Col 1 -->
           <ng-container *ngFor="let thirdLevelEmployee of thirdLevelEmployees; let i = index">
             <li *ngIf="thirdLevelEmployee.reportsTo === secondLevelEmployee.name && i % 2 === 0">
               <div class="level-3 rectangle">
@@ -73,6 +90,7 @@
                 <h4 class="mt-1 mb-2">{{ thirdLevelEmployee.name }}</h4>
                 <h6>{{ thirdLevelEmployee.title }}</h6>
               </div>
+              <!-- Fourth Level -->
               <ol class="level-4-wrapper">
                 <ng-container *ngFor="let fourthLevelEmployee of fourthLevelEmployees; let i = index">
                   <li *ngIf="fourthLevelEmployee.reportsTo === thirdLevelEmployee.name">
@@ -84,8 +102,11 @@
                   </li>
                 </ng-container>
               </ol>
+              <!-- End Fourth Level -->
             </li>
           </ng-container>
+          <!-- End Third Level 2 Col 1 -->
+          <!-- Third Level 2 Col 2 -->
           <ng-container *ngFor="let thirdLevelEmployee of thirdLevelEmployees; let i = index">
             <li *ngIf="thirdLevelEmployee.reportsTo === secondLevelEmployee.name && i % 2 !== 0">
               <div class="level-3 rectangle">
@@ -93,6 +114,7 @@
                 <h4 class="mt-1 mb-2">{{ thirdLevelEmployee.name }}</h4>
                 <h6>{{ thirdLevelEmployee.title }}</h6>
               </div>
+              <!-- Fourth Level -->
               <ol class="level-4-wrapper">
                 <ng-container *ngFor="let fourthLevelEmployee of fourthLevelEmployees; let i = index">
                   <li *ngIf="fourthLevelEmployee.reportsTo === thirdLevelEmployee.name">
@@ -104,10 +126,14 @@
                   </li>
                 </ng-container>
               </ol>
+              <!-- Fourth Level -->
             </li>
           </ng-container>
+          <!-- End Third Level 2 Col 2 -->
         </ol>
+        <!-- End Third Level 2 -->
       </li>
     </ng-container>
   </ol>
+  <!-- End Second Level 2 -->
 </div>

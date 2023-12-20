@@ -40,12 +40,13 @@
       </div>
     </div>
   </div>
+  <!-- Select input to set who employee reports to for org chart -->
   <div class="form-group">
     <label class="reports-label" for="reportsTo">Reports To:</label>
     <select name="reportsTo" [(ngModel)]="newEmployee.reportsTo" required>
       <option value="na">N/A</option>
       <ng-container *ngFor="let employee of employees">
-        <option value="{{ employee.name }}">{{ employee.name }}</option>
+        <option value="{{ employee.name }}">{{ employee.name }} - {{ employee.title }}</option>
       </ng-container>
     </select>
   </div>

@@ -1,12 +1,12 @@
 .layout {
   display: grid;
-  grid:
-      "sidebar body" 1fr / auto 1fr;
+  /* Set two columns that contain 'sidebar' and 'body' elements
+  both taking one fractional unit each.  */
+  grid: "sidebar body" 1fr / auto 1fr;
 }
 
 .sidebar {
   grid-area: sidebar;
-  height: 100vh;
 }
 
 .body {

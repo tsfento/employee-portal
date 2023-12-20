@@ -1,3 +1,4 @@
+// Model for Organization containing info to save and retrieve
 export class Organization {
   constructor(
     public name: string,
