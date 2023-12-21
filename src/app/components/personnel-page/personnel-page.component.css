@@ -203,6 +203,8 @@
   padding: 5px;
   border: 1px solid #ccc;
   width:450px;
+  margin-left: 32px;
+  margin-bottom: 25px;
 }
 
 .eventtextbox{

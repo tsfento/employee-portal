@@ -123,6 +123,14 @@ export class PersonnelPageComponent implements OnInit, OnDestroy {
     const li = document.createElement("li");
     li.setAttribute("class", "to-do-item");
     li.innerText=todoRef.value;
-    ul.appendChild(li); 
+    ul.appendChild(li);
   }
+
+  addItem2(todoRef2:HTMLInputElement){
+    const ul = document.querySelector(".event-list");
+    const li = document.createElement("li");
+    li.setAttribute("class", "event-item");
+    li.innerText=todoRef2.value;
+    ul.appendChild(li);
+}
 }

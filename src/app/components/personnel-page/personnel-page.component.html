@@ -64,9 +64,9 @@
       <li class="to-do-item">Complete documentation for upcoming audit</li>
       <li class="to-do-item">Update the job descriptions for open positions on the careers page</li>
       <li class="to-do-item">Prepare a report on employee turnover for the past year</li>
-      <input class=todotextbox type="text" id="myTextBox" name="myTextBox" placeholder="Add Item..." #todoRef>
-          </ul>
 
+          </ul>
+          <input class=todotextbox type="text" id="myTextBox" name="myTextBox" placeholder="Add Item..." #todoRef>
         </div>
         <button class="btn btn-offcanvas-box" (click)="addItem(todoRef)">
 
@@ -87,10 +87,12 @@
       <li class="event-item">Labor Law Update Seminar - August 15th</li>
       <li class="event-item">Team Building Retreat - September 10th</li>
       <li class="event-item">End-of-Year Benefits Enrollment Period - October 1st to 31st</li>
-      <input class=eventtextbox type="text" id="myTextBox" name="myTextBox" placeholder="Add Item...">
+
             </ul>
+            <input class=eventtextbox type="text" id="myTextBox" name="myTextBox" placeholder="Add Item..." #todoRef2>
           </div>
-          <button class="btn btn-offcanvas-box">
+          <button class="btn btn-offcanvas-box" (click)="addItem2(todoRef2)">
+
             <span class="material-symbols-outlined box-button-icon">add</span>
           </button>
         </div>
